@@ -1,0 +1,195 @@
+
+
+html *
+{font-family: Arial}
+
+
+/* Style the tab */
+.tab {
+    float: left;
+    /*border: 1px solid #ccc;*/
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 300px;
+}
+
+
+
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1em;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/*#artsEventTab.style.display = "block"*/
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    /*border: 1px solid #ccc;*/
+    width: 80%;
+    border-left: none;
+    height: 300px;
+}
+
+@media (max-width: 700px) { 
+    .tab {width: 100%;; }
+    .tabcontent{width: 100%;}
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-y: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+}
+
+@media (max-width: 700px) { 
+    .modal-content {width: 100%;}
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+     
+
+/*!!!!!! MAP !!!!!!*/
+
+     /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    
+    /*#map {
+        height: 200pt;
+        width: 60%;
+        margin: 0 auto 0 auto;
+
+      }*/
+    #cameraData {display: none;}
+    #policeData {display: none;}
+    #taxiData {display: none;}
+
+
+
+/*.modal-content input {
+  width: 50px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  overflow: auto;
+}*/
+
+
+
+/* Style the buttons that are used to open and close the accordion panel for events*/
+.accordion {
+    background-color: #eee;
+    color: #444;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+
+    
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active:hover {
+    background-color: #ccc;
+
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    
+    
+}
+
+
+.mobileOnlyRow {display:none;}
+.mobileOnlyCell {display:none;}
+.desktopOnlyRow {display:table-row;}
+.desktopOnlyCell {display:table-cell;}
+
+@media (max-width: 700px) { 
+    .mobileOnlyRow {display:table-row; }
+    .mobileOnlyCell {display:table-cell; }
+    .desktopOnlyRow {display:none;}
+    .desktopOnlyCell {display:none;}
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
