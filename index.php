@@ -44,7 +44,7 @@
               </div>
               <!-- name-and-slogan -->
               <div class="logo-section smooth-scroll">
-                <div class="brand"><a href="index.php">SAFEPATH</a></div>               
+                <div class="brand"><a href="index.php">SAFEPATH1</a></div>               
               </div>
             </div>
             <!-- header-left end -->
