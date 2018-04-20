@@ -163,22 +163,47 @@ function UrlExists(url)
 
   <div id="eventPanel" class="mapOrInfoPanelContent">
 
-  <form id="userInputForm" name="userInputForm" method="post" action="php/sendInput.php"/>
-  <input type="hidden" name="eventIdValue" id="eventIdValue" value=""/>
-  <input type="hidden" name="description" id="description" value="" />
+  <div id="phpOutput"></div>
+
   <button onclick="setValue('noToilets');">No Toilets</button>
   <button onclick="setValue('longQueue');">Long Queues</button>
   <button onclick="setValue('foodRange');">Wide Range of Food</button>
-  <button onclick="setValue('quickService');">Quick Service</button>
-  </form>
+  <button onclick="setValue('quickService');">Quick Service</button></br>
+
+  <button onclick="getUserData();">Show event data</button></br></br>
+
+  <button onclick="barChart();">Show event data</button></br></br>
+
+
+
+
+  <div id="userData"></div>
+  <div id="ipData"></div>
+
+
+  <script>
+    function barChart() {
+  var userData = JSON.parse(document.getElementById('userData').innerHTML);
+  var ipData = JSON.parse(document.getElementById('ipData').innerHTML);
+  console.dir(userData);
+ console.dir(ipData);
+  }
+  </script>
+
 
   <script>
 function setValue(desc){
-    document.userInputForm.eventIdValue.value = eventId;
-    document.userInputForm.description.value = desc;
-    document.forms["userInputForm"].submit();
-}
+        $("#phpOutput").load("php/sendInput.php?eventIdValue="+eventId+"&description="+desc);
+    };
 </script>
+
+<script>
+function getUserData(){
+        $("#phpOutput").load("php/getUserData.php?eventIdValue="+eventId);
+
+    };
+</script>
+
 
   </div>
 
