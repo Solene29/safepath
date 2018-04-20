@@ -77,15 +77,7 @@ a:active {
 	transition: all 0.2s ease-in-out;
 
 }
-.banner {
-	background:url(../images/banner.jpg) no-repeat 0px 0px;
-	background-size: cover;
-	min-height: 100%;
-	position: relative;
-	color: #fff;
-	
-	
-}
+
 .banner1 {
 	background:url(../images/event.jpg) no-repeat 0px 0px;
 	background-size:cover;
@@ -133,6 +125,10 @@ color: #FFC40A;
 button.cta-button.btn-light, button.cta-button.btn-dark, .contact-form button.cta-button, button.cta-button.btn-default, .contact-form a {
 color:#FBFBFB;
 background: transparent;
+}
+ .name button.cta-button, .caption-data a{
+	color:#FBFBFB;
+    background: transparent;
 }
 button.cta-button {
 font-size: 14px;
@@ -479,6 +475,26 @@ color: #949494;
   img {
 	cursor: pointer;
 	position: relative;
+}
+/* add
+----------------------------------------------------------------------------- */
+.name {
+	padding:20em 0 15em;
+	text-align:center;
+	width: 50%;
+    margin: 0 auto;
+}
+.name h1 {
+	font-size:50px;
+	font-weight: 900;
+	text-transform: uppercase;
+	color:#FFC40A;;
+}
+
+.name h3{
+	line-height: 39px;
+	font-size: 30px;
+	color:#FBFBFB;
 }
 
 
