@@ -92,7 +92,7 @@
 				<div class="name">
 					<h1>Safe Path</h1>
 					<h3>shows you safer path to events.</h3>
-					<a href="events.html"><button class="btn cta-button">go to events</button></a>
+					<a href="Events/index.php"><button class="btn cta-button">go to events</button></a>
 				</div>
 				</div>	
 			<!-- footer start -->
@@ -113,17 +113,6 @@
  <video autoplay="autoplay" loop="loop" poster="images/banner.jpg">  
     <source  src="video/mel.mp4" type="video/mp4" > 
 </video> 
-	<!--<div class="banner">
-	<div data-vide-bg="video/mel">
-				<div class="container">
-				<div class="name">
-					<h1>Safe Path</h1>
-					<h3>shows you safer path to events.</h3>
-					<a href="events.html"><button class="btn cta-button">go to events</button></a>
-				</div>
-				</div>	
-	</div>
-		</div>-->
 		<!-- banner end -->
 	
 			 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
