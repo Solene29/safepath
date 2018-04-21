@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Events</title>
+  <title>SafePath|Events</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/bootstrap.css" rel="stylesheet"> 
   <link href="css/animate.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
   <script>
   new WOW().init();
   </script>
-
+<link rel="shortcut icon" href="favicon.ico">
 <!-- Display events in tabs that we can show or hide -->
 <script>
 function toggleAccordion(Input) {
@@ -81,7 +81,7 @@ function openModal(eventName,address,lat,lng) {
               </div>
               <!-- name-and-slogan -->
               <div class="logo-section smooth-scroll">
-                <div class="brand"><a href="../index.php">Events</a></div>               
+                <div class="brand"><a href="../index.php">SAFE PATH</a></div>               
               </div>
             </div>
             <!-- header-left end -->
@@ -107,7 +107,8 @@ function openModal(eventName,address,lat,lng) {
                     <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
                       <ul class="nav navbar-nav navbar-right">
                         <li><a href="../index.php">Home</a></li>
-                        <li><a href="index.php">Events</a></li>
+                        <li><a  style="color:#ffc400;" href="index.php">Events</a></li>
+						  <li><a href="../about.php">About us</a></li>
                       </ul>
                     </div>
                   </div>
@@ -147,7 +148,9 @@ function openModal(eventName,address,lat,lng) {
 </script>
 
 <!-- Event category tabs: -->
+<div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="index.php">Event</a></p></div>
 <div class="tab">
+  <h3>Category</h3>
   <button class="tablinks" onclick="openCategory(event, 'eventArts')">Arts</button>
   <button class="tablinks" onclick="openCategory(event, 'eventFood')">Food and Drink</button>
   <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic')">Music</button>
@@ -157,31 +160,31 @@ function openModal(eventName,address,lat,lng) {
 
 <!-- Event category tabs content -->
 <div id="eventArtsTab" class="tabcontent">
-   <p style="background-color: #454445; border: none; color: white; font-size: 18pt; padding: 16px 60px; text-decoration: none; margin: 40px 0px;">
+   <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
 Arts</p>
 <div id="eventArts"></div>    
 </div>
 
 <div id="eventFoodTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; color: white; font-size: 18pt; padding: 16px 60px; text-decoration: none; margin: 40px 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
   Food and Drink</p> 
   <div id="eventFood"></div>
 </div>
 
 <div id="eventMusicTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; color: white; font-size: 18pt; padding: 16px 60px; text-decoration: none; margin: 40px 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
   Music</p> 
   <div id="eventMusic"></div>
 </div>
 
 <div id="eventSportsTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; color: white; font-size: 18pt; padding: 16px 60px; text-decoration: none; margin: 40px 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
   Sports</p>
   <div id="eventSports"></div>
 </div>
 
 <div id="eventOtherTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; color: white; font-size: 18pt; padding: 16px 60px; text-decoration: none; margin: 40px 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
   Other</p> 
   <div id="eventOther"></div>
 </div>
