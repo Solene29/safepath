@@ -132,7 +132,7 @@
 								</div></a>
 							</div>
 						</div>
-						<div class="col-md-4 team-grid wow fadeInDownBig animated animated" data-wow-delay="0.4s">
+						<div class="col-md-4 team-grid wow fadeInDown animated animated" data-wow-delay="0.4s">
 							<div class="ih-item circle effect1"><a href="#">
 								<div class="spinner"></div>
 									<div class="img"><img src="images/yunshu.jpg" alt="img"></div>
