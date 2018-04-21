@@ -81,7 +81,7 @@ a:active {
 	background:url(../images/banner.jpg) no-repeat 0px 0px;
 	min-height: 100%;
 	position: relative;
-	z-index: -1;
+	z-index: 1;
 	color: #fff;
 	background-size: cover;
 }
@@ -731,6 +731,7 @@ color: #949494;
 
  video{  
             position: fixed;  
+            z-index:-1;
             right: 0px;  
             bottom: 0px;  
             min-width: 100%;  
