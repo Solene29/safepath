@@ -109,7 +109,7 @@ function UrlExists(url)
 <hr width="100%";>  
 
 <div style="content: ""; display: table; clear: both;">
-  <div id="directionsPanel" style="float: left; width: 30%;" align="center">
+  <div id="directionsPanel" style="float: left; width: 30%;" align="left">
     <b>Choose starting point:</b>    
         <input id="origin-input" class="controls" type="text" style ="width:250px" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
@@ -122,7 +122,7 @@ function UrlExists(url)
             <i class="material-icons">directions_transit</i></label>
             <label><input type="radio" name="type" id="changemode-driving">
             <i class="material-icons">directions_car</i></label>
-            </br>
+            </br></br>
             <b>Directions:</b>
             <div id="panel" style="width: 90%;"></div>
           </div>
@@ -136,17 +136,16 @@ function UrlExists(url)
     
   <div id="mapPanel" class="mapOrInfoPanelContent">
     <div id="safetyOptions" class="mapOptions">
-    <b>Safety features: </b>
           <table>
             <tr>
               <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras</input></td>
               <td> <img src="http://maps.google.com/mapfiles/kml/paddle/grn-blank.png" style="height:15px;"></td>
-            </tr>
-            <tr>
+            <!-- </tr>
+            <tr> -->
               <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations</input></td>
               <td><img src="http://maps.google.com/mapfiles/kml/paddle/purple-blank.png" style="height:15px;"></td>
-            </tr>
-            <tr>
+            <!-- </tr>
+            <tr> -->
               <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks</input></td>
               <td><img src="http://maps.google.com/mapfiles/kml/paddle/pink-blank.png" style="height:15px;"></td>
             </tr>
@@ -172,22 +171,63 @@ function UrlExists(url)
 
   <button onclick="getUserData();">Show event data</button></br></br>
 
-  <button onclick="barChart();">Show event data</button></br></br>
+  <button onclick="barChart();">Bar Chart</button></br></br>
 
 
 
 
-  <div id="userData"></div>
-  <div id="ipData"></div>
-
+  <div id="userData" style="display: none;"></div>
+  <div id="ipData" style="display: none;"></div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <div id="chartDiv"></div>
 
   <script>
-    function barChart() {
+
+  function barChart() {
   var userData = JSON.parse(document.getElementById('userData').innerHTML);
   var ipData = JSON.parse(document.getElementById('ipData').innerHTML);
-  console.dir(userData);
- console.dir(ipData);
+
+  var dataTable = new Array();
+  dataTable[0] = ['Description', 'Total'];
+   for(var i=0; i<userData.length;i++) {
+    console.log(userData[i]);
+    dataTable[i+1] = [ userData[i].description , userData[i].total ];
+   }
+
+   console.log(dataTable);
+  
+
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable(dataTable,false);
+
+      var options = {
+        title: 'Population of Largest U.S. Cities',
+        chartArea: {width: '50%'},
+        hAxis: {
+          viewWindowMode:'explicit',
+          title: 'Total voters',
+          minValue: 0,
+          maxValue: ipData[0].totalIP
+        },
+        vAxis: {
+          title: 'City'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chartDiv'));
+
+      chart.draw(data, options);
+    }
+
+
+
+
   }
+  
   </script>
 
 
