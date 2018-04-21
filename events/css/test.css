@@ -249,9 +249,9 @@ html *
 .choice {
     padding: 5px;
     cursor: pointer;
-    background-color: #FEB728; 
+    background-color: #bbb; 
     border: 1px; 
     box-shadow: none; 
     border-radius: 0px; 
-    width:125px;
+    width:150px;
 }
