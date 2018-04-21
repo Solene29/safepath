@@ -29,9 +29,9 @@ while($row = mysqli_fetch_assoc($ip))
 
 
 // Convert data to format for Javascript
-$result = json_encode($result1,true);
+$result = json_encode($result1,JSON_NUMERIC_CHECK);
 $result1 = str_replace('"','\"',$result);
-$ip = json_encode($ip1,true);
+$ip = json_encode($ip1,JSON_NUMERIC_CHECK);
 $ip1 = str_replace('"','\"',$ip);
 
 //echo '<div id="userData">' . $result . '</div>';
