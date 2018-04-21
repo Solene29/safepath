@@ -78,11 +78,16 @@ a:active {
 	
 }
 .banner1 {
-	background:url(../images/event.jpg) no-repeat 0px 0px;
+	background:url(../images/banner.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	position: relative;
 	color: #fff;
 	min-height:300px;
+}
+@media (max-width: 768px){
+	.banner1{
+		min-height: 100px;
+	}
 }
 .banner:after {
 	position: absolute;
