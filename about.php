@@ -162,7 +162,7 @@
 					<div class="col-md-6 team-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
 							<div class="ih-item circle effect1"><a href="#">
 								<div class="spinner"></div>
-									<div class="img"><img src="images/Solene_id.jpg" alt="img"></div>
+									<div class="img"><img src="images/Solene_id2.jpg" alt="img"></div>
 								<div class="info">
 									<div class="info-back">
 										<h4>Solène Greliche</h4>
