@@ -3,11 +3,15 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 
+//console.log(document.getElementById('cameraData').innerHTML);
       // Convert php output (stored in id=allData) of "safety facilities locations" into javacript variable
       var cameraData = JSON.parse(document.getElementById('cameraData').innerHTML);
       var policeData = JSON.parse(document.getElementById('policeData').innerHTML);
       var taxiData = JSON.parse(document.getElementById('taxiData').innerHTML);
 
+/*console.log(taxiData);*/
+var visibleSafetyMarkers = ["cameraMarker","policeMarker","taxiMarker"];
+/*console.log(visibleSafetyMarkers);*/
 
 var markerGroups = {
     "cameraMarker": [],
@@ -25,7 +29,34 @@ function toggleGroup(type) {
             marker.setVisible(false);
         }
     }
+
+    var index = visibleSafetyMarkers.indexOf(type);
+
+    if (index > -1) {
+    visibleSafetyMarkers.splice(index, 1);
+    }
+    else {
+      visibleSafetyMarkers.push(type);
+    }
+
+    /*console.log(visibleSafetyMarkers);*/
 }
+
+ /*console.log(visibleSafetyMarkers.length);*/
+
+function toggleAllMarkers(trueFalse) {
+  /*console.log(trueFalse);*/
+  for (var type in markerGroups) {
+    var index = visibleSafetyMarkers.indexOf(type);
+    if (index > -1) {
+      for (var i = 0; i < markerGroups[type].length; i++) {
+          var marker = markerGroups[type][i];
+          marker.setVisible(trueFalse);
+        }
+    }
+  }
+}
+
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -152,11 +183,11 @@ new AutocompleteDirectionsHandler(map);
   };
 
 
-	var eventCoords = [{lat:"-37.8136",lng:"144.9631"}];
+  var eventCoords = [{lat:"-37.8136",lng:"144.9631"}];
 
-	function updateEventCoords() {
-		eventCoords = JSON.parse(document.getElementById('eventCoords').innerHTML);
-	}
+  function updateEventCoords() {
+    eventCoords = JSON.parse(document.getElementById('eventCoords').innerHTML);
+  }
 
       AutocompleteDirectionsHandler.prototype.route = function() {
         if (!this.originPlaceId /*|| !this.destinationPlaceId*/) {
