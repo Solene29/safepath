@@ -245,3 +245,13 @@ html *
     border: 1px solid #ccc;
     border-top: none;
 }
+
+.choice {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #FEB728; 
+    border: 1px; 
+    box-shadow: none; 
+    border-radius: 0px; 
+    width:125px;
+}
