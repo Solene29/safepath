@@ -87,35 +87,46 @@
 			</div>
 		</header>
 		<!-- header end -->
-		<!-- banner start --> 
-		       <div class="container">
+			<!-- header start --> 
+		<div class="container">
 				<div class="name">
 					<h1>Safe Path</h1>
 					<h3>shows you safer path to events.</h3>
 					<a href="events.html"><button class="btn cta-button">go to events</button></a>
 				</div>
+				</div>	
+			<!-- footer start -->
+		<footer id="footer">
+			<div class="subfooter">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<p class="text-center">FIT5120 &copy; 2018.Our team name and other</p>
+						</div>
+					</div>
 				</div>
-			<div class="banner">
 			</div>
-		<!-- banner end -->
- <video autoplay="autoplay" loop="loop">  
+		</footer>
+		<!-- footer end -->
+		<!-- header end -->
+		<!-- banner start -->
+ <video autoplay="autoplay" loop="loop" poster="images/banner.jpg">  
     <source  src="video/mel.mp4" type="video/mp4" > 
 </video> 
-	  
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+	<!--<div class="banner">
+	<div data-vide-bg="video/mel">
+				<div class="container">
+				<div class="name">
+					<h1>Safe Path</h1>
+					<h3>shows you safer path to events.</h3>
+					<a href="events.html"><button class="btn cta-button">go to events</button></a>
+				</div>
+				</div>	
+	</div>
+		</div>-->
+		<!-- banner end -->
+	
+			 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
     <script src="js/jquery.vide.min.js"></script>
-    <!-- footer start --> 
-    <footer id="footer">
-      <div class="subfooter">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <p class="text-center">&copy; 2018.Sympatico</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- footer end -->
   </body>
 </html>
