@@ -110,7 +110,7 @@
 		<!-- footer end -->
 		<!-- header end -->
 		<!-- banner start -->
- <video autoplay="autoplay" loop="loop" poster="images/banner.jpg">  
+ <video autoplay="autoplay" poster="images/loading.jpg">  
     <source  src="video/mel.mp4" type="video/mp4" > 
 </video> 
 		<!-- banner end -->
