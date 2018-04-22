@@ -1,18 +1,34 @@
 
 <html>
 <head>
-<title>Document sans-titre</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="robots" content="noindex" />
+<meta charset="utf-8">
+  <title>SafePath|Event Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="robots" content="noindex" />
+  <link href="css/bootstrap.css" rel="stylesheet"> 
+  <link href="css/animate.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet"> 
+  <link href="css/test.css" rel="stylesheet">
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
-   <link href="css/test.css" rel="stylesheet">
-   <link href="../css/style.css" rel="stylesheet">
-   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../css/bootstrap.css" rel="stylesheet"> 
-  <link href="../css/animate.min.css" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type=text/javascript src=js/displayEvents.js></script>
+  <script type=text/javascript src=js/categoryTabs.js></script>
+  <script type=text/javascript src=js/AccordionEventDesc.js></script> 
+    
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.backstretch.min.js"></script>
+  <script type="text/javascript" src="../js/function.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script>
+  new WOW().init();
+  </script>
+
+   
    
 <style>
 	#log, #pass { color: white; background-color:black; padding-left:8px; padding-right:8px; }
@@ -209,11 +225,6 @@ function UrlExists(url)
 
 <div id="toiletData" style="display: none;">[]</div>
 
-<!--<div id="cameraData">[{"camID":"1","lat":"-37.9665640","lon":"145.1737420"},{"camID":"2","lat":"-37.9653610","lon":"145.1738210"},{"camID":"3","lat":"-37.9654370","lon":"145.1739190"},{"camID":"4","lat":"-37.9664380","lon":"145.1743700"}]</div> 
-<div id="policeData">[{"psID":"1","name":"Alexandra Police Station","lat":"-37.1885386","lon":"145.7078915"},{"psID":"2","name":"Altona North Police Staion","lat":"-37.8359990","lon":"144.8448483"}]</div> 
-<div id="taxiData">[{"rankID":"25","lat":"-37.8180760128761","lon":"144.967531439296"},{"rankID":"53","lat":"-37.8234785115904","lon":"144.980467189591"},{"rankID":"54","lat":"-37.8158008159014","lon":"144.982752695403"},{"rankID":"57","lat":"-37.8118983657603","lon":"144.975326526605"},{"rankID":"56","lat":"-37.8091517635133","lon":"144.975898423805"}]</div> -->
-
-
 <script type=text/javascript src=js/route.js></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE&libraries=places&callback=initMap"
         async defer>
@@ -248,7 +259,7 @@ function UrlExists(url)
             <i class="material-icons">directions_car</i></label>
             </br></br>
             <b>Directions:</b>
-            <div id="panel" style="width: 90%;"></div>
+            <div id="panel" style="width: 90%; height: 250px; overflow: auto;"></div>
           </div>
   </div>
   <div id="mapAndInfoPanel" style="float: left; width: 70%; padding-right: 25px" align="left">
@@ -496,35 +507,6 @@ var marker = new google.maps.Marker({
 }
 
 
-
-/*
-function addToiletMarkers() {
-
-  var toiletData = JSON.parse(document.getElementById('toiletData').innerHTML);
-        console.log(toiletData);
-
-        var toiletIcon = {
-          url: "http://maps.google.com/mapfiles/kml/paddle/red-blank.png", // url
-          scaledSize: new google.maps.Size(15,15), // scaled size
-          origin: new google.maps.Point(0,0), // origin
-          anchor: new google.maps.Point(0, 0) // anchor
-        };
-
-        Array.prototype.forEach.call(toiletData, function(data){
-          console.log(data.lat);
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(data.Lat,data.Lon),
-          map: map,
-          icon: toiletIcon
-        })
-
-        if (!markerGroups["toiletMarker"]) markerGroups["toiletMarker"] = [];
-          markerGroups["toiletMarker"].push(marker);
-
-      })
-}
-*/
-
 function goToToilets(){
         $('#toiletCheckbox').prop('checked', true)
         if(toiletMarkerStatus==="hide"){
@@ -565,19 +547,7 @@ function getUserData(){
 </div>
 
 
-
-
-
-<p><b>Description: </b> <div style="height: 200px; overflow: auto;"" id="eventDescription" ></div> </p>
-
-
-
-
-
-
-
-
-
+<br/><p> <b style="padding-left: 25px; ">Description:<div style="height: 200px; overflow: auto; padding-left: 25px; background-color:#bbb;" id="eventDescription" ></div> </b></p>
 
 
 <script>
