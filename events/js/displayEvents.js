@@ -82,15 +82,15 @@ function testAddress(address1,name) {
 
 function testPicture(logo) {
     if(!logo){
-        return '../images/event1.jpg'
+        return '../images/about.jpg'
     }
     if(!logo.url){
-        return '../images/event1.jpg'
+        return '../images/about.jpg'
     }
     if(UrlExists(logo.url)){
         return logo.url
     }
-    return '../images/event1.jpg'
+    return '../images/about.jpg'
 
 }
 
