@@ -9,15 +9,20 @@
       var policeData = JSON.parse(document.getElementById('policeData').innerHTML);
       var taxiData = JSON.parse(document.getElementById('taxiData').innerHTML);
 
+
 /*console.log(taxiData);*/
 var visibleSafetyMarkers = ["cameraMarker","policeMarker","taxiMarker"];
 /*console.log(visibleSafetyMarkers);*/
+var toiletMarkerStatus = "show";
 
 var markerGroups = {
     "cameraMarker": [],
         "policeMarker": [],
-        "taxiMarker": []
+        "taxiMarker": [],
+        "toiletMarker": []
 };
+
+
 
 
 function toggleGroup(type) {
@@ -30,13 +35,24 @@ function toggleGroup(type) {
         }
     }
 
-    var index = visibleSafetyMarkers.indexOf(type);
-
-    if (index > -1) {
-    visibleSafetyMarkers.splice(index, 1);
+    if(type === "toiletMarker"){
+        if(toiletMarkerStatus==="hide"){
+          toiletMarkerStatus ="show";
+        }
+        else{
+          toiletMarkerStatus="hide";
+        }
+        //console.log(toiletMarkerStatus);
     }
-    else {
-      visibleSafetyMarkers.push(type);
+    else{
+       var index = visibleSafetyMarkers.indexOf(type);
+
+       if (index > -1) {
+        visibleSafetyMarkers.splice(index, 1);
+        }
+       else {
+          visibleSafetyMarkers.push(type);
+        }
     }
 
     /*console.log(visibleSafetyMarkers);*/
@@ -44,7 +60,7 @@ function toggleGroup(type) {
 
  /*console.log(visibleSafetyMarkers.length);*/
 
-function toggleAllMarkers(trueFalse) {
+function toggleSafetyMarkers(trueFalse) {
   /*console.log(trueFalse);*/
   for (var type in markerGroups) {
     var index = visibleSafetyMarkers.indexOf(type);
@@ -56,10 +72,21 @@ function toggleAllMarkers(trueFalse) {
     }
   }
 }
+function toggleToiletMarkers(trueFalse) {
+  /*console.log(trueFalse);*/
+if(toiletMarkerStatus === "show"){
+   for (var i = 0; i < markerGroups["toiletMarker"].length; i++) {
+          var marker = markerGroups["toiletMarker"][i];
+          marker.setVisible(trueFalse);
 
+        }
+      } 
+}
+
+var map;
 
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+   map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
     center: {lat: -37.8136, lng: 144.9631},
     zoom: 13
@@ -124,6 +151,10 @@ Array.prototype.forEach.call(taxiData, function(data){
     if (!markerGroups["taxiMarker"]) markerGroups["taxiMarker"] = [];
          markerGroups["taxiMarker"].push(marker);
 })
+
+
+
+
 new AutocompleteDirectionsHandler(map);
 }
 
@@ -220,3 +251,4 @@ new AutocompleteDirectionsHandler(map);
     }
   }
 } 
+

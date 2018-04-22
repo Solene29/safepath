@@ -135,13 +135,18 @@ function UrlExists(url)
     <!-- banner end -->
 
 
+
 </head>
 
 <body>
 <form method="get" action="parameters.html"> </form>
 
 
+
 <script language="JavaScript">
+
+  var eventlat = "";
+  var eventlon = "";
 
   var eventId;
 
@@ -165,14 +170,29 @@ function UrlExists(url)
                 document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\">Click here for event page</a>";
                 document.getElementById("eventDate").innerHTML = moment(event.start.local).format('D/M/YYYY h:mm A');
                 document.getElementById("eventDescription").innerHTML = event.description.html;
+                eventlat = event.venue.latitude;
+                eventlon = event.venue.longitude;
+
+                addEventMarker(eventlat,eventlon);
+
+                var pt = new google.maps.LatLng(eventlat, eventlon);
+                map.setCenter(pt);
+                map.setZoom(13);
+
+                $("#phpOutput").load("php/getToilets.php?eventLatValue="+eventlat+"&eventLonValue="+eventlon);
+
+
         });
                   
   };
 
-
   getEventById();
 
+
+
+
 </script>
+
 
 
   <!-- Get Camera, taxi ranks and Police stations data from database -->
@@ -187,6 +207,7 @@ function UrlExists(url)
   require "php/getTaxi.php"
 ?>
 
+<div id="toiletData" style="display: none;">[]</div>
 
 <!--<div id="cameraData">[{"camID":"1","lat":"-37.9665640","lon":"145.1737420"},{"camID":"2","lat":"-37.9653610","lon":"145.1738210"},{"camID":"3","lat":"-37.9654370","lon":"145.1739190"},{"camID":"4","lat":"-37.9664380","lon":"145.1743700"}]</div> 
 <div id="policeData">[{"psID":"1","name":"Alexandra Police Station","lat":"-37.1885386","lon":"145.7078915"},{"psID":"2","name":"Altona North Police Staion","lat":"-37.8359990","lon":"144.8448483"}]</div> 
@@ -196,6 +217,7 @@ function UrlExists(url)
 <script type=text/javascript src=js/route.js></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE&libraries=places&callback=initMap"
         async defer>
+
 </script>
 
 <div class=HeadEvent></div>
@@ -231,10 +253,10 @@ function UrlExists(url)
   </div>
   <div id="mapAndInfoPanel" style="float: left; width: 70%; padding-right: 25px" align="left">
     <div class="horizontalTab">
-  <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Direction to event</button>
+  <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
-  <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
+  <button class="tablinks" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
   </div>
     
   <div id="mapPanel" class="mapOrInfoPanelContent">
@@ -259,6 +281,11 @@ function UrlExists(url)
     <b>Other Options</b>
       </div>
 
+      <div id="directionsOptions" class="mapOptions">
+    <b>Direction Options</b>
+    <input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
+      </div>
+
   <div id="map" style="width: 100%; height:300px;"></div>
 
   </div>
@@ -276,13 +303,17 @@ function UrlExists(url)
 
 
   <div id="userData" style="display: none;">[{"description": "foodRange", "total": 0},{"description":"longQueue","total":0}, {"description":"noToilets","total":0}, {"description":"quickService","total":0}]</div>
-  <div id="ipData" style="display: none;">"[{totalIP: 0}]"</div>
+  <div id="ipData" style="display: none;">[{"totalIP": 0}]</div>
+  
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <div id="chartDiv"></div>
 
+  <button onclick="goToToilets();" >Show me nearby toilets!</button>
+
   <script>
 
-  
+
 
 function switchNames(codeName) {
   var out = '';
@@ -343,7 +374,7 @@ function switchColours(codeName) {
   for(var i = 0; i < allDescriptions.length; i++) {
     if(currentDescriptions.indexOf(allDescriptions[i])<0){
       userData.push({description: allDescriptions[i], total:0});
-      console.dir(allDescriptions[i]);
+      //console.dir(allDescriptions[i]);
     }
   }
 
@@ -352,7 +383,7 @@ function switchColours(codeName) {
 
 
   addZeroCounts();
-    console.dir(userData);
+    //console.dir(userData);
 
 
   var dataTable = new Array();
@@ -362,7 +393,7 @@ function switchColours(codeName) {
     dataTable[i+1] = [ switchNames(userData[i].description) , userData[i].total,  switchColours(userData[i].description) ];
    }
 
-   console.log(dataTable);
+   //console.log(dataTable);
   
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -402,6 +433,55 @@ function drawBasic() {
 
   </script>
 
+<script>
+
+function addEventMarker(lat,lon) {
+var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lat,lon),
+          map: map
+        })
+}
+
+/*
+function addToiletMarkers() {
+
+  var toiletData = JSON.parse(document.getElementById('toiletData').innerHTML);
+        console.log(toiletData);
+
+        var toiletIcon = {
+          url: "http://maps.google.com/mapfiles/kml/paddle/red-blank.png", // url
+          scaledSize: new google.maps.Size(15,15), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+        Array.prototype.forEach.call(toiletData, function(data){
+          console.log(data.lat);
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(data.Lat,data.Lon),
+          map: map,
+          icon: toiletIcon
+        })
+
+        if (!markerGroups["toiletMarker"]) markerGroups["toiletMarker"] = [];
+          markerGroups["toiletMarker"].push(marker);
+
+      })
+}
+*/
+
+function goToToilets(){
+        $('#toiletCheckbox').prop('checked', true)
+        if(toiletMarkerStatus==="hide"){
+          toggleGroup('toiletMarker');
+        }
+        openMapOrInfo(event, 'directions');
+        var pt = new google.maps.LatLng(eventlat, eventlon);
+        map.setCenter(pt);
+        map.setZoom(15);
+      
+    };
+</script>
 
   <script>
 function setValue(desc){
@@ -463,14 +543,21 @@ function openMapOrInfo(evt, panelName) {
       
 
       if(panelName === "safety"){
-        toggleAllMarkers(true);
+        toggleSafetyMarkers(true);
+        toggleToiletMarkers(false);
       }
       else{
-        toggleAllMarkers(false);
+        if(panelName === "directions"){
+        toggleSafetyMarkers(false);
+        toggleToiletMarkers(true);
+      }
+      else{
+        toggleSafetyMarkers(false);
+        toggleToiletMarkers(false);
       }
 
     }
-
+}
 
     tabcontent = document.getElementsByClassName("mapOrInfoPanelContent");
     for (i = 0; i < tabcontent.length; i++) {

@@ -16,16 +16,18 @@ if ($conn->connect_error) {
 
 // Fetch camera data
 $sqlUser = "SELECT description, count(userip) as total FROM user_input_data WHERE eventid = '" . $_GET["eventIdValue"] . "' GROUP BY description" ; 
-$result = $conn->query($sqlUser);
-
 $sqlIp = "SELECT count(distinct userip) as totalIP FROM user_input_data WHERE eventid = ". $_GET["eventIdValue"];
+
+$result = $conn->query($sqlUser);
 $ip = $conn->query($sqlIp);
 
+if (mysqli_num_rows($result)>0 ) {
 // Convert data to correct format for json_encode
 while($row = mysqli_fetch_assoc($result))
     $result1[] = $row; 
 while($row = mysqli_fetch_assoc($ip))
     $ip1[] = $row;
+
 
 
 // Convert data to format for Javascript
@@ -41,7 +43,7 @@ echo '</script>';
 echo '<script  language="javascript">';
 echo '$("#ipData").html("'.$ip1.'")';
 echo '</script>';
-
+}
 
 
 

@@ -44,9 +44,9 @@ function getEvents(input) {
                     s += "<table style=\"width:90%\"> <tr> <td>";
                     s += "<p><b>Location: "+ testAddress(event.venue.address.address_1,event.venue.name) + event.venue.address.city+"</b><br/>";
                     s += "<b>Date/Time: " + eventTime + "</b></p> </td>";
-                    s += "<td align=\"right\" class=\"desktopOnlyCell\"><button onclick = \"openModal('"+ event.name.text +"','" + testAddress(event.venue.address.address_1,event.venue.name) + event.venue.address.city+ ", "+ event.venue.address.postal_code +"',' "+event.venue.address.latitude+"','"+event.venue.longitude+"')\" style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:125px;\">Get there Safely!</button>"
+                    s += "<td align=\"right\" class=\"desktopOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:125px; text-align: center;\">Get there Safely!</div></a>"
                     s += "</td>";
-                    s += "<td align=\"right\" class=\"mobileOnlyCell\"><button onclick = \"openModal('"+ event.name.text +"','" + testAddress(event.venue.address.address_1,event.venue.name) + event.venue.address.city+ ", "+ event.venue.address.postal_code +"',' "+event.venue.address.latitude+"','"+event.venue.longitude+"')\" style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:75px;\"> <div> Get there Safely! </div></button>"
+                    s += "<td align=\"right\" class=\"mobileOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:75px; text-align: center;\">Get there Safely!</div></a>"
                     s += "</td>";
                     s += "</tr></table></td></tr></table>";
                     s += "<table style=\"width:90%\"><tr><td align=\"center\"><button onclick=\"toggleAccordion('" + event.id + "')\" style=\"border: 0; box-shadow:none; background-color:transparent;\" >";
