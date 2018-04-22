@@ -121,7 +121,7 @@
 					</div>
 					<div class="team-grids">
 						<div class="col-md-4 team-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
-							<div class="ih-item circle effect1"><a href="#">
+							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
 								<div class="img"><img src="images/Miki_ID.jpg" alt="img"></div>
 								<div class="info">
@@ -133,7 +133,7 @@
 							</div>
 						</div>
 						<div class="col-md-4 team-grid wow fadeInDown animated animated" data-wow-delay="0.4s">
-							<div class="ih-item circle effect1"><a href="#">
+							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
 									<div class="img"><img src="images/yunshu.jpg" alt="img"></div>
 								<div class="info">
@@ -145,7 +145,7 @@
 							</div>
 						</div>
 						<div class="col-md-4 team-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
-							<div class="ih-item circle effect1"><a href="#">
+							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
 									<div class="img"><img src="images/sherry.jpg" alt="img"></div>
 								<div class="info">
@@ -160,7 +160,7 @@
 					</div>
 	                <div class="team-grids">
 					<div class="col-md-6 team-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
-							<div class="ih-item circle effect1"><a href="#">
+							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
 									<div class="img"><img src="images/Solene_id2.jpg" alt="img"></div>
 								<div class="info">
@@ -172,7 +172,7 @@
 							</div>
 						</div>
 						<div class="col-md-6 team-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
-							<div class="ih-item circle effect1"><a href="#">
+							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
 									<div class="img"><img src="images/Minhao.jpg" alt="img"></div>
 								<div class="info">
