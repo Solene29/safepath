@@ -115,7 +115,7 @@ function UrlExists(url)
                       <ul class="nav navbar-nav navbar-right">
                                                 <li><a href="index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
-                        <li><a  style="color:#ffc400;" href="about.php">About Us</a></li>
+                        <li><a  style="color:#ffc400;" href="../about.php">About Us</a></li>
                       </ul>
                     </div>
                   </div>
@@ -278,7 +278,7 @@ function UrlExists(url)
       </div>
 
       <div id="routeOptions" class="mapOptions">
-    <b>Other Options</b>
+    <b>Coming soon...</b>
       </div>
 
       <div id="directionsOptions" class="mapOptions">
@@ -294,13 +294,60 @@ function UrlExists(url)
 
   <div id="phpOutput"></div>
 
-  <p>What would you like to report?</p>
+  <p>What would you like to report?    
+
+  </p>
+
   <button class="choice" onclick="setValue('noToilets');">No Toilets</button>
   <button class="choice" onclick="setValue('longQueue');" >Long Queues</button>
   <button class="choice" onclick="setValue('foodRange');" >Wide Range of Food</button>
-  <button class="choice" onclick="setValue('quickService');" >Quick Service</button></br>
+  <button class="choice" onclick="setValue('quickService');" >Quick Service  </button><!-- Trigger/Open The Modal -->
+<input type="image" id="myBtn" src="http://maps.google.com/mapfiles/kml/shapes/info.png" style="height:22px"></input>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>
+No Toilet - insufficient facilities</br>
+Long Queues - access or service is slow</br>
+Varied Food - plenty of tasty treats</br>
+Great Event - no problems encountered</p>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script></br>
+
+  
 
   <div id="userData" style="display: none;">[{"description": "foodRange", "total": 0},{"description":"longQueue","total":0}, {"description":"noToilets","total":0}, {"description":"quickService","total":0}]</div>
   <div id="ipData" style="display: none;">[{"totalIP": 0}]</div>
@@ -309,7 +356,13 @@ function UrlExists(url)
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <div id="chartDiv"></div>
 
-  <button onclick="goToToilets();" >Show me nearby toilets!</button>
+  <button onclick="goToToilets();" style="padding: 5px;
+    cursor: pointer;
+    background-color: #bbb; 
+    border: 1px; 
+    box-shadow: none; 
+    border-radius: 0px; 
+    width:200px;" >Show me nearby toilets!  <img src="http://maps.google.com/mapfiles/kml/shapes/toilets.png" style="height:22px;"></button>
 
   <script>
 
@@ -441,6 +494,8 @@ var marker = new google.maps.Marker({
           map: map
         })
 }
+
+
 
 /*
 function addToiletMarkers() {

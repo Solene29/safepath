@@ -42,7 +42,7 @@ function addToiletMarkers() {
         console.log(toiletData);
 
         var toiletIcon = {
-          url: "http://maps.google.com/mapfiles/kml/paddle/red-blank.png", // url
+          url: "http://maps.google.com/mapfiles/kml/shapes/toilets.png", // url
           scaledSize: new google.maps.Size(15,15), // scaled size
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(0, 0) // anchor

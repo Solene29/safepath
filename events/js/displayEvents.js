@@ -34,7 +34,7 @@ function getEvents(input) {
                 var s = "";
                 for(var i=0; i<res.events.length;i++) {
                     var event = res.events[i];
-                    var eventTime = moment(event.start.local).format('M/D/YYYY h:mm A');
+                    var eventTime = moment(event.start.local).format('D/M/YYYY h:mm A');
                     console.dir(event);
                     s += "<div class=\"accordion\" id=\"accordion"+ event.id  + "\">"; 
                     s += "<table style=\"width:100%\"><tr class=\"mobileOnlyRow\"><td><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;\"></td></tr><tr>"
