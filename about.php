@@ -103,7 +103,7 @@
 
             <div class="row">
                 <div class="col-sm-6 wow">
-                  <img class="img-responsive" src="images/banner.jpg" alt="">
+                  <img class="img-responsive" src="images/about.jpg" alt="">
                 </div>
                 <div class="col-sm-6 wow" style="background: #FFFFFF;">
                     <h3 class="column-title">About SafePath</h3>
