@@ -73,6 +73,10 @@
 												<li><a style="color:#ffc400" href="index.php">Home</a></li>
 												<li><a href="Events/index.php">Events</a></li>
 												<li><a href="about.php">About Us</a></li>
+										                <li><a><form action="#" class="search-form">
+										                    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
+										                    <input type="submit" value="" class="search-submit" name="submit">
+									                            </form></a></li>
 											</ul>
 										</div>
 									</div>
