@@ -71,7 +71,7 @@ toggleToiletMarkers(false);
 
 else {
 echo '<script language="javascript">';
-echo 'alert("Unfortunately, no toilets were found within 500m of this event.")';
+echo 'toggleSafetyMarkers(false);';
 echo '</script>';
 }
 
