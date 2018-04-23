@@ -119,10 +119,14 @@ function openModal(eventName,address,lat,lng) {
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
-                      <ul class="nav navbar-nav navbar-right">
+                      <ul class="nav navbar-nav navbar-right search">
                         <li><a href="../index.php">Home</a></li>
                         <li><a  style="color:#ffc400;" href="index.php">Events</a></li>
-						  <li><a href="../about.php">About us</a></li>
+			<li><a href="../about.php">About us</a></li>
+		        <li><a><form action="#" class="search-form">
+			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
+			 <input type="submit" value="" class="search-submit" name="submit">
+			 </form></a></li>
                       </ul>
                     </div>
                   </div>

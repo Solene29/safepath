@@ -86,7 +86,7 @@ document.onmousedown = rtclickcheck;
 										</div>
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
-											<ul class="nav navbar-nav navbar-right">
+											<ul class="nav navbar-nav navbar-right search">
                                                                                                 <li><a href="index.php">Home</a></li>
 												<li><a href="Events/index.php">Events</a></li>
 												<li><a  style="color:#ffc400;" href="about.php">About Us</a></li>
@@ -144,7 +144,7 @@ document.onmousedown = rtclickcheck;
 								<div class="info">
 								  <div class="info-back">
 									<h4>Mikaela Jennings</h4>
-									<span>Data sourcing</span>
+									<span>Data Sourcing</span>
 								  </div>
 								</div></a>
 							</div>
@@ -168,7 +168,7 @@ document.onmousedown = rtclickcheck;
 								<div class="info">
 									<div class="info-back">
 										<h4>Sherry Xiang</h4>
-										<span>UI designer</span>
+										<span>UI design</span>
 								  </div>
 								</div></a>
 							</div>
@@ -183,7 +183,7 @@ document.onmousedown = rtclickcheck;
 								<div class="info">
 									<div class="info-back">
 										<h4>Solène Greliche</h4>
-										<span>Coding of Back-end</span>
+										<span>Web Development</span>
 								  </div>
 								</div></a>
 							</div>
@@ -195,7 +195,7 @@ document.onmousedown = rtclickcheck;
 								<div class="info">
 									<div class="info-back">
 										<h4>MinHao Du</h4>
-										<span>Coding of front-end</span>
+										<span>Web Development</span>
 								  </div>
 								</div></a>
 							</div>
