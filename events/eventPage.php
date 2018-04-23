@@ -132,10 +132,10 @@ function UrlExists(url)
                         <li><a href="index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
                         <li><a href="../about.php">About Us</a></li>
-			<li><a><form action="#" class="search-form">
+			<!-- <li><a><form action="#" class="search-form">
 			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
 			 <input type="submit" value="" class="search-submit" name="submit">
-			  </form></a></li>
+			  </form></a></li> -->
                       </ul>
                     </div>
                   </div>
@@ -336,8 +336,8 @@ var marker = new google.maps.Marker({
 
   <button class="choice" onclick="setValue('noToilets');">No Toilets</button>
   <button class="choice" onclick="setValue('longQueue');" >Long Queues</button>
-  <button class="choice" onclick="setValue('foodRange');" >Wide Range of Food</button>
-  <button class="choice" onclick="setValue('quickService');" >Quick Service  </button><!-- Trigger/Open The Modal -->
+  <button class="choice" onclick="setValue('foodRange');" >Varied Food</button>
+  <button class="choice" onclick="setValue('quickService');" >Great Event  </button><!-- Trigger/Open The Modal -->
 
   <label><input type="image" id="myBtn" style="height:24px">
             <i class="material-icons">info_outline</i></label>
@@ -393,7 +393,7 @@ function switchNames(codeName) {
   var out = '';
    switch (codeName) {
         case 'foodRange':
-            out = 'Wide range of food';
+            out = 'Varied Food';
             break;
         case 'longQueue':
             out = 'Long queues';
@@ -402,7 +402,7 @@ function switchNames(codeName) {
             out = 'No toilets';
             break;
         case 'quickService':
-            out = 'Quick service';
+            out = 'Great Event';
             break;
     }
     return out;
