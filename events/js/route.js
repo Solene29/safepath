@@ -217,7 +217,10 @@ new AutocompleteDirectionsHandler(map);
   var eventCoords = [{lat:"-37.8136",lng:"144.9631"}];
 
   function updateEventCoords() {
-    eventCoords = JSON.parse(document.getElementById('eventCoords').innerHTML);
+    console.log([{lat: eventlat, lng:eventlon}]);
+    eventCoords =[{lat: eventlat, lng:eventlon}];
+    console.log(eventCoords);
+    //eventCoords = JSON.parse([{lat: eventlat[0],lng:eventlon[0]}]);
   }
 
       AutocompleteDirectionsHandler.prototype.route = function() {
@@ -241,7 +244,7 @@ new AutocompleteDirectionsHandler(map);
       
   /*Get directions for each type of transport*/
      function writeDirectionsSteps(steps) {
-  var directions = document.getElementById('panel');
+  var directions = document.getElementById('directionsOutput');
   directions.innerHTML = '';
   for (var i = 0; i < steps.length; i++) {
     directions.innerHTML += '<br/><br/>' + steps[i].instructions + '<br/>' + steps[i].distance.text;

@@ -150,7 +150,14 @@ function UrlExists(url)
     <div class="banner1"></div>
     <!-- banner end -->
 
-
+<script type="text/javascript">
+  function addEventMarker(lat,lon) {
+var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lat,lon),
+          map: map
+        })
+}
+</script>
 
 </head>
 
@@ -191,6 +198,8 @@ function UrlExists(url)
 
                 addEventMarker(eventlat,eventlon);
 
+                updateEventCoords();
+
                 var pt = new google.maps.LatLng(eventlat, eventlon);
                 map.setCenter(pt);
                 map.setZoom(13);
@@ -203,10 +212,6 @@ function UrlExists(url)
   };
 
   getEventById();
-
-
-
-
 </script>
 
 
@@ -225,11 +230,22 @@ function UrlExists(url)
 
 <div id="toiletData" style="display: none;">[]</div>
 
+<div id="userData" style="display: none;">[{"description": "foodRange", "total": 0},{"description":"longQueue","total":0}, {"description":"noToilets","total":0}, {"description":"quickService","total":0}]</div>
+<div id="ipData" style="display: none;">[{"totalIP": 0}]</div>
+  
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type=text/javascript src=js/route.js></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE&libraries=places&callback=initMap"
         async defer>
 
 </script>
+
+
+
+
+
 
 <div class=HeadEvent></div>
 
@@ -243,9 +259,10 @@ function UrlExists(url)
 
 </br></br><hr width="100%";></br>  
 
-<div style="content: ""; display: table; clear: both;">
-  <div id="directionsPanel" style="float: left; width: 30%; padding-left:25px;" align="left">
-    <b>Choose starting point:</b>    
+<div id="mainTable">
+  <div id="directionsPanel" align="left">
+
+        <b>Choose starting point:</b>    
         <input id="origin-input" class="controls" type="text" style ="width:250px" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
           <div id="mode-selector" class="controls">
@@ -257,12 +274,14 @@ function UrlExists(url)
             <i class="material-icons">directions_transit</i></label>
             <label><input type="radio" name="type" id="changemode-driving">
             <i class="material-icons">directions_car</i></label>
-            </br></br>
-            <b>Directions:</b>
-            <div id="panel" style="width: 90%; height: 250px; overflow: auto;"></div>
           </div>
+            </br>
+
+            <b>Directions:</b>
+            <div id="directionsOutput">Please input your starting location for directions.</div>
+          
   </div>
-  <div id="mapAndInfoPanel" style="float: left; width: 70%; padding-right: 25px" align="left">
+  <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
   <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
@@ -294,10 +313,12 @@ function UrlExists(url)
 
       <div id="directionsOptions" class="mapOptions">
     <b>Direction Options</b>
+    
+
     <input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
       </div>
 
-  <div id="map" style="width: 100%; height:300px;"></div>
+  <div id="map" style="width: 100%; height:350px;"></div>
 
   </div>
 
@@ -313,59 +334,17 @@ function UrlExists(url)
   <button class="choice" onclick="setValue('longQueue');" >Long Queues</button>
   <button class="choice" onclick="setValue('foodRange');" >Wide Range of Food</button>
   <button class="choice" onclick="setValue('quickService');" >Quick Service  </button><!-- Trigger/Open The Modal -->
-<input type="image" id="myBtn" src="http://maps.google.com/mapfiles/kml/shapes/info.png" style="height:22px"></input>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+  <label><input type="image" id="myBtn" style="height:24px">
+            <i class="material-icons">info_outline</i></label>
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>
-No Toilet - insufficient facilities</br>
-Long Queues - access or service is slow</br>
-Varied Food - plenty of tasty treats</br>
-Great Event - no problems encountered</p>
-  </div>
-
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script></br>
+</br>
 
   
 
-  <div id="userData" style="display: none;">[{"description": "foodRange", "total": 0},{"description":"longQueue","total":0}, {"description":"noToilets","total":0}, {"description":"quickService","total":0}]</div>
-  <div id="ipData" style="display: none;">[{"totalIP": 0}]</div>
   
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <div id="chartDiv"></div>
+
 
   <button onclick="goToToilets();" style="padding: 5px;
     cursor: pointer;
@@ -373,7 +352,31 @@ window.onclick = function(event) {
     border: 1px; 
     box-shadow: none; 
     border-radius: 0px; 
-    width:200px;" >Show me nearby toilets!  <img src="http://maps.google.com/mapfiles/kml/shapes/toilets.png" style="height:22px;"></button>
+    width:200px;" >Show me nearby toilets! <i class="material-icons">wc</i>
+  </button>
+
+
+  </div>
+
+    
+  </div>
+</div>
+
+
+
+<div style="display: block; clear: both">
+  <div style=" background-color:#bbb; padding: 25px;">
+<p style="display: block; "> 
+  <b>Description:</b>
+  <div id="eventDescription" ></div> </p>
+</div>
+</div>
+
+
+
+
+
+
 
   <script>
 
@@ -499,15 +502,15 @@ function drawBasic() {
 
 <script>
 
-function addEventMarker(lat,lon) {
-var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(lat,lon),
-          map: map
-        })
-}
+
 
 
 function goToToilets(){
+        
+        if(markerGroups['toiletMarker'].length ===0){
+          alert("Unfortunately, no toilets were found within 500m of this event.")
+        }
+        else {
         $('#toiletCheckbox').prop('checked', true)
         if(toiletMarkerStatus==="hide"){
           toggleGroup('toiletMarker');
@@ -516,7 +519,7 @@ function goToToilets(){
         var pt = new google.maps.LatLng(eventlat, eventlon);
         map.setCenter(pt);
         map.setZoom(15);
-      
+      }
     };
 </script>
 
@@ -539,15 +542,6 @@ function getUserData(){
     var intervalID = setInterval(function(){getUserData(); barChart();}, 1000);
 </script>
 
-
-  </div>
-
-    
-  </div>
-</div>
-
-
-<br/><p> <b style="padding-left: 25px; ">Description:<div style="height: 200px; overflow: auto; padding-left: 25px; background-color:#bbb;" id="eventDescription" ></div> </b></p>
 
 
 <script>
@@ -603,6 +597,53 @@ function openMapOrInfo(evt, panelName) {
 <script> 
 document.getElementById("defaultOpen").click();
 </script>
+
+
+<!-- ================   Modal code start  ====================    -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>
+No Toilet - insufficient facilities</br>
+Long Queues - access or service is slow</br>
+Varied Food - plenty of tasty treats</br>
+Great Event - no problems encountered</p>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<!-- ================   Modal code end  ====================    -->
+
 
 
 
