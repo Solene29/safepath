@@ -73,7 +73,7 @@
 										</div>
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
-											<ul class="nav navbar-nav navbar-right">
+											<ul class="nav navbar-nav navbar-right search">
                                                                                                 <li><a href="index.php">Home</a></li>
 												<li><a href="Events/index.php">Events</a></li>
 												<li><a  style="color:#ffc400;" href="about.php">About Us</a></li>
