@@ -276,22 +276,28 @@ html *
 .desktopOnlyRow {display:table-row;}
 .desktopOnlyCell {display:table-cell;}
 #directionsPanel {float: left; width: 30%; padding-left:25px;}
-#mapAndInfoPanel {float: left; width: 70%; padding-right:25px;}
+#mapAndInfoPanel {float: left; width: 70%; padding-right:0;}
 
 #directionsOutput {width: 95%; height: 250px; overflow: auto;}
-#mainTable {content: ""; display: table; clear: both;}
+#mainTable {content: ""; display: table; clear: both; width: 100%;}
 @media (max-width: 700px) { 
     .mobileOnlyRow {display:table-row; }
     .mobileOnlyCell {display:table-cell; }
     .desktopOnlyRow {display:none;}
     .desktopOnlyCell {display:none;}
-    #directionsPanel {display: block;  width: 100%; padding:5px;}
-    #mapAndInfoPanel {display: block;  width: 100%; padding:5px;}
-    .mapOrInfoPanelContent {padding: 0px ; border: none; border-top: none;}
+    #directionsPanel {display: block;  width: 100%; padding:5px; }
+    #mapAndInfoPanel {display: block;  width: 100%; padding:5px; position: right;}
+    .mapOrInfoPanelContent {padding: 0px ; border: none; border-top: none; width: 100%}
     #directionsOutput {width: 100%; height:unset}
 
-    #mainTable {display: flex; flex-direction: column;}
+    #mainTable {display: flex; flex-direction: column; width: 100%;}
 
-    #mainTable > #directionsPanel {order: 2; } /* Will be displayed second */
-    #mainTable > #mapAndInfoPanel {order: 1; } /* Will be displayed first  */
+    #mainTable > #directionsPanel {order: 2; width: 100%;} /* Will be displayed second */
+    #mainTable > #mapAndInfoPanel {order: 1; width: 100%} /* Will be displayed first  */
+}
+
+
+#origin-input {width:250px}
+@media (max-width: 942px) { 
+    #origin-input {width:98%}
 }

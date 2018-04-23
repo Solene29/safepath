@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html >
   <head>
+  	<script type="text/javascript" src="../js/hideCodejs"></script>
+  	<script>
+  		mousehandler(e);
+  		disableCtrlKeyCombination(e);
+  	</script>
     <meta charset="utf-8">
     <title>SafePath</title>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -31,7 +36,7 @@
   }
 </style>
   </head>
-  <body>
+  <body oncontextmenu="return false">
 <!-- header start --> 
 		<header class="header fixed clearfix navbar navbar-fixed-top">
 			<div class="container">
@@ -73,10 +78,10 @@
 												<li><a style="color:#ffc400" href="index.php">Home</a></li>
 												<li><a href="Events/index.php">Events</a></li>
 												<li><a href="about.php">About Us</a></li>
-										                <li><a><form action="#" class="search-form">
+										                <!-- <li><a><form action="#" class="search-form">
 										                    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
 										                    <input type="submit" value="" class="search-submit" name="submit">
-									                            </form></a></li>
+									                            </form></a></li> -->
 											</ul>
 										</div>
 									</div>

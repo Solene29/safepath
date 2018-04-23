@@ -190,7 +190,7 @@ var marker = new google.maps.Marker({
         console.dir(event);
 
                 document.getElementById("eventName").innerHTML = event.name.text;
-                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\">Click here for event page</a>";
+                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\"><u>Click here for event page</u></a>";
                 document.getElementById("eventDate").innerHTML = moment(event.start.local).format('D/M/YYYY h:mm A');
                 document.getElementById("eventDescription").innerHTML = event.description.html;
                 eventlat = event.venue.latitude;
@@ -263,7 +263,7 @@ var marker = new google.maps.Marker({
   <div id="directionsPanel" align="left">
 
         <b>Choose starting point:</b>    
-        <input id="origin-input" class="controls" type="text" style ="width:250px" placeholder="Enter an origin location"></br></br>
+        <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
           <div id="mode-selector" class="controls">
             <label><input type="radio" name="type" id="changemode-walking" checked="checked">
@@ -285,7 +285,7 @@ var marker = new google.maps.Marker({
     <div class="horizontalTab">
   <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
-  <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
+  <!-- <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button> -->
   <button class="tablinks" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
   </div>
     
@@ -312,11 +312,11 @@ var marker = new google.maps.Marker({
       </div>
 
       <div id="directionsOptions" class="mapOptions">
-    <b>Direction Options</b>
+    <b style="font-size: 20px">Direction Options</b>
     
 
-    <input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
-      </div>
+    </br></br><input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
+      </div></br>
 
   <div id="map" style="width: 100%; height:350px;"></div>
 
@@ -326,7 +326,7 @@ var marker = new google.maps.Marker({
 
   <div id="phpOutput"></div>
 
-  <p>What would you like to report?    
+  <p><h3><b>What would you like to report? </b></h3>   
 
   </p>
 
@@ -354,7 +354,10 @@ var marker = new google.maps.Marker({
     border-radius: 0px; 
     width:200px;" >Show me nearby toilets! <i class="material-icons">wc</i>
   </button>
-
+<!-- <input type="image" src="images/twit.png" class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?text=Hello%20world"><a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?text=Hello%20world"></a></input>
+Tweet</a> -->
 
   </div>
 
@@ -454,10 +457,10 @@ function switchColours(codeName) {
 
 
   var dataTable = new Array();
-  dataTable[0] = ['Description', 'Total', { role: 'style' }];
+  dataTable[0] = ['Description', 'Percentage of votes', { role: 'style' }];
    for(var i=0; i<userData.length;i++) {
     /*console.log(switchNames(userData[i].description));*/
-    dataTable[i+1] = [ switchNames(userData[i].description) , userData[i].total,  switchColours(userData[i].description) ];
+    dataTable[i+1] = [ switchNames(userData[i].description) , userData[i].descPercentage,  switchColours(userData[i].description) ];
    }
 
    //console.log(dataTable);
@@ -476,9 +479,9 @@ function drawBasic() {
         chartArea: {width: '50%'},
         hAxis: {
           viewWindowMode:'explicit',
-          title: 'Total voters',
+          title: 'Percentage of Voters (Total voters = ' + ipData[0].totalIP +')',
           minValue: 0,
-          maxValue: ipData[0].totalIP
+          maxValue: 100
         },
         vAxis: {
           title: ''
