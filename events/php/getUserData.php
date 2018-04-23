@@ -15,7 +15,15 @@ if ($conn->connect_error) {
 } 
 
 // Fetch camera data
-$sqlUser = "SELECT description, count(userip) as total FROM user_input_data WHERE eventid = '" . $_GET["eventIdValue"] . "' GROUP BY description" ; 
+$sqlUser = "SELECT T03.description, ROUND(100*(count(T03.userip)/T03.TotalIP),0) as descPercentage
+			FROM (	SELECT T01.*, T02.totalIP as totalIP
+					FROM user_input_data T01
+					INNER JOIN (SELECT eventid, count(distinct userip) as totalIP 
+								FROM user_input_data
+								WHERE eventid = '" .  $_GET["eventIdValue"] . "') T02
+					ON T01.eventid = T02.eventid
+     			) T03
+			GROUP BY T03.description" ; 
 $sqlIp = "SELECT count(distinct userip) as totalIP FROM user_input_data WHERE eventid = ". $_GET["eventIdValue"];
 
 $result = $conn->query($sqlUser);
