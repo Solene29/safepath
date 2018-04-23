@@ -131,7 +131,7 @@
 								<div class="info">
 								  <div class="info-back">
 									<h4>Mikaela Jennings</h4>
-									<span>Data sourcing</span>
+									<span>Data Sourcing</span>
 								  </div>
 								</div></a>
 							</div>
@@ -155,7 +155,7 @@
 								<div class="info">
 									<div class="info-back">
 										<h4>Sherry Xiang</h4>
-										<span>UI designer</span>
+										<span>UI design</span>
 								  </div>
 								</div></a>
 							</div>
@@ -170,7 +170,7 @@
 								<div class="info">
 									<div class="info-back">
 										<h4>Solène Greliche</h4>
-										<span>Coding of Back-end</span>
+										<span>Web Development</span>
 								  </div>
 								</div></a>
 							</div>
@@ -182,7 +182,7 @@
 								<div class="info">
 									<div class="info-back">
 										<h4>MinHao Du</h4>
-										<span>Coding of front-end</span>
+										<span>Web Development</span>
 								  </div>
 								</div></a>
 							</div>
