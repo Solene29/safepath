@@ -74,9 +74,13 @@
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
 											<ul class="nav navbar-nav navbar-right">
-                                                <li><a href="index.php">Home</a></li>
+                                                                                                <li><a href="index.php">Home</a></li>
 												<li><a href="Events/index.php">Events</a></li>
 												<li><a  style="color:#ffc400;" href="about.php">About Us</a></li>
+												<li><a><form action="#" class="search-form">
+										                <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
+										                <input type="submit" value="" class="search-submit" name="submit">
+									                         </form></a></li>
 											</ul>
 										</div>
 									</div>
@@ -103,7 +107,7 @@
 
             <div class="row">
                 <div class="col-sm-6 wow">
-                  <img class="img-responsive" src="images/about.jpg" alt="">
+                  <img class="img-responsive" src="images/abouta.jpg" alt="">
                 </div>
                 <div class="col-sm-6 wow" style="background: #FFFFFF;">
                     <h3 class="column-title">About SafePath</h3>
@@ -123,7 +127,7 @@
 						<div class="col-md-4 team-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
 							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
-								<div class="img"><img src="images/Miki_ID.jpg" alt="img"></div>
+								<div class="img"><img src="images/Miki.jpg" alt="img"></div>
 								<div class="info">
 								  <div class="info-back">
 									<h4>Mikaela Jennings</h4>
@@ -174,7 +178,7 @@
 						<div class="col-md-6 team-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
 							<div class="ih-item circle effect1"><a href="###">
 								<div class="spinner"></div>
-									<div class="img"><img src="images/Minhao.jpg" alt="img"></div>
+									<div class="img"><img src="images/minhao.jpg" alt="img"></div>
 								<div class="info">
 									<div class="info-back">
 										<h4>MinHao Du</h4>
