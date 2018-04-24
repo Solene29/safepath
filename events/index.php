@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <SCRIPT language=JavaScript>
-
-<!-- http://www.spacegun.co.uk -->
+  <!-- <SCRIPT language=JavaScript>
 
 var message = "function disabled";
 
@@ -13,7 +11,7 @@ if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(mes
 
 document.onmousedown = rtclickcheck;
 
-</SCRIPT>
+</SCRIPT> -->
   <meta charset="utf-8">
   <title>SafePath|Events</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +78,7 @@ function openModal(eventName,address,lat,lng) {
 
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
 <!-- header start --> 
     <header class="header fixed clearfix navbar navbar-fixed-top">
@@ -121,12 +119,12 @@ function openModal(eventName,address,lat,lng) {
                     <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
                       <ul class="nav navbar-nav navbar-right search">
                         <li><a href="../index.php">Home</a></li>
-                        <li><a  style="color:#ffc400;" href="index.php">Events</a></li>
-			<li><a href="../about.php">About us</a></li>
-		        <li><a><form action="#" class="search-form">
-			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
-			 <input type="submit" value="" class="search-submit" name="submit">
-			 </form></a></li>
+                        <li><a href="index.php">Events</a></li>
+                        <li><a href="../about.php">About Us</a></li>
+      <li><a><form action="index.php" class="search-form">
+      <input type="text" name="search" placeholder="Search" required="">
+       <input type="submit" value="" class="search-submit" >
+        </form></a></li>
                       </ul>
                     </div>
                   </div>
@@ -147,33 +145,42 @@ function openModal(eventName,address,lat,lng) {
 
 
 <body>
+  <form method="get" action="parameters.html"> </form>
 
-  <!-- Get Camera, taxi ranks and Police stations data from database -->
+  
+  
+<script language="JavaScript">
+var searchString = "";
+var searchQn = "no";
+function getSearchString() {
+    var parameters =  unescape(location.search.substring(1).split("&")[0]);
+    var temp = parameters.split("=");
+    if(temp.length>0){
+      if(temp[0]==="search"){
+        searchQn = "yes";
+        searchString = temp[1];
+      }
+    }
+  };
+getSearchString();
+console.log(searchString);
+console.log(searchQn);
 
-<?php
-  require "php/getCameras.php"
-?>
-<?php
-  require "php/getPoliceStations.php"
-?>
-<?php
-  require "php/getTaxi.php"
-?>
-
-<script type=text/javascript src=js/route.js></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE&libraries=places&callback=initMap"
-        async defer>
 </script>
+
+
+
 
 <!-- Event category tabs: -->
 <div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="index.php">Event</a></p></div>
 <div class="tab">
   <h3>Category</h3>
-  <button class="tablinks" onclick="openCategory(event, 'eventArts')">Arts</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventFood')">Food and Drink</button>
-  <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic')">Music</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventSports')">Sports</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventOther')">Other</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventArts', '')">Arts</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventFood', '')">Food and Drink</button>
+  <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic', '')">Music</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventSports', '')">Sports</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventOther', '')">Other</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventSearch', '')">Search</button>
 </div>
 
 <!-- Event category tabs content -->
@@ -207,9 +214,22 @@ Arts</p>
   <div id="eventOther"></div>
 </div>
 
+<div id="eventSearchTab" class="tabcontent">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  Search</p> 
+  <input id="seachInputMain" class="controls" type="text" placeholder="Search for event..."> 
+  <button style="padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:80px; text-align: center;" onclick="openCategory(event,'eventSearch', document.getElementById('seachInputMain').value)">Search</button>
+  <div id="eventSearch"></div>
+</div>
+
 <!-- Event category tabs open: -->
 <script> 
-document.getElementById("defaultOpen").click();
+  if(searchQn==="no"){
+    document.getElementById("defaultOpen").click();
+  }
+  else {
+    openCategory(event, 'eventSearch', searchString);
+  }
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -226,87 +246,6 @@ for (i = 0; i < acc.length; i++) {
 }
 </script>
   
-<!-- The Modal -->
-<div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div id="modalDiv"></div>
-    <b>Choose starting point: </b>    
-    <input id="origin-input" class="controls" type="text" style ="width:250px" placeholder="Enter an origin location"></br></br>
-    <table>
-      <col width="200px">
-      <tr>
-        <td valign="top">
-          <b>Transport type: </b>
-          <div id="mode-selector" class="controls">
-            <input type="radio" name="type" id="changemode-walking" checked="checked">
-            <label for="changemode-walking">Walking</label></br>
-            <input type="radio" name="type" id="changemode-bicycling">
-            <label for="changemode-bicycling">Cycling</label></br>
-            <input type="radio" name="type" id="changemode-transit">
-            <label for="changemode-transit">Transit</label></br>
-            <input type="radio" name="type" id="changemode-driving">
-            <label for="changemode-driving">Driving</label>
-            </br>
-          </div></br>
-        </td>
-
-        <td valign="top">
-          <b>Safety features: </b>
-          <table>
-            <tr>
-              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras</input></td>
-              <td> <img src="http://maps.google.com/mapfiles/kml/paddle/grn-blank.png" style="height:15px;"></td>
-            </tr>
-            <tr>
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations</input></td>
-              <td><img src="http://maps.google.com/mapfiles/kml/paddle/purple-blank.png" style="height:15px;"></td>
-            </tr>
-            <tr>
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks</input></td>
-              <td><img src="http://maps.google.com/mapfiles/kml/paddle/pink-blank.png" style="height:15px;"></td>
-            </tr>
-          </table>
-
-        </td>
-      </tr>
-    </table>
-
-    <table style="width:100%">
-      <tr>
-        <td>
-            <div id="map" style="width: 100%; height:300px;"></div></br>
-        </td>
-      </tr>
-      <tr>
-        <td> 
-          <b>Directions:</b>
-          <div id="panel" style="width: 90%;"></div>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-
-<!-- Get modal: -->
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-    }
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
 </body>
 </html>
