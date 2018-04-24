@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html >
   <head>
-  	<script type="text/javascript" src="../js/hideCodejs"></script>
   	<script>
   		mousehandler(e);
   		disableCtrlKeyCombination(e);
@@ -76,12 +75,12 @@
 										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
 											<ul class="nav navbar-nav navbar-right search">
 												<li><a style="color:#ffc400" href="index.php">Home</a></li>
-												<li><a href="Events/index.php">Events</a></li>
+												<li><a href="events/index.php">Events</a></li>
 												<li><a href="about.php">About Us</a></li>
-										                <!-- <li><a><form action="#" class="search-form">
-										                    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
-										                    <input type="submit" value="" class="search-submit" name="submit">
-									                            </form></a></li> -->
+      <li><a><form action="events/index.php" class="search-form">
+      <input type="text" name="search" placeholder="Search" required="">
+       <input type="submit" value="" class="search-submit" >
+        </form></a></li>
 											</ul>
 										</div>
 									</div>
@@ -100,7 +99,7 @@
 		<div class="container">
 				<div class="name">
 					<h1>Safe Path</h1>
-					<h3>shows you safer path to events.</h3>
+					<h3>Shows you safer path to events.</h3>
 					<a href="Events/index.php"><button class="btn cta-button">go to events</button></a>
 				</div>
 				</div>	
@@ -110,7 +109,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<p class="text-center">FIT5120 &copy; 2018.Our team name and other</p>
+							<p class="text-center">FIT5120 &copy; 2018.SafePath</p>
 						</div>
 					</div>
 				</div>
