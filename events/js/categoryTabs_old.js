@@ -1,15 +1,10 @@
-// Changing tabs and getting the event data
-function openCategory(evt, catName, searchString) {
+function openCategory(evt, catName) {
     // Declare all variables
     var i, tabcontent, tablinks;
     
-    if(catName==="eventSearch" && searchString===""){
-
+    if(catName != "eventSearch"){
+        getEvents(catName)
     }
-    else{
-        getEvents(catName, searchString)
-    }
-    
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -25,14 +20,5 @@ function openCategory(evt, catName, searchString) {
 
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(catName + 'Tab').style.display = "block";
-
-    console.log(searchString);
-    console.log(searchString.length);
-
-    if(catName!="eventSearch"){  
     evt.currentTarget.className += " active";
-    }  
-    else{
-        document.getElementById("searchOpen").className += " active";
-    }
 }

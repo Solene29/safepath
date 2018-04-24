@@ -39,7 +39,6 @@ echo '<script  language="javascript">
 function addToiletMarkers() {
 
   var toiletData = JSON.parse(document.getElementById(\'toiletData\').innerHTML);
-        console.log(toiletData);
 
         var toiletIcon = {
           url: "http://maps.google.com/mapfiles/kml/shapes/toilets.png", // url

@@ -1,54 +1,37 @@
-
-//Function getting events from EventBright
-function getEvents(input,searchString) {
+function getEvents(input) {
         
         //anon oauth token
     var token = 'BY5GBM6TSQPL3NTR5S6E';
 
         var $events1 = $("#"+input);
         
-    var mainInput;
-
-//This line puts the search string into the "search input box" that lives inside the search tab
-    document.getElementById('seachInputMain').value = searchString;
-
-//Check for event categories
-    if(input != "eventSearch"){
-        console.log("here");
         var cat;
-        switch (input) {
-           case "eventArts":
-                cat = 105;
-                break;
-            case "eventFood":
-                cat = 110;
-                break;
-            case "eventMusic":
-                cat = 103;
-                break;
-            case "eventOther":
-                cat = 107;
-                break;
-            case "eventSports":
-                cat = 108;
-                break;
-            }
-        mainInput = "&sort_by=date&categories="+cat;
-    }
-    else{
-    mainInput = "&q="+searchString;
+        
+    switch (input) {
+        case "eventArts":
+            cat = 105;
+            break;
+        case "eventFood":
+            cat = 110;
+            break;
+        case "eventMusic":
+            cat = 103;
+            break;
+        case "eventOther":
+            cat = 107;
+            break;
+        case "eventSports":
+            cat = 108;
+            break;
+
+
     }
 
-//Loading events from eventBright according to below endpoints:
         $events1.html("<i>Loading events, please stand by...</i>");
-        $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token + mainInput +'&location.address=Melbourne&location.within=3km&expand=venue', function(res) {
+        $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token+'&location.address=Melbourne&location.within=3km&sort_by=date&categories='+cat+'&expand=venue', function(res) {
             
             if(res.events.length) {
                 var s = "";
-                if (input === "eventSearch"){
-                    var s = "<b>Results for \"" + searchString + "\":</b>"
-                }
-
                 for(var i=0; i<res.events.length;i++) {
                     var event = res.events[i];
                     var eventTime = moment(event.start.local).format('D/M/YYYY h:mm A');
@@ -84,7 +67,41 @@ function getEvents(input,searchString) {
 
     };
 
+function testAddress(address1,name) {
+    if(address1===null){
+        if(name===null){
+            return "";
+        }
+        else{
+            return name + ", ";
+        }
+    }
+    return address1 + ", ";
+}
 
+
+function testPicture(logo) {
+    if(!logo){
+        return '../images/about.jpg'
+    }
+    if(!logo.url){
+        return '../images/about.jpg'
+    }
+    if(UrlExists(logo.url)){
+        return logo.url
+    }
+    return '../images/about.jpg'
+
+}
+
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    //console.log(http.status!=404);
+    return http.status!=404;
+}
 
 
 

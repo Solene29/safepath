@@ -15,7 +15,8 @@
   
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
-  <script type=text/javascript src=js/displayEvents.js></script>
+  <!--<script type=text/javascript src=js/displayEvents.js></script>-->
+  <script type=text/javascript src=js/test.js></script>
   <script type=text/javascript src=js/categoryTabs.js></script>
   <script type=text/javascript src=js/AccordionEventDesc.js></script> 
     
@@ -49,7 +50,7 @@ label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
 </style>
 
 <script type="text/javascript">
-	
+//testing address is right format and change to if not
 	function testAddress(address1,name) {
     if(address1===null){
         if(name===null){
@@ -62,7 +63,7 @@ label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
     return address1 + ", ";
 }
 
-
+//testing event has a logo, if not display dummy
 function testPicture(logo) {
     if(!logo){
         return '../images/event1.jpg'
@@ -77,12 +78,12 @@ function testPicture(logo) {
 
 }
 
+//testing url exists
 function UrlExists(url)
 {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    //console.log(http.status!=404);
     return http.status!=404;
 }
 
@@ -129,13 +130,13 @@ function UrlExists(url)
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
                       <ul class="nav navbar-nav navbar-right search">
-                        <li><a href="index.php">Home</a></li>
+                        <li><a href="../index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
                         <li><a href="../about.php">About Us</a></li>
-			<!-- <li><a><form action="#" class="search-form">
-			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = "Search";}" required="">
-			 <input type="submit" value="" class="search-submit" name="submit">
-			  </form></a></li> -->
+                        <li><a><form action="index.php" class="search-form">
+                      <input type="text" name="search" placeholder="Search" required="">
+                       <input type="submit" value="" class="search-submit" >
+                        </form></a></li>
                       </ul>
                     </div>
                   </div>
@@ -154,8 +155,10 @@ function UrlExists(url)
     <div class="banner1"></div>
     <!-- banner end -->
 
+
 <script type="text/javascript">
-  function addEventMarker(lat,lon) {
+//Add the event location marker
+function addEventMarker(lat,lon) {
 var marker = new google.maps.Marker({
           position: new google.maps.LatLng(lat,lon),
           map: map
@@ -168,8 +171,6 @@ var marker = new google.maps.Marker({
 <body>
 <form method="get" action="parameters.html"> </form>
 
-
-
 <script language="JavaScript">
 
   var eventlat = "";
@@ -177,21 +178,20 @@ var marker = new google.maps.Marker({
 
   var eventId;
 
+//Get the ID for event
   function getEventId() {
     eventId =  unescape(location.search.substring(1).split("&")[0]);
   }
   
   getEventId();
 
-  console.log(eventId);
-
+//Get event data from eventbright
   function getEventById() {
 
     var token = 'BY5GBM6TSQPL3NTR5S6E';
 
     $.get('https://www.eventbriteapi.com/v3/events/' + eventId + '/?token=' + token + '&expand=venue', function(event) {
 
-        console.dir(event);
 
                 document.getElementById("eventName").innerHTML = event.name.text;
                 document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\"><u>Click here for event page</u></a>";
@@ -232,9 +232,13 @@ var marker = new google.maps.Marker({
   require "php/getTaxi.php"
 ?>
 
+<!-- Get toilet data from database -->
+
 <div id="toiletData" style="display: none;">[]</div>
 
-<div id="userData" style="display: none;">[{"description": "foodRange", "total": 0},{"description":"longQueue","total":0}, {"description":"noToilets","total":0}, {"description":"quickService","total":0}]</div>
+<!-- Initialise data for plot where there is no user input yet -->
+
+<div id="userData" style="display: none;">[{"description": "foodRange", "descPercentage": 0},{"description":"longQueue","descPercentage":0}, {"description":"noToilets","descPercentage":0}, {"description":"quickService","descPercentage":0}]</div>
 <div id="ipData" style="display: none;">[{"totalIP": 0}]</div>
   
 
@@ -246,11 +250,7 @@ var marker = new google.maps.Marker({
 
 </script>
 
-
-
-
-
-
+<!-- Display content event information -->
 <div class=HeadEvent></div>
 
 <div align="center"><h1><span id="eventName"></span></h1></div>
@@ -263,7 +263,9 @@ var marker = new google.maps.Marker({
 
 </br></br><hr width="100%";></br>  
 
+
 <div id="mainTable">
+  <!-- Display directions panel -->
   <div id="directionsPanel" align="left">
 
         <b>Choose starting point:</b>    
@@ -285,6 +287,8 @@ var marker = new google.maps.Marker({
             <div id="directionsOutput">Please input your starting location for directions.</div>
           
   </div>
+
+  <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
   <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
@@ -311,9 +315,9 @@ var marker = new google.maps.Marker({
           </table>
       </div>
 
-      <div id="routeOptions" class="mapOptions">
+      <!-- <div id="routeOptions" class="mapOptions">
     <b>Coming soon...</b>
-      </div>
+      </div> -->
 
       <div id="directionsOptions" class="mapOptions">
     <b style="font-size: 20px">Direction Options</b>
@@ -325,6 +329,8 @@ var marker = new google.maps.Marker({
   <div id="map" style="width: 100%; height:350px;"></div>
 
   </div>
+
+  <!-- Display Feedback panel -->
 
   <div id="eventPanel" class="mapOrInfoPanelContent">
 
@@ -369,7 +375,7 @@ Tweet</a> -->
   </div>
 </div>
 
-
+<!-- Display event description -->
 
 <div style="display: block; clear: both">
   <div style=" background-color:#bbb; padding: 25px;">
@@ -383,8 +389,7 @@ Tweet</a> -->
 
 
 
-
-
+<!-- ===================================== Reformating data for the bar chart in Feedback tab ========================================-->
   <script>
 
 
@@ -428,12 +433,11 @@ function switchColours(codeName) {
 }
 
 
-
+//Display bar chart
 
   function barChart() {
   var userData = JSON.parse(document.getElementById('userData').innerHTML);
   var ipData = JSON.parse(document.getElementById('ipData').innerHTML);
-
 
   function addZeroCounts(){
   var allDescriptions = ["foodRange", "longQueue", "noToilets", "quickService"];
@@ -448,7 +452,7 @@ function switchColours(codeName) {
   for(var i = 0; i < allDescriptions.length; i++) {
     if(currentDescriptions.indexOf(allDescriptions[i])<0){
       userData.push({description: allDescriptions[i], total:0});
-      //console.dir(allDescriptions[i]);
+ 
     }
   }
 
@@ -457,21 +461,21 @@ function switchColours(codeName) {
 
 
   addZeroCounts();
-    //console.dir(userData);
+
 
 
   var dataTable = new Array();
   dataTable[0] = ['Description', 'Percentage of votes', { role: 'style' }];
    for(var i=0; i<userData.length;i++) {
-    /*console.log(switchNames(userData[i].description));*/
     dataTable[i+1] = [ switchNames(userData[i].description) , userData[i].descPercentage,  switchColours(userData[i].description) ];
    }
 
-   //console.log(dataTable);
   
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
+
+//Draw bar chart
 
 function drawBasic() {
 
@@ -510,7 +514,7 @@ function drawBasic() {
 <script>
 
 
-
+//Get nearby toilets
 
 function goToToilets(){
         
