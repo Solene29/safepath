@@ -1,3 +1,6 @@
+ 
+/*<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*/
  // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -111,21 +114,23 @@ Array.prototype.forEach.call(cameraData, function(data){
         markerGroups["cameraMarker"].push(marker);
 })
 
+     
 
-var icon = {
-    url: "http://maps.google.com/mapfiles/kml/paddle/purple-blank.png", // url
-    scaledSize: new google.maps.Size(15,15), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-     anchor: new google.maps.Point(0, 0) // anchor
-};
-       
-/*<img style="-webkit-user-select: none;" src="https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png">*/
+var policeIcon = {
+    path: "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z",
+    fillColor: '#944dff',
+    fillOpacity: 1,
+    background: '#ffffff',
+    anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: 1
+}  
 
 Array.prototype.forEach.call(policeData, function(data){
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.lat,data.lon),
     map: map,
-    icon: icon,
+    icon: policeIcon,
     title: data.name
   })
 
@@ -141,11 +146,15 @@ var iconTaxi = {
   anchor: new google.maps.Point(0, 0) // anchor
 };
 
+/*var iconTaxi2 = {
+<i class="material-icons">videocam &#160;</i>
+}*/
+
 Array.prototype.forEach.call(taxiData, function(data){
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.lat,data.lon),
     map: map,
-    icon: iconTaxi 
+    icon: iconTaxi
   })
 
     if (!markerGroups["taxiMarker"]) markerGroups["taxiMarker"] = [];

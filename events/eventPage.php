@@ -21,7 +21,7 @@
   <script type=text/javascript src=js/AccordionEventDesc.js></script> 
     
   <script type="text/javascript" src="../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/jfavascript" src="../js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/jquery.backstretch.min.js"></script>
   <script type="text/javascript" src="../js/function.js"></script>
   <script src="js/wow.min.js"></script>
@@ -46,6 +46,9 @@ label > input + i{ /* IMAGE STYLES */
 label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
   color:black;
 }
+
+}
+
 
 </style>
 
@@ -133,8 +136,8 @@ function UrlExists(url)
                         <li><a href="../index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
                         <li><a href="../about.php">About Us</a></li>
-                        <li><a><form action="index.php" class="search-form">
-                      <input type="text" name="search" placeholder="Search" required="">
+                        <li><a><form action="index.php" class="search-form" >
+                      <input type="text" name="search" placeholder="Search for event..." required="">
                        <input type="submit" value="" class="search-submit" >
                         </form></a></li>
                       </ul>
@@ -154,6 +157,7 @@ function UrlExists(url)
     <!-- banner start --> 
     <div class="banner1"></div>
     <!-- banner end -->
+   
 
 
 <script type="text/javascript">
@@ -261,7 +265,7 @@ var marker = new google.maps.Marker({
   <div id="eventUrl" style="float: left; width: 50%;" align="center"></div>
 </div>
 
-</br></br><hr width="100%";></br>  
+</br></br><hr width="100%"; style="border-color:#BEBEBE"></br>  
 
 
 <div id="mainTable">
@@ -300,17 +304,16 @@ var marker = new google.maps.Marker({
   <div id="mapPanel" class="mapOrInfoPanelContent">
     <div id="safetyOptions" class="mapOptions">
           <table>
+          </br>
             <tr>
-              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras</input></td>
-              <td> <img src="http://maps.google.com/mapfiles/kml/paddle/grn-blank.png" style="height:15px;"></td>
+              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras </input><i class="material-icons">videocam &#160;</i></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations</input></td>
-              <td><img src="http://maps.google.com/mapfiles/kml/paddle/purple-blank.png" style="height:15px;"></td>
+              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations </input><i class="material-icons">security &#160;</i></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks</input></td>
-              <td><img src="http://maps.google.com/mapfiles/kml/paddle/pink-blank.png" style="height:15px;"></td>
+              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks </input><i class="material-icons">local_taxi</i></td>
+              
             </tr>
           </table>
       </div>
@@ -375,10 +378,12 @@ Tweet</a> -->
   </div>
 </div>
 
+</br></br><hr width="100%"; style="border-color:#BEBEBE">
+
 <!-- Display event description -->
 
 <div style="display: block; clear: both">
-  <div style=" background-color:#bbb; padding: 25px;">
+  <div style="padding: 25px;">
 <p style="display: block; "> 
   <b>Description:</b>
   <div id="eventDescription" ></div> </p>
@@ -655,7 +660,19 @@ window.onclick = function(event) {
 
 <!-- ================   Modal code end  ====================    -->
 
-
+ <!-- footer start -->
+    <div id="footer">
+      <div class="subfooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center">&copy; 2018 SafePath</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer end -->
 
 
 </body>

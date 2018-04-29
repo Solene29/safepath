@@ -7,7 +7,9 @@ function openCategory(evt, catName, searchString) {
 
     }
     else{
-        getEvents(catName, searchString)
+        if(pagesLoaded[pageNames.indexOf(catName)] === 0){
+            getEvents(catName, searchString)
+        }
     }
     
 

@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- <SCRIPT language=JavaScript>
 
-var message = "function disabled";
-
-function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
-
-if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
-
-document.onmousedown = rtclickcheck;
-
-</SCRIPT> -->
   <meta charset="utf-8">
   <title>SafePath|Events</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +12,13 @@ document.onmousedown = rtclickcheck;
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <!-- <script src="jquery.easyPaginate.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
   <script type=text/javascript src=js/displayEvents.js></script>
   <script type=text/javascript src=js/test.js></script>
   <script type=text/javascript src=js/categoryTabs.js></script>
+  <script type=text/javascript src=js/pageTab.js></script>
   <script type=text/javascript src=js/AccordionEventDesc.js></script> 
     
   <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -79,8 +72,10 @@ function openModal(eventName,address,lat,lng) {
 
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
+<div class="wrapper">
+    
 <!-- header start --> 
     <header class="header fixed clearfix navbar navbar-fixed-top">
       <div class="container">
@@ -146,6 +141,7 @@ function openModal(eventName,address,lat,lng) {
 
 
 <body>
+ 
 
 <!-- Importing the search string from another page -->
 <form method="get" action="parameters.html"> </form>
@@ -171,7 +167,6 @@ console.log(searchQn);
 <!-- Event category tabs: -->
 <div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="index.php">Event</a></p></div>
 <div class="tab">
-  <h3>Category</h3>
   <button class="tablinks" onclick="openCategory(event, 'eventArts', '')">Arts</button>
   <button class="tablinks" onclick="openCategory(event, 'eventFood', '')">Food and Drink</button>
   <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic', '')">Music</button>
@@ -180,44 +175,75 @@ console.log(searchQn);
   <button class="tablinks" id="searchOpen" onclick="openCategory(event, 'eventSearch', '')">Search</button>
 </div>
 
+
+
 <!-- Event category tabs content -->
 <div id="eventArtsTab" class="tabcontent">
-   <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
 Arts</p>
 <div id="eventArts"></div>    
 </div>
 
 <div id="eventFoodTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
   Food and Drink</p> 
   <div id="eventFood"></div>
 </div>
 
 <div id="eventMusicTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
   Music</p> 
   <div id="eventMusic"></div>
 </div>
 
 <div id="eventSportsTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
   Sports</p>
   <div id="eventSports"></div>
 </div>
 
 <div id="eventOtherTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
   Other</p> 
   <div id="eventOther"></div>
 </div>
 
 <div id="eventSearchTab" class="tabcontent">
-  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none; margin: 1.5em 0px;">
+  <p style="background-color: #454445; border: none; font-weight: 900; text-align: center; color: white; font-size: 28pt; padding:0 ; text-decoration:none;">
   Search</p> 
   <input id="seachInputMain" class="controls" type="text" placeholder="Search for event..."> 
   <button style="padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:80px; text-align: center;" onclick="openCategory(event,'eventSearch', document.getElementById('seachInputMain').value)">Search</button>
   <div id="eventSearch"></div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- footer start -->
+<div style="clear:both; display:block;">
+  <div id="footer">
+      <div class="subfooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center">&copy; 2018 SafePath</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+<!-- footer end -->
+
+
 
 <!-- Event category tabs open: -->
 <script> 
@@ -242,7 +268,6 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 </script>
-  
-
 </body>
+
 </html>

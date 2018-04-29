@@ -76,7 +76,7 @@ html *
     /*border: 1px solid #ccc;*/
     width: 75%;
     border-left: none;
-    height: 100px;
+    min-height: 600px;
 }
 
 
@@ -169,7 +169,6 @@ html *
     border: none;
     outline: none;
     transition: 0.4s;
-
     
 }
 
@@ -192,23 +191,7 @@ html *
 
 
 
-.pagination {
-    display: inline-block;
-}
 
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-.pagination a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
 
 .HeadEvent {
     font: Arial;
@@ -271,6 +254,39 @@ html *
     width:150px;
 }
 
+/* =========================================== Pagination ============================================== */
+
+
+.pageTab {
+    display: inline-block;
+
+}
+
+.pageTab button {
+    background-color: white;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    border: 1px; 
+    box-shadow: none; 
+    border-radius: 0px;
+}
+
+.pageTab button.active {
+    background-color: #FEB728; 
+    padding: 8px 16px;
+    border: 1px; 
+    box-shadow: none; 
+    border-radius: 0px;
+}
+
+.pageTab button:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+/*============================================ Mobile vs Desktop format ================================ */
+
 .mobileOnlyRow {display:none;}
 .mobileOnlyCell {display:none;}
 .desktopOnlyRow {display:table-row;}
@@ -301,3 +317,6 @@ html *
 @media (max-width: 942px) { 
     #origin-input {width:98%}
 }
+
+
+
