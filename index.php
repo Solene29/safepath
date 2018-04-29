@@ -33,6 +33,18 @@
   { 
      .mobileHide { display: none;}
   }
+
+  ::-webkit-input-placeholder {
+    color:white;
+}
+
+::-moz-placeholder {
+    color:white;
+}
+
+::placeholder {
+    color:white;
+}
 </style>
   </head>
   <body oncontextmenu="return false">
@@ -78,7 +90,7 @@
 												<li><a href="events/index.php">Events</a></li>
 												<li><a href="about.php">About Us</a></li>
       <li><a><form action="events/index.php" class="search-form">
-      <input type="text" name="search" placeholder="Search" required="">
+      <input type="text" name="search" placeholder="Search events..." required="">
        <input type="submit" value="" class="search-submit" >
         </form></a></li>
 											</ul>
@@ -109,7 +121,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<p class="text-center">FIT5120 &copy; 2018.SafePath</p>
+							<p class="text-center">&copy; 2018 SafePath</p>
 						</div>
 					</div>
 				</div>

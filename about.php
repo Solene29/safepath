@@ -216,7 +216,7 @@ document.onmousedown = rtclickcheck;
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<p class="text-center">&copy; 2018.Sympatico</p>
+							<p class="text-center">&copy; 2018 Sympatico</p>
 						</div>
 					</div>
 				</div>
