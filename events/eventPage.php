@@ -297,7 +297,7 @@ var marker = new google.maps.Marker({
     <div class="horizontalTab">
   <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
-  <!-- <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button> -->
+  <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
   </div>
     
@@ -318,9 +318,9 @@ var marker = new google.maps.Marker({
           </table>
       </div>
 
-      <!-- <div id="routeOptions" class="mapOptions">
+    <div id="routeOptions" class="mapOptions">
     <b>Coming soon...</b>
-      </div> -->
+      </div>
 
       <div id="directionsOptions" class="mapOptions">
     <b style="font-size: 20px">Direction Options</b>
