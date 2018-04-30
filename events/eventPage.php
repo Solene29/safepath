@@ -319,7 +319,12 @@ var marker = new google.maps.Marker({
       </div>
 
     <div id="routeOptions" class="mapOptions">
-    <b>Coming soon...</b>
+    <h3><b>What would you like to report on the way?</b></h3>
+  </br>
+  <button class="choice" onclick="setValue('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
+  <button class="choice" onclick="setValue('abusivePatrons');" style=" background-color:#EEC440">Abusive patrons</button>
+  <button class="choice" onclick="setValue('fight');" style=" background-color:#EEC440">Fighting group</button>
+  <button class="choice" onclick="setValue('suspiciousPeople');" style=" background-color:#EEC440">Suspicious person</button>
       </div>
 
       <div id="directionsOptions" class="mapOptions">
@@ -343,10 +348,10 @@ var marker = new google.maps.Marker({
 
   </p>
 
-  <button class="choice" onclick="setValue('noToilets');">No Toilets</button>
-  <button class="choice" onclick="setValue('longQueue');" >Long Queues</button>
-  <button class="choice" onclick="setValue('foodRange');" >Varied Food</button>
-  <button class="choice" onclick="setValue('quickService');" >Great Event  </button><!-- Trigger/Open The Modal -->
+  <button class="choice" onclick="setValue('noToilets');" style=" background-color:#EEC440">No Toilets</button>
+  <button class="choice" onclick="setValue('longQueue');" style=" background-color:#EEC440">Long Queues</button>
+  <button class="choice" onclick="setValue('foodRange');" style=" background-color:#EEC440">Varied Food</button>
+  <button class="choice" onclick="setValue('quickService');" style=" background-color:#EEC440">Great Event  </button>
 
   <label><input type="image" id="myBtn" style="height:24px">
             <i class="material-icons">info_outline</i></label>

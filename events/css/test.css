@@ -246,12 +246,11 @@ html *
 
 .choice {
     padding: 5px;
-    cursor: pointer;
-    background-color: #bbb; 
+    cursor: pointer; 
     border: 1px; 
     box-shadow: none; 
     border-radius: 0px; 
-    width:150px;
+    width:155px;
 }
 
 /* =========================================== Pagination ============================================== */
