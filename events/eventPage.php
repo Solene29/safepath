@@ -306,13 +306,13 @@ var marker = new google.maps.Marker({
           <table>
           </br>
             <tr>
-              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras </input><i class="material-icons">videocam &#160;</i></td>
+              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras </input><i class="material-icons" style="color:#6600ff">videocam &#160;</i></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations </input><i class="material-icons">security &#160;</i></td>
+              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations </input><i class="material-icons" style="color:#993300">security &#160;</i></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks </input><i class="material-icons">local_taxi</i></td>
+              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks </input><i class="material-icons" style="color:#FF3366">local_taxi</i></td>
               
             </tr>
           </table>

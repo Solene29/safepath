@@ -95,19 +95,23 @@ function initMap() {
     zoom: 13
   });
 
-  var icon3 = {
-    url: "http://maps.google.com/mapfiles/kml/paddle/grn-blank.png", // url
-    scaledSize: new google.maps.Size(15,15), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(0, 0) // anchor
-};
+  var cameraIcon = {
+    path: "M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z",
+    fillColor: '#6600ff',
+    fillOpacity: 1,
+    background: '#ffffff',
+    anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: 0.7
+} 
 
 // Place "camera location" makers
 Array.prototype.forEach.call(cameraData, function(data){
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.lat,data.lon),
     map: map,
-    icon: icon3
+    icon: cameraIcon,
+    title: data.name
   })
 
     if (!markerGroups["cameraMarker"]) markerGroups["cameraMarker"] = [];
@@ -118,12 +122,12 @@ Array.prototype.forEach.call(cameraData, function(data){
 
 var policeIcon = {
     path: "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z",
-    fillColor: '#944dff',
+    fillColor: '#993300',
     fillOpacity: 1,
     background: '#ffffff',
     anchor: new google.maps.Point(0,0),
     strokeWeight: 0,
-    scale: 1
+    scale: 0.7
 }  
 
 Array.prototype.forEach.call(policeData, function(data){
@@ -139,22 +143,22 @@ Array.prototype.forEach.call(policeData, function(data){
     })
 
 // Place "taxi_rank location" makers
-var iconTaxi = {
-  url: "http://maps.google.com/mapfiles/kml/paddle/pink-blank.png", // url
-  scaledSize: new google.maps.Size(15,15), // scaled size
-  origin: new google.maps.Point(0,0), // origin
-  anchor: new google.maps.Point(0, 0) // anchor
-};
+var taxiIcon = {
+    path: "M18.92 6.01C18.72 5.42 18.16 5 17.5 5H15V3H9v2H6.5c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z",
+    fillColor: '#FF3366',
+    fillOpacity: 1,
+    background: '#ffffff',
+    anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: 0.7
+} 
 
-/*var iconTaxi2 = {
-<i class="material-icons">videocam &#160;</i>
-}*/
 
 Array.prototype.forEach.call(taxiData, function(data){
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.lat,data.lon),
     map: map,
-    icon: iconTaxi
+    icon: taxiIcon
   })
 
     if (!markerGroups["taxiMarker"]) markerGroups["taxiMarker"] = [];
