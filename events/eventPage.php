@@ -210,7 +210,6 @@ var marker = new google.maps.Marker({
 
                 var pt = new google.maps.LatLng(eventlat, eventlon);
                 map.setCenter(pt);
-                map.setZoom(13);
 
                 $("#phpOutput").load("php/getToilets.php?eventLatValue="+eventlat+"&eventLonValue="+eventlon);
 
@@ -321,10 +320,10 @@ var marker = new google.maps.Marker({
     <div id="routeOptions" class="mapOptions">
     <h3><b>What would you like to report on the way?</b></h3>
   </br>
-  <button class="choice" onclick="setValue('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
-  <button class="choice" onclick="setValue('abusivePatrons');" style=" background-color:#EEC440">Abusive patrons</button>
-  <button class="choice" onclick="setValue('fight');" style=" background-color:#EEC440">Fighting group</button>
-  <button class="choice" onclick="setValue('suspiciousPeople');" style=" background-color:#EEC440">Suspicious person</button>
+  <button class="choice" onclick="setHazard('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
+  <button class="choice" onclick="setHazard('harrassment');" style=" background-color:#EEC440">Harrassment</button>
+  <button class="choice" onclick="setHazard('aggression');" style=" background-color:#EEC440">Aggression</button>
+  <button class="choice" onclick="setHazard('illegalActivity');" style=" background-color:#EEC440">Illegal activity</button>
       </div>
 
       <div id="directionsOptions" class="mapOptions">
@@ -547,6 +546,12 @@ function goToToilets(){
   <script>
 function setValue(desc){
         $("#phpOutput").load("php/sendInput.php?eventIdValue="+eventId+"&description="+desc);
+    };
+</script>
+
+<script>
+function setHazard(desc){
+        $("#phpOutput").load("php/sendInputRoute.php?eventIdValue="+eventId+"&description="+desc);
     };
 </script>
 

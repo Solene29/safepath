@@ -26,7 +26,7 @@ if ($conn->query($sql) === TRUE) {
 	echo 'alert("Your input has been recorded")';
 	echo '</script>';
 } else {
-        echo '<script language="javascript">';
+    echo '<script language="javascript">';
 	echo 'alert("Your input has already been recorded")';
 	echo '</script>';
 }
