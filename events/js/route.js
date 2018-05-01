@@ -86,14 +86,39 @@ if(toiletMarkerStatus === "show"){
       } 
 }
 
+
+function geocodeLatLng(lat,lng) {
+        var latlng = new google.maps.LatLng(lat, lng);
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, hazardMarker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+
+
 var map;
+var geocoder;
+var infowindow
 
 function initMap() {
    map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
     center: {lat: -37.8136, lng: 144.9631},
-    zoom: 20
+    streetViewControl: false,
+    fullscreenControl: false,
+    zoom: 16
   });
+
+  geocoder = new google.maps.Geocoder;
+  infowindow = new google.maps.InfoWindow;
 
   var cameraIcon = {
     path: "M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z",
