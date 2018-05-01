@@ -29,6 +29,17 @@
   new WOW().init();
   </script>
 
+<script>
+function openHazardInput() {
+document.getElementById("trafficHazardClosedPanel").style.display = "none";
+document.getElementById("trafficHazardOpenPanel").style.display = "block";
+}
+function closeHazardInput() {
+document.getElementById("trafficHazardClosedPanel").style.display = "block";
+document.getElementById("trafficHazardOpenPanel").style.display = "none";
+}
+
+</script>
    
    
 <style>
@@ -294,9 +305,9 @@ var marker = new google.maps.Marker({
   <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
-  <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
+  <button class="tablinks" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
-  <button class="tablinks" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
+  <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
   <button class="tablinks" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
   </div>
     
@@ -318,13 +329,25 @@ var marker = new google.maps.Marker({
       </div>
 
     <div id="routeOptions" class="mapOptions">
-    <h3><b>What would you like to report on the way?</b></h3>
-  </br>
-  <button class="choice" onclick="setHazard('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
-  <button class="choice" onclick="setHazard('harrassment');" style=" background-color:#EEC440">Harrassment</button>
-  <button class="choice" onclick="setHazard('aggression');" style=" background-color:#EEC440">Aggression</button>
-  <button class="choice" onclick="setHazard('illegalActivity');" style=" background-color:#EEC440">Illegal activity</button>
+      <div id="trafficHazardClosedPanel">
+        <button onclick="openHazardInput()"> Add Hazard</button> 
       </div>
+      <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
+ 
+      <h3><b>What would you like to report on the way?</b></h3>
+      </br>
+      <button class="choice" onclick="setHazard('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
+      <button class="choice" onclick="setHazard('harrassment');" style=" background-color:#EEC440">Harrassment</button>
+      <button class="choice" onclick="setHazard('aggression');" style=" background-color:#EEC440">Aggression</button>
+      <button class="choice" onclick="setHazard('illegalActivity');" style=" background-color:#EEC440">Illegal activity</button>
+
+      </br>
+        <button onclick="closeHazardInput()"> Cancel</button>
+      </div>
+
+
+    </div>
+
 
       <div id="directionsOptions" class="mapOptions">
     <b style="font-size: 20px">Direction Options</b>
