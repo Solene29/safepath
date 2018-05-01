@@ -33,7 +33,16 @@
 function openHazardInput() {
 document.getElementById("trafficHazardClosedPanel").style.display = "none";
 document.getElementById("trafficHazardOpenPanel").style.display = "block";
-}
+
+new google.maps.event.addListener(map, 'click', function(event) {
+    hazardMarker.setPosition(event.latLng);
+    hazardMarker.setVisible(true);
+    });
+
+};
+
+
+
 function closeHazardInput() {
 document.getElementById("trafficHazardClosedPanel").style.display = "block";
 document.getElementById("trafficHazardOpenPanel").style.display = "none";
@@ -173,12 +182,24 @@ function UrlExists(url)
 
 <script type="text/javascript">
 //Add the event location marker
+var hazardMarker;
+
 function addEventMarker(lat,lon) {
+var hazardIcon = {url: 'images/ylw-pushpin.png',
+                  anchor: new google.maps.Point(22, 64)
+                  };
 var marker = new google.maps.Marker({
           position: new google.maps.LatLng(lat,lon),
           map: map
-        })
-}
+        });
+hazardMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(lat,lon),
+          map: map,
+          icon: hazardIcon,
+          draggable: true
+        });
+hazardMarker.setVisible(false);
+};
 </script>
 
 </head>
@@ -342,6 +363,7 @@ var marker = new google.maps.Marker({
       <button class="choice" onclick="setHazard('illegalActivity');" style=" background-color:#EEC440">Illegal activity</button>
 
       </br>
+        <button onclick="addHazard()"> Submit Hazard </button>
         <button onclick="closeHazardInput()"> Cancel</button>
       </div>
 
