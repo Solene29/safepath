@@ -30,13 +30,26 @@
   </script>
 
 <script>
+
+function snapToRoad(lat,lng){
+  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+lat+','+lng+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE',
+      function(res){
+        console.log(res.snappedPoints[0].location.latitude);
+        hazardMarker.setPosition(new google.maps.LatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude));
+      });
+
+};
+
 function openHazardInput() {
 document.getElementById("trafficHazardClosedPanel").style.display = "none";
 document.getElementById("trafficHazardOpenPanel").style.display = "block";
 
 new google.maps.event.addListener(map, 'click', function(event) {
+    console.log(event.latLng.lat());
     hazardMarker.setPosition(event.latLng);
     hazardMarker.setVisible(true);
+    snapToRoad(event.latLng.lat(),event.latLng.lng());
+
     });
 
 };
