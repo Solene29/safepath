@@ -25,8 +25,7 @@ var markerGroups = {
         "toiletMarker": []
 };
 
-
-
+var hazardMarkerGroup;
 
 function toggleGroup(type) {
     for (var i = 0; i < markerGroups[type].length; i++) {

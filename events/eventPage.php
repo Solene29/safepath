@@ -362,7 +362,7 @@ hazardMarker.setVisible(false);
 
     <div id="routeOptions" class="mapOptions">
       <div id="trafficHazardClosedPanel">
-        <button onclick="openHazardInput()"> Add Hazard</button> 
+        <button onclick="openHazardInput()"> Add Hazard</button> <button onclick="getHazards()"> Get Hazards</button> 
       </div>
       <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
  
@@ -627,6 +627,11 @@ function addHazard(){
           alert("Please select a hazard location");
         }
       }
+    };
+
+    function getHazards(){
+        $("#phpOutput").load("php/getHazardData.php");
+
     };
 </script>
 
