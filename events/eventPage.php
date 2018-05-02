@@ -75,6 +75,9 @@ google.maps.event.removeListener(hazardClickListener);
 google.maps.event.removeListener(hazardDragListener);
 hazardMarker.setVisible(false);
 infowindow.close();
+if($('input[name=hazard-type]:checked').length>0){
+    $('input[name=hazard-type]:checked')[0].checked = false;
+  }
 }
 
 </script>
@@ -608,8 +611,22 @@ function setValue(desc){
 </script>
 
 <script>
-function setHazard(desc){
-        $("#phpOutput").load("php/sendInputRoute.php?eventIdValue="+eventId+"&description="+desc);
+function addHazard(){
+      if(hazardMarker.getVisible() && $('input[name=hazard-type]:checked').length>0){
+        console.log($('input[name=hazard-type]:checked')[0].id);
+        console.log(hazardMarker.getPosition().lat());
+        console.log(hazardMarker.getPosition().lng());
+        $("#phpOutput").load("php/sendInputRoute.php?eventIdValue="+eventId+"&description="+$('input[name=hazard-type]:checked')[0].id+"&lat="+hazardMarker.getPosition().lat()+"&lon="+hazardMarker.getPosition().lng());
+        closeHazardInput();
+      }
+      else{
+        if($('input[name=hazard-type]:checked').length < 1){
+          //alert("Please choose a hazard type.");
+        }
+        else{
+          alert("Please select a hazard location");
+        }
+      }
     };
 </script>
 

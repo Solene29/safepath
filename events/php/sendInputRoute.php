@@ -18,7 +18,8 @@ if ($conn->connect_error) {
 
 $IP = $_SERVER['REMOTE_ADDR'];
 
-$sql = "INSERT INTO pinpoint(eventID, description, userip, lat, lon) values('" .  $_GET["eventIdValue"] . "', '" . $_GET["description"] . "' , '" . $IP . "')";
+
+$sql = "INSERT INTO pinpoint(eventID, description, userip, lat, lon) values('" .  $_GET["eventIdValue"] . "', '" . $_GET["description"] . "' , '" . $IP . "' , '". $_GET["lat"] ."' , '". $_GET["lon"]."')";
 
 if ($conn->query($sql) === TRUE) {
    // echo "New record created successfully";
