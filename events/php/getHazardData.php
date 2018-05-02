@@ -33,6 +33,8 @@ echo '<script  language="javascript">';
 echo 'hazardData =' . $result .';';
 echo 'console.log(hazardData);';
 echo 'hazardMarkerGroup = [];';
+//echo 'var status = false;';
+echo 'console.log(getActiveTab());';
 echo '	Array.prototype.forEach.call(hazardData, function(data){
 			  var marker = new google.maps.Marker({
 			    position: new google.maps.LatLng(data.lat,data.lon),
@@ -40,7 +42,6 @@ echo '	Array.prototype.forEach.call(hazardData, function(data){
 			    title: data.description
 			  })
 
-		
 			hazardMarkerGroup.push(marker);
 		});';
 //echo '$("#userData").html("'.$result1.'")';

@@ -42,6 +42,15 @@ function snapToRoad(lat,lng){
 };
 
 
+function getActiveTab(){
+  tablinks = $(".tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      if (tablinks[i].className === "tablinks active") {
+        return tablinks[i].id;
+      }
+    }
+}
+
 var hazardClickListener;
 var hazardDragListener;
 
@@ -337,10 +346,10 @@ hazardMarker.setVisible(false);
   <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
-  <button class="tablinks" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
-  <button class="tablinks" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
-  <button class="tablinks" id="defaultOpen" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
-  <button class="tablinks" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
+  <button class="tablinks" id="directions" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
+  <button class="tablinks" id="safety" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
+  <button class="tablinks" id="route" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
+  <button class="tablinks" id="event" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
   </div>
     
   <div id="mapPanel" class="mapOrInfoPanelContent">
@@ -701,7 +710,7 @@ function openMapOrInfo(evt, panelName) {
 </script>
 
 <script> 
-document.getElementById("defaultOpen").click();
+document.getElementById("route").click(); // default open tab
 </script>
 
 
