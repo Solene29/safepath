@@ -95,10 +95,10 @@ function geocodeLatLng(lat,lng) {
               infowindow.setContent(results[0].formatted_address);
               infowindow.open(map, hazardMarker);
             } else {
-              window.alert('No results found');
+              infowindow.close();
             }
           } else {
-            window.alert('Geocoder failed due to: ' + status);
+            infowindow.close();
           }
         });
       }

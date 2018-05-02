@@ -41,11 +41,15 @@ function snapToRoad(lat,lng){
 
 };
 
+
+var hazardClickListener;
+var hazardDragListener;
+
 function openHazardInput() {
 document.getElementById("trafficHazardClosedPanel").style.display = "none";
 document.getElementById("trafficHazardOpenPanel").style.display = "block";
 
-new google.maps.event.addListener(map, 'click', function(event) {
+hazardClickListener = new google.maps.event.addListener(map, 'click', function(event) {
     //console.log(event.latLng.lat());
     hazardMarker.setPosition(event.latLng);
     hazardMarker.setVisible(true);
@@ -53,8 +57,8 @@ new google.maps.event.addListener(map, 'click', function(event) {
 
     });
 
-new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
-    console.log(hazardMarker.getPosition());
+hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
+    //console.log(hazardMarker.getPosition());
     snapToRoad(event.latLng.lat(),event.latLng.lng());
 
     });
@@ -66,10 +70,14 @@ new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
 function closeHazardInput() {
 document.getElementById("trafficHazardClosedPanel").style.display = "block";
 document.getElementById("trafficHazardOpenPanel").style.display = "none";
+
+google.maps.event.removeListener(hazardClickListener);
+google.maps.event.removeListener(hazardDragListener);
+hazardMarker.setVisible(false);
+infowindow.close();
 }
 
 </script>
-   
    
 
 <script type="text/javascript">
