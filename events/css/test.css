@@ -252,6 +252,43 @@ html *
     border-radius: 0px; 
     width:155px;
 }
+/*===========================================direction mode radio button =================================*/
+
+#mode-selector label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+#mode-selector label > input + i{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  color:grey;
+}
+#mode-selector label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
+  color:black;
+}
+
+/*===========================================hazard selector radio button =================================*/
+
+#hazard-selector label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+#hazard-selector label > input + div{ /* IMAGE STYLES */
+    padding: 5px;
+    cursor: pointer; 
+    border: 1px; 
+    box-shadow: none; 
+    border-radius: 0px; 
+    width:155px;
+    background-color:#EEC440
+}
+#hazard-selector label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
+  background-color:black;
+  color:#EEC440
+}
+
+
+
 
 /* =========================================== Pagination ============================================== */
 

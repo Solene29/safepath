@@ -71,26 +71,6 @@ document.getElementById("trafficHazardOpenPanel").style.display = "none";
 </script>
    
    
-<style>
-	#log, #pass { color: white; background-color:black; padding-left:8px; padding-right:8px; }
-
-label > input{ /* HIDE RADIO */
-  visibility: hidden; /* Makes input not-clickable */
-  position: absolute; /* Remove input from document flow */
-}
-label > input + i{ /* IMAGE STYLES */
-  cursor:pointer;
-  border:2px solid transparent;
-  color:grey;
-}
-label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
-  color:black;
-}
-
-}
-
-
-</style>
 
 <script type="text/javascript">
 //testing address is right format and change to if not
@@ -377,11 +357,16 @@ hazardMarker.setVisible(false);
  
       <h3><b>What would you like to report on the way?</b></h3>
       </br>
-      <button class="choice" onclick="setHazard('trafficAccident');" style=" background-color:#EEC440">Traffic accident</button>
-      <button class="choice" onclick="setHazard('harrassment');" style=" background-color:#EEC440">Harrassment</button>
-      <button class="choice" onclick="setHazard('aggression');" style=" background-color:#EEC440">Aggression</button>
-      <button class="choice" onclick="setHazard('illegalActivity');" style=" background-color:#EEC440">Illegal activity</button>
-
+          <div id="hazard-selector" class="controls">
+            <label><input type="radio" name="hazard-type" id="trafficAccident">
+             <div align="center">Traffic accident</div></label>
+            <label><input type="radio" name="hazard-type" id="harrassment">
+            <div align="center">Harrassment</div></label>
+            <label><input type="radio" name="hazard-type" id="aggression">
+            <div align="center">Aggression</div></label>
+            <label><input type="radio" name="hazard-type" id="illegalActivity">
+            <div align="center">Illegal activity</div></label>
+          </div>
       </br>
         <button onclick="addHazard()"> Submit Hazard </button>
         <button onclick="closeHazardInput()"> Cancel</button>
@@ -417,7 +402,7 @@ hazardMarker.setVisible(false);
   <button class="choice" onclick="setValue('foodRange');" style=" background-color:#EEC440">Varied Food</button>
   <button class="choice" onclick="setValue('quickService');" style=" background-color:#EEC440">Great Event  </button>
 
-  <label><input type="image" id="myBtn" style="height:24px">
+  <label><input type="submit" id="myBtn" style="display:none">
             <i class="material-icons">info_outline</i></label>
 
 </br>
