@@ -32,19 +32,20 @@ $result = json_encode($result1,JSON_NUMERIC_CHECK);
 echo '<script  language="javascript">';
 echo 'hazardData =' . $result .';';
 echo 'console.log(hazardData);';
-echo 'hazardMarkerGroup = [];';
-//echo 'var status = false;';
-echo 'console.log(getActiveTab());';
-echo '	Array.prototype.forEach.call(hazardData, function(data){
+echo 'for (var i = 0; i < markerGroups["hazardMarker"].length; i++) {
+          var marker = markerGroups["hazardMarker"][i];
+          marker.setMap(null);
+      };';
+echo 'markerGroups["hazardMarker"] = [];';
+echo 'Array.prototype.forEach.call(hazardData, function(data){
 			  var marker = new google.maps.Marker({
 			    position: new google.maps.LatLng(data.lat,data.lon),
 			    map: map,
 			    title: data.description
 			  })
 
-			hazardMarkerGroup.push(marker);
+			markerGroups["hazardMarker"].push(marker);
 		});';
-//echo '$("#userData").html("'.$result1.'")';
 echo '</script>';
 
 }

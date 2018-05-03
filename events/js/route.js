@@ -22,10 +22,32 @@ var markerGroups = {
     "cameraMarker": [],
         "policeMarker": [],
         "taxiMarker": [],
-        "toiletMarker": []
+        "toiletMarker": [],
+        "hazardMarker":[]
 };
 
-var hazardMarkerGroup;
+//var hazardMarkerGroup;
+
+function showMarkerGroup(tab){
+  for (var type in markerGroups) {
+      for (var i = 0; i < markerGroups[type].length; i++) {
+          var marker = markerGroups[type][i];
+          marker.setVisible(false);
+        }
+    }
+  
+  switch (tab) {
+           case "directions":
+                toggleToiletMarkers(true); 
+                break;
+            case "safety":
+                toggleSafetyMarkers(true);
+                break;
+            case "route":
+                toggleHazardMarkers(true);
+                break;
+            }
+}
 
 function toggleGroup(type) {
     for (var i = 0; i < markerGroups[type].length; i++) {
@@ -82,6 +104,14 @@ if(toiletMarkerStatus === "show"){
           marker.setVisible(trueFalse);
 
         }
+      } 
+}
+
+function toggleHazardMarkers(trueFalse) {
+  /*console.log(trueFalse);*/
+   for (var i = 0; i < markerGroups["hazardMarker"].length; i++) {
+          var marker = markerGroups["hazardMarker"][i];
+          marker.setVisible(trueFalse);
       } 
 }
 

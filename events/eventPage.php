@@ -44,6 +44,7 @@ function snapToRoad(lat,lng){
 
 function getActiveTab(){
   tablinks = $(".tablinks");
+  //console.log(tablinks);
     for (i = 0; i < tablinks.length; i++) {
       if (tablinks[i].className === "tablinks active") {
         return tablinks[i].id;
@@ -55,6 +56,7 @@ var hazardClickListener;
 var hazardDragListener;
 
 function openHazardInput() {
+toggleHazardMarkers(false);
 document.getElementById("trafficHazardClosedPanel").style.display = "none";
 document.getElementById("trafficHazardOpenPanel").style.display = "block";
 
@@ -77,6 +79,7 @@ hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', 
 
 
 function closeHazardInput() {
+toggleHazardMarkers(true);
 document.getElementById("trafficHazardClosedPanel").style.display = "block";
 document.getElementById("trafficHazardOpenPanel").style.display = "none";
 
@@ -630,7 +633,7 @@ function addHazard(){
       }
       else{
         if($('input[name=hazard-type]:checked').length < 1){
-          //alert("Please choose a hazard type.");
+          alert("Please choose a hazard type.");
         }
         else{
           alert("Please select a hazard location");
@@ -673,35 +676,25 @@ function openMapOrInfo(evt, panelName) {
       }
 
       document.getElementById(panelName+"Options").style.display = "block";
-      evt.currentTarget.className += " active";
       
-
-      if(panelName === "safety"){
-        toggleSafetyMarkers(true);
-        toggleToiletMarkers(false);
-      }
-      else{
-        if(panelName === "directions"){
-        toggleSafetyMarkers(false);
-        toggleToiletMarkers(true);
-      }
-      else{
-        toggleSafetyMarkers(false);
-        toggleToiletMarkers(false);
-      }
-
+      if(document.getElementById("trafficHazardOpenPanel").style.display === "block"){
+        closeHazardInput();
+      };
+      showMarkerGroup(panelName);  
     }
-}
 
+    
     tabcontent = document.getElementsByClassName("mapOrInfoPanelContent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
+    document.getElementById(targetName+"Panel").style.display = "block";
+
+    
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(targetName+"Panel").style.display = "block";
     evt.currentTarget.className += " active";
 }
 
