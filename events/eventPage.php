@@ -12,7 +12,9 @@
   <link href="css/test.css" rel="stylesheet">
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
+
+
+  <script type=text/javascript src="js/markerclusterer.js"></script>  
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
   <!--<script type=text/javascript src=js/displayEvents.js></script>-->
@@ -266,6 +268,8 @@ hazardMarker.setVisible(false);
                 var pt = new google.maps.LatLng(eventlat, eventlon);
                 map.setCenter(pt);
 
+                markerCluster = new MarkerClusterer(map, [], {imagePath:"images/m", minimumClusterSize:1, ignoreHidden: true});
+
                 $("#phpOutput").load("php/getToilets.php?eventLatValue="+eventlat+"&eventLonValue="+eventlon);
 
 
@@ -374,7 +378,7 @@ hazardMarker.setVisible(false);
 
     <div id="routeOptions" class="mapOptions">
       <div id="trafficHazardClosedPanel">
-        <button onclick="openHazardInput()"> Add Hazard</button> <button onclick="getHazards()"> Get Hazards</button> 
+        <button onclick="openHazardInput()"> Add Hazard</button> 
       </div>
       <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
  
@@ -657,7 +661,18 @@ function getUserData(){
 
     barChart();
 
-    var intervalID = setInterval(function(){getUserData(); barChart();}, 1000);
+    function updateData(){
+      var activeTab = getActiveTab();
+      if(activeTab === "route" && document.getElementById("trafficHazardOpenPanel").style.display === "none"){
+        getHazards();
+      };
+      if(activeTab === "event"){
+        getUserData(); 
+        barChart();
+      };
+    }
+
+    var intervalID = setInterval(function(){updateData();}, 1000);
 </script>
 
 
@@ -696,6 +711,8 @@ function openMapOrInfo(evt, panelName) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     evt.currentTarget.className += " active";
+
+    updateData();
 }
 
 

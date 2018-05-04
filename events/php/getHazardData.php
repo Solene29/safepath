@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 } 
 
 // Fetch camera data 
-$sqlHazard = "SELECT description, dt, lat, lon FROM pinpoint HAVING minute(TIMEDIFF(dt,CURRENT_TIMESTAMP))<30 and hour(TIMEDIFF(dt,CURRENT_TIMESTAMP))=0";
+$sqlHazard = "SELECT description, dt, lat, lon FROM pinpoint";// HAVING minute(TIMEDIFF(dt,CURRENT_TIMESTAMP))<30 and hour(TIMEDIFF(dt,CURRENT_TIMESTAMP))=0";
 
 $result = $conn->query($sqlHazard);
 
@@ -31,11 +31,12 @@ $result = json_encode($result1,JSON_NUMERIC_CHECK);
 //echo '<div id="userData">' . $result . '</div>';
 echo '<script  language="javascript">';
 echo 'hazardData =' . $result .';';
-echo 'console.log(hazardData);';
+//echo 'console.log(hazardData);';
 echo 'for (var i = 0; i < markerGroups["hazardMarker"].length; i++) {
           var marker = markerGroups["hazardMarker"][i];
           marker.setMap(null);
       };';
+echo 'markerCluster.clearMarkers();';
 echo 'markerGroups["hazardMarker"] = [];';
 echo 'Array.prototype.forEach.call(hazardData, function(data){
 			  var marker = new google.maps.Marker({
@@ -46,6 +47,8 @@ echo 'Array.prototype.forEach.call(hazardData, function(data){
 
 			markerGroups["hazardMarker"].push(marker);
 		});';
+echo 'markerCluster.addMarkers(markerGroups["hazardMarker"]);';
+//echo 'markerCluster.redraw();';
 echo '</script>';
 
 }
