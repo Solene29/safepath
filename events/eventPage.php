@@ -289,7 +289,7 @@ hazardMarker.setVisible(false);
 
 </head>
 
-<body>
+<body background="images/dust_scratches.png">
 <form method="get" action="parameters.html"> </form>
 
 <script language="JavaScript">
@@ -381,15 +381,19 @@ hazardMarker.setVisible(false);
 <hr width="100%"; style="border-color:#BEBEBE"></br>  
 
 
-<div id="mainTable">
+<div id="mainTable" >
   <!-- Display directions panel -->
 
   <div id="directionsPanel" align="left">
+    <div style="background:white">
         <b>Date:</b></br>
         <div id="eventDate" style="float: left;" align="left"></div></br>
         <b>Location:</b></br>
         <div id="eventLoc" style="float: left;" align="left"></div></br>
-        <a href="#eventDescription">Click here for event information</a></br></br>
+        <a href="#eventDescription">Click here for event information</a></br>
+      </div>
+    </br>
+    <div style="background:white">
         <b>Route:</b>    
         <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
@@ -417,6 +421,7 @@ hazardMarker.setVisible(false);
             <div id="directionsOutputContent">Please input your starting location for directions.</div>
           
   </div>
+</div>
 
   <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
