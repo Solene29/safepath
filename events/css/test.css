@@ -252,6 +252,50 @@ html *
     border-radius: 0px; 
     width:155px;
 }
+
+
+/*===========================================Alternative Directions Tabs =================================*/
+
+/* Style the tab */
+#directionsTab {
+    overflow: hidden;
+    border: none;
+    background-color: #ccc;
+}
+
+/* Style the buttons inside the tab */
+#directionsTab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 20%;
+}
+
+/* Change background color of buttons on hover */
+#directionsTab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+#directionsTab button.active {
+    background-color: #f1f1f1;
+}
+
+/* Style the tab content */
+.directionstabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 0px;
+    border-top: none;
+    background-color: #f1f1f1;
+}
+
+
 /*===========================================direction mode radio button =================================*/
 
 #mode-selector label > input{ /* HIDE RADIO */

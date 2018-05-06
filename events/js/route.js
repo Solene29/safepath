@@ -128,6 +128,8 @@ function geocodeLatLng(lat,lng) {
             if (results[0]) {
               infowindow.setContent(results[0].formatted_address);
               infowindow.open(map, hazardMarker);
+              hazardRoad = results[0].address_components[1].short_name;
+              console.log(hazardRoad);
             } else {
               infowindow.close();
             }
@@ -140,7 +142,8 @@ function geocodeLatLng(lat,lng) {
 
 var map;
 var geocoder;
-var infowindow
+var infowindow;
+var directionsVariable;
 
 function initMap() {
    map = new google.maps.Map(document.getElementById('map'), {
@@ -224,9 +227,6 @@ Array.prototype.forEach.call(taxiData, function(data){
          markerGroups["taxiMarker"].push(marker);
 })
 
-
-
-
 new AutocompleteDirectionsHandler(map);
 }
 
@@ -253,7 +253,20 @@ new AutocompleteDirectionsHandler(map);
     this.setupClickListener('changemode-transit', 'TRANSIT');
     this.setupClickListener('changemode-driving', 'DRIVING');
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+    this.setupRouteListener('changeroute-1',0);
+    this.setupRouteListener('changeroute-2',1);
+    this.setupRouteListener('changeroute-3',2);
+    this.setupRouteListener('changeroute-4',3);
+    this.setupRouteListener('changeroute-5',4);
   }
+
+ AutocompleteDirectionsHandler.prototype.setupRouteListener = function(id,num) {
+    var radioButton = document.getElementById(id);
+    var me = this;
+    radioButton.addEventListener('click', function() {
+      me.directionsDisplay.setRouteIndex(num);
+    });
+  };
 
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
@@ -293,27 +306,59 @@ new AutocompleteDirectionsHandler(map);
   }
 
       AutocompleteDirectionsHandler.prototype.route = function() {
-        if (!this.originPlaceId /*|| !this.destinationPlaceId*/) {
+        if (!this.originPlaceId) {
           return;
         }
         var me = this;
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           destination: new google.maps.LatLng(eventCoords[0].lat, eventCoords[0].lng), 
-          travelMode: this.travelMode
+          travelMode: this.travelMode,
+          provideRouteAlternatives: true
         }, function(response, status) {
           if (status === 'OK') {
+            //console.log(response);
+            //console.log( me.directionsDisplay.getRouteIndex());
             me.directionsDisplay.setDirections(response);
-            writeDirectionsSteps(me.directionsDisplay.directions.routes[0].legs[0].steps);
+            //me.directionsDisplay.setRouteIndex(2);
+            //console.log( me.directionsDisplay.getRouteIndex());
+            //writeDirectionsSteps(me.directionsDisplay.directions.routes[0].legs[0].steps);
+            displayDirectionsInfo(me.directionsDisplay);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
       };  
-      
+
+
+function displayDirectionsInfo(directionsDisp){
+  var numOfRoutes = directionsDisp.directions.routes.length;
+
+  var sDetails = '<div id="routeTab1" class="directionstabcontent">1</div>';
+  
+  if(numOfRoutes>1){
+    var sTabsLinks = '<button id="routeTablink1" class="routetablinks" onclick="changeRoute(event, 1)"> 1 </button>';
+    for(var i=2; i<numOfRoutes+1; i++){
+      sTabsLinks += '<button id="routeTablink'+i+'" class="routetablinks" onclick="changeRoute(event, ' + i +')">' + i + '</button>';
+      sDetails += '<div id="routeTab' + i + '" class="directionstabcontent">'+i+'</div>';
+    }
+    document.getElementById("directionsTab").innerHTML = sTabsLinks;
+    document.getElementById("directionsOutputContent").innerHTML = sDetails ;
+    document.getElementById("routeTablink1").click();
+  }
+  else{
+    document.getElementById("directionsOutputContent").innerHTML = sDetails ;
+  }
+ 
+  for(var i=0; i<numOfRoutes; i++){
+    writeDirectionsSteps(directionsDisp.directions.routes[i].legs[0].steps,i+1);
+  }
+
+}
+    
   /*Get directions for each type of transport*/
-     function writeDirectionsSteps(steps) {
-  var directions = document.getElementById('directionsOutput');
+     function writeDirectionsSteps(steps,routeNo) {
+  var directions = document.getElementById('routeTab'+routeNo);
   directions.innerHTML = '';
   for (var i = 0; i < steps.length; i++) {
     directions.innerHTML += '<br/><br/>' + steps[i].instructions + '<br/>' + steps[i].distance.text;

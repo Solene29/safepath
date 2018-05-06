@@ -20,7 +20,8 @@
   <!--<script type=text/javascript src=js/displayEvents.js></script>-->
   <script type=text/javascript src=js/test.js></script>
   <script type=text/javascript src=js/categoryTabs.js></script>
-  <script type=text/javascript src=js/AccordionEventDesc.js></script> 
+  <script type=text/javascript src=js/AccordionEventDesc.js></script>
+  <script type=text/javascript src=js/changeRoute.js></script> 
     
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/jfavascript" src="../js/bootstrap.min.js"></script>
@@ -33,15 +34,20 @@
 
 <script>
 
-function snapToRoad(lat,lng){
-  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+lat+','+lng+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE',
+var hazardRoad;
+
+function snapToRoad(marker){
+  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE',
       function(res){
         //console.log(res.snappedPoints[0].location.latitude);
-        hazardMarker.setPosition(new google.maps.LatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude));
-        geocodeLatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude);
+        marker.setPosition(new google.maps.LatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude));
+        if(marker === hazardMarker){
+          geocodeLatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude);
+        }
       });
 
 };
+
 
 
 function getActiveTab(){
@@ -66,7 +72,7 @@ hazardClickListener = new google.maps.event.addListener(map, 'click', function(e
     //console.log(event.latLng.lat());
     hazardMarker.setPosition(event.latLng);
     hazardMarker.setVisible(true);
-    snapToRoad(event.latLng.lat(),event.latLng.lng());
+    snapToRoad(hazardMarker);
 
     });
 
@@ -77,6 +83,60 @@ hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', 
     });
 
 };
+
+
+
+var tempMarkers =[];
+function getPointsOnRoad(){
+  var kmToCoordFactor = 360/(6371*2*3.141596536);
+  var points = [];
+
+  for(var t = 0; t <= 9; t++){
+    for(var r = 0; r <= 3; r++){
+      point =[hazardMarker.getPosition().lat() - kmToCoordFactor*0.025*(1+r)*Math.sin(t*3.141596536/5), hazardMarker.getPosition().lng() - kmToCoordFactor*0.05*(1+r)*Math.cos(t*3.141596536/5)];
+      var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(point[0],point[1]),
+            map: map
+          });
+      points.push(point);
+      tempMarkers.push(marker);
+    }
+  }
+console.log(points);
+
+console.log(tempMarkers[0].getPosition().lat());
+for(marker in tempMarkers){
+  snapToRoad(tempMarkers[marker]);
+};
+}
+
+
+
+function testPointsOnRoad(){
+  console.log(tempMarkers);
+  for(i = 0; i < tempMarkers.length; i++){
+    setTimeout(function(){
+    var latlng = new google.maps.LatLng(tempMarkers[i].getPosition().lat(),tempMarkers[i].getPosition().lng());
+      geocoder1 = new google.maps.Geocoder;
+      geocoder1.geocode({'location': latlng}, function(results, status) {
+              console.log(status);
+          if (status === 'OK' && results[0]) {
+              //if( hazardRoad != results[0].address_components[1].short_name){
+                //console.log(results[0].address_components[1].short_name);
+                //console.log(hazardRoad);
+                //tempMarkers[i].setMap(null)
+              //}
+          } 
+        });
+    }, 1200*i);
+
+};
+}
+
+
+
+
+
 
 
 
@@ -268,7 +328,7 @@ hazardMarker.setVisible(false);
                 var pt = new google.maps.LatLng(eventlat, eventlon);
                 map.setCenter(pt);
 
-                markerCluster = new MarkerClusterer(map, [], {imagePath:"images/m", minimumClusterSize:1, ignoreHidden: true});
+                //markerCluster = new MarkerClusterer(map, [], {imagePath:"images/m", minimumClusterSize:1, ignoreHidden: true});
 
                 $("#phpOutput").load("php/getToilets.php?eventLatValue="+eventlat+"&eventLonValue="+eventlon);
 
@@ -346,7 +406,15 @@ hazardMarker.setVisible(false);
             </br>
 
             <b>Directions:</b>
-            <div id="directionsOutput">Please input your starting location for directions.</div>
+            <div id="directionsTab"></div>
+              <div id="route-selector" class="controls" style="display:none">
+                <input type="radio" name="routeNo" id="changeroute-1" checked="checked">
+                <input type="radio" name="routeNo" id="changeroute-2"> 
+                <input type="radio" name="routeNo" id="changeroute-3">
+                <input type="radio" name="routeNo" id="changeroute-4">
+                <input type="radio" name="routeNo" id="changeroute-5">
+              </div>
+            <div id="directionsOutputContent">Please input your starting location for directions.</div>
           
   </div>
 
@@ -397,6 +465,8 @@ hazardMarker.setVisible(false);
       </br>
         <button onclick="addHazard()"> Submit Hazard </button>
         <button onclick="closeHazardInput()"> Cancel</button>
+        <button onclick="getPointsOnRoad()"> Test</button>
+        <button onclick="testPointsOnRoad()"> Test2</button>
       </div>
 
 
@@ -720,7 +790,7 @@ function openMapOrInfo(evt, panelName) {
 </script>
 
 <script> 
-document.getElementById("route").click(); // default open tab
+document.getElementById("directions").click(); // default open tab
 </script>
 
 
