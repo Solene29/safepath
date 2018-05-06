@@ -317,6 +317,7 @@ hazardMarker.setVisible(false);
                 document.getElementById("eventName").innerHTML = event.name.text;
                 document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\"><u>Click here for event page</u></a>";
                 document.getElementById("eventDate").innerHTML = moment(event.start.local).format('D/M/YYYY h:mm A');
+                document.getElementById("eventLoc").innerHTML = event.venue.address.address_1 + ", " + event.venue.address.city;
                 document.getElementById("eventDescription").innerHTML = event.description.html;
                 eventlat = event.venue.latitude;
                 eventlon = event.venue.longitude;
@@ -377,20 +378,19 @@ hazardMarker.setVisible(false);
 
 <div align="center"><h1><span id="eventName"></span></h1></div>
 
-
-<div style="content: ""; display: table; clear: both;">
-  <div id="eventDate" style="float: left; width: 50%;" align="center"></div>
-  <div id="eventUrl" style="float: left; width: 50%;" align="center"></div>
-</div>
-
-</br></br><hr width="100%"; style="border-color:#BEBEBE"></br>  
+<hr width="100%"; style="border-color:#BEBEBE"></br>  
 
 
 <div id="mainTable">
   <!-- Display directions panel -->
-  <div id="directionsPanel" align="left">
 
-        <b>Choose starting point:</b>    
+  <div id="directionsPanel" align="left">
+        <b>Date:</b></br>
+        <div id="eventDate" style="float: left;" align="left"></div></br>
+        <b>Location:</b></br>
+        <div id="eventLoc" style="float: left;" align="left"></div></br>
+        <a href="#eventDescription">Click here for event information</a></br></br>
+        <b>Route:</b>    
         <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
           <div id="mode-selector" class="controls">
@@ -538,6 +538,7 @@ Tweet</a> -->
 <p style="display: block; "> 
   <b>Description:</b>
   <div id="eventDescription" ></div> </p>
+  <div id="eventUrl" style="float: left; width: 50%;" align="left"></div>
 </div>
 </div>
 
