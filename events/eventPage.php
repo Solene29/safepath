@@ -386,15 +386,15 @@ hazardMarker.setVisible(false);
 
   <div id="directionsPanel" align="left">
     <div style="background:white">
-        <b>Date:</b></br>
+        <u><b>Date:</b></u></br>
         <div id="eventDate" style="float: left;" align="left"></div></br>
-        <b>Location:</b></br>
+        <u><b>Location:</b></u></br>
         <div id="eventLoc" style="float: left;" align="left"></div></br>
         <a href="#eventDescription">Click here for event information</a></br>
       </div>
     </br>
     <div style="background:white">
-        <b>Route:</b>    
+        <u><b>Route:</b></u></br></br>    
         <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></br></br>
           <b>Transport type: </b>
           <div id="mode-selector" class="controls">
@@ -479,7 +479,7 @@ hazardMarker.setVisible(false);
 
 
       <div id="directionsOptions" class="mapOptions">
-    <b style="font-size: 20px">Direction Options</b>
+    <b style="font-size: 20px">Filter Options</b>
     
 
     </br></br><input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>

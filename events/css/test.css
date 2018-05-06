@@ -362,8 +362,17 @@ html *
 
 .pageTab button:hover:not(.active) {background-color: #ddd;}
 
+.horizontalTab button{
+    color: white; 
+    background-color: #1a1a1a;
+    width: 25%;
+}
 
-
+.horizontalTab button:active{
+    color: yellow; 
+    background-color: #1a1a1a;
+    width: 25%;
+}
 
 /*============================================ Mobile vs Desktop format ================================ */
 
