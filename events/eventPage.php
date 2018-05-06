@@ -115,20 +115,20 @@ for(marker in tempMarkers){
 function testPointsOnRoad(){
   console.log(tempMarkers);
   for(i = 0; i < tempMarkers.length; i++){
-    setTimeout(function(){
-    var latlng = new google.maps.LatLng(tempMarkers[i].getPosition().lat(),tempMarkers[i].getPosition().lng());
-      geocoder1 = new google.maps.Geocoder;
-      geocoder1.geocode({'location': latlng}, function(results, status) {
-              console.log(status);
-          if (status === 'OK' && results[0]) {
+    
+      $.get("https://35.197.185.129/nominatim/reverse?format=json&lat="+ tempMarkers[i].getPosition().lat() +"&lon="+tempMarkers[i].getPosition().lng()+"", 
+        function(res){
+          console.log(res);
+        }
+
+        )
+    
               //if( hazardRoad != results[0].address_components[1].short_name){
                 //console.log(results[0].address_components[1].short_name);
                 //console.log(hazardRoad);
                 //tempMarkers[i].setMap(null)
               //}
-          } 
-        });
-    }, 1200*i);
+
 
 };
 }
@@ -734,7 +734,7 @@ function getUserData(){
     function updateData(){
       var activeTab = getActiveTab();
       if(activeTab === "route" && document.getElementById("trafficHazardOpenPanel").style.display === "none"){
-        getHazards();
+        //getHazards();
       };
       if(activeTab === "event"){
         getUserData(); 
