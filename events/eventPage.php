@@ -22,6 +22,7 @@
   <script type=text/javascript src=js/categoryTabs.js></script>
   <script type=text/javascript src=js/AccordionEventDesc.js></script>
   <script type=text/javascript src=js/changeRoute.js></script> 
+  <script type=text/javascript src=js/createHazards.js></script> 
     
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/jfavascript" src="../js/bootstrap.min.js"></script>
@@ -78,14 +79,14 @@ hazardClickListener = new google.maps.event.addListener(map, 'click', function(e
 
 hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
     //console.log(hazardMarker.getPosition());
-    snapToRoad(event.latLng.lat(),event.latLng.lng());
+    snapToRoad(hazardMarker);
 
     });
 
 };
 
 
-
+/*
 var tempMarkers =[];
 function getPointsOnRoad(){
   var kmToCoordFactor = 360/(6371*2*3.141596536);
@@ -134,7 +135,7 @@ function testPointsOnRoad(){
 }
 
 
-
+*/
 
 
 
@@ -451,7 +452,13 @@ hazardMarker.setVisible(false);
 
     <div id="routeOptions" class="mapOptions">
       <div id="trafficHazardClosedPanel">
-        <button onclick="openHazardInput()"> Add Hazard</button> 
+        <button onclick="openHazardInput()"> Add Hazard</button><button onclick="showCurrentHazards(document.getElementById('myRange').value);"> test</button> 
+        <div class="slidecontainer">
+          <input type="range" min="1" max="6" value="6" class="slider" id="myRange">
+          <p>Showing hazards reported up to <span id="timePastSlider"></span> minutes ago</p><span id="demo1"></span>
+        </div>
+
+        <button onclick="getHazards()">Get Hazards</button>
       </div>
       <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
  
@@ -470,8 +477,6 @@ hazardMarker.setVisible(false);
       </br>
         <button onclick="addHazard()"> Submit Hazard </button>
         <button onclick="closeHazardInput()"> Cancel</button>
-        <button onclick="getPointsOnRoad()"> Test</button>
-        <button onclick="testPointsOnRoad()"> Test2</button>
       </div>
 
 
@@ -798,6 +803,21 @@ function openMapOrInfo(evt, panelName) {
 <script> 
 document.getElementById("directions").click(); // default open tab
 </script>
+
+
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("timePastSlider");
+output.innerHTML = 140-slider.value*20;
+
+
+slider.oninput = function() {
+  output.innerHTML = 140-this.value*20;
+  showCurrentHazards(this.value);
+}
+</script>
+
+
 
 
 <!-- ================   Modal code start  ====================    -->
