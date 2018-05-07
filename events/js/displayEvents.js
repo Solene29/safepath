@@ -84,7 +84,7 @@ function getEvents(catName,searchString) {
                         var event = res.events[allEventIndex];
                         var eventTime = moment(event.start.local).format('D/M/YYYY h:mm A');
                         //console.dir(event);
-                        s += "<div class=\"accordion\" id=\"accordion"+ event.id  + "\">"; 
+                        s += "<div class=\"accordion\" id=\"accordion"+ event.id  + "\" style=\"padding-bottom:2px; background-clip: content-box; box-shadow: inset 0 0 0 0px white;\">"; 
                         s += "<table style=\"width:100%\"><tr class=\"mobileOnlyRow\"><td><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;\"></td></tr><tr>"
                         s += "<td class=\"desktopOnlyCell\"><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;padding-right:15px\"> </td>"
                         s += "<td style=\"width: 100%\"; align=\"left\"><div class='eventList'>";
@@ -92,9 +92,9 @@ function getEvents(catName,searchString) {
                         s += "<table style=\"width:90%\"> <tr> <td>";
                         s += "<p><b>Location: "+ testAddress(event.venue.address.address_1,event.venue.name) + event.venue.address.city+"</b><br/>";
                         s += "<b>Date/Time: " + eventTime + "</b></p> </td>";
-                        s += "<td align=\"right\" class=\"desktopOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:125px; text-align: center;\">Get there Safely!</div></a>"
+                        s += "<td align=\"right\" class=\"desktopOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:125px; text-align: center;\">Go there</div></a>"
                         s += "</td>";
-                        s += "<td align=\"right\" class=\"mobileOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:75px; text-align: center;\">Get there Safely!</div></a>"
+                        s += "<td align=\"right\" class=\"mobileOnlyCell\"><a href =\"eventpage.php?" + event.id + "\" style=\"color:black\"><div style=\"padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:75px; text-align: center;\">Go there</div></a>"
                         s += "</td>";
                         s += "</tr></table></td></tr></table>";
                         s += "<table style=\"width:90%\"><tr><td align=\"center\"><button onclick=\"toggleAccordion('" + event.id + "')\" style=\"border: 0; box-shadow:none; background-color:transparent;\" >";
@@ -105,8 +105,7 @@ function getEvents(catName,searchString) {
                         s += "<div id=\"panel" + event.id + "\" style=\"display:none;white-space:pre-wrap;\">";
                         s += "<div>" + event.description.text + "<a href='" + event.url + "' target=\"_blank\" style=\"color:orange;font-weight:700;\"> More details here!</a></div>";
                         s += "</div>";
-
-                        
+                      
                     }
                     s += "</div>";
                     
