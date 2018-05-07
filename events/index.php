@@ -167,12 +167,12 @@ console.log(searchQn);
 <!-- Event category tabs: -->
 <div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="index.php">Event</a></p></div>
 <div class="tab">
-  <button class="tablinks" onclick="openCategory(event, 'eventArts', '')">Arts</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventFood', '')">Food and Drink</button>
-  <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic', '')">Music</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventSports', '')">Sports</button>
-  <button class="tablinks" onclick="openCategory(event, 'eventOther', '')">Other</button>
-  <button class="tablinks" id="searchOpen" onclick="openCategory(event, 'eventSearch', '')">Search</button>
+  <button class="tablinks" onclick="openCategory(event, 'eventArts', '')">Arts <img src="images/ic_brush.png" align="right"></img></button>
+  <button class="tablinks" onclick="openCategory(event, 'eventFood', '')">Food and Drink <img src="images/ic_local_dining.png" align="right"></img></button>
+  <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic', '')">Music <img src="images/ic_headset.png" align="right"></img></button>
+  <button class="tablinks" onclick="openCategory(event, 'eventSports', '')">Sports <img src="images/ic_fitness_center.png" align="right"></img></button>
+  <button class="tablinks" onclick="openCategory(event, 'eventOther', '')">Other <img src="images/ic_linear_scale.png" align="right"></img></button>
+  <button class="tablinks" id="searchOpen" onclick="openCategory(event, 'eventSearch', '')">Search <img src="images/ic_youtube_searched_for.png" align="right"></img></button>
 </div>
 
 
