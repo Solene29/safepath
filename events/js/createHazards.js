@@ -7,55 +7,91 @@ var hazardLines = {"20":[],"40":[],"60":[],"80":[],"100":[],"120":[]};
 var snappedCoordinates = [];
 
 
-function showCurrentHazards(timeVal){
+function showCurrentHazards(sliderVal){
 	//console.log(timeVal);
-	for(var i=timeVal; i<=6; i++){
+	for(var i=sliderVal; i<=6; i++){
 		var time = 140-i*20;
 		//console.log(time+" show");
-		console.log(hazardLines[time]);
-		for(var j =0; j <hazardLines[time].length; j++){
-			hazardLines[time][j].setVisible(true);
-			hazardMarkers[time][j].setVisible(true);
-			switch (numberOfNearbyHazards(timeVal,hazardMarkers[time][j])) {
+		//console.log("time="+time, "harzardMarkers[time]=");
+		//console.log(hazardMarkers[time]);
+		//console.log("time="+time, "harzardLines[time]=");
+		//console.log(hazardLines[time]);
+		for(pinpointID in hazardMarkers[time] ){
+			var hazardLine = hazardLines[time][pinpointID];
+			console.log(hazardLine.strokeColor);
+			hazardLine.setVisible(true);
+			hazardMarkers[time][pinpointID].setVisible(true);
+			switch (numberOfNearbyHazards(sliderVal,hazardMarkers[time][pinpointID])) {
             case 1:
-                hazardLines[time][j].setOptions({strokeColor: 'yellow'}); 
+            	console.log(hazardLine);
+                hazardLine.setOptions({strokeColor: 'yellow'}); 
                 break;
             case 2:
-                hazardLines[time][j].setOptions({strokeColor: 'orange'});
+            	console.log(hazardLine);
+                hazardLine.setOptions({strokeColor: 'orange'});
                 break;
             default:
-                hazardLines[time][j].setOptions({strokeColor: 'red'});
+            	console.log(hazardLine);
+                hazardLine.setOptions({strokeColor: 'red'});
                 break;
             }
 
 		}
 	}
-	for(var i= 1; i< timeVal; i++){
+	for(var i= 1; i< sliderVal; i++){
 		var time = 140-i*20;
 		//console.log(time+" hide");
-		for(var j =0; j <hazardLines[time].length; j++){
-			hazardLines[time][j].setVisible(false);
-			hazardMarkers[time][j].setVisible(false);
+		for(pinpointID in hazardMarkers[time] ){
+			hazardLines[time][pinpointID].setVisible(false);
+			hazardMarkers[time][pinpointID].setVisible(false);
 		}
 	}
 }
 
-function numberOfNearbyHazards(timeVal,marker){
+function getHarzardStatus(timeVal,sliderVal,marker){
+
+	var trueFalse;
+	var color;
+	var time = 140-timeVal*20;
+	if(timeVal >= sliderVal){
+		trueFalse = true;
+		switch (numberOfNearbyHazards(sliderVal,marker)) {
+            case 1:
+                color = 'yellow'; 
+                break;
+            case 2:
+                color = 'orange';
+                break;
+            default:
+                color = 'red' ;
+                break;
+        };
+	}
+	else{
+		trueFalse = false;
+		color = 'red' ;
+	}	
+
+	return [trueFalse,color,numberOfNearbyHazards(sliderVal,marker)];
+}
+
+function numberOfNearbyHazards(sliderVal,marker){
 	var num = 0;
-	for(var i = timeVal; i<=6; i++){
+	for(var i = sliderVal; i<=6; i++){
 		var time = 140-i*20;
-		for(var j =0; j <hazardLines[time].length; j++){
-			if(distanceBetweenCoords(	hazardMarkers[time][j].getPosition().lat(),
-												hazardMarkers[time][j].getPosition().lng(),
+		//console.log(time,hazardMarkers[time].length);
+		for(pinpointID in hazardMarkers[time] ){
+			if(distanceBetweenCoords(	hazardMarkers[time][pinpointID].getPosition().lat(),
+												hazardMarkers[time][pinpointID].getPosition().lng(),
 												marker.getPosition().lat(),
 												marker.getPosition().lng()
 												) < 0.1 ){
-				console.log(hazardMarkers[time][j].getTitle());
+				//console.log(hazardMarkers[time][pinpointID].getTitle());
 				num++;
 			}
 		}
 	}
-	console.log(num +"," + timeVal);
+	console.log(num +"," + sliderVal);
 	return num;
 }
 
@@ -64,7 +100,7 @@ function distanceBetweenCoords(lat1,lon1,lat2,lon2){
 }
 
 
-function runSnapToRoad(path,timePast) {
+function runSnapToRoad(path,marker,timePast,pinpointID) {
   //var pathValues = [];
   //for (var i = 0; i < path.length; i++) {
   //  pathValues.push(path.getAt(i).toUrlValue());
@@ -75,7 +111,7 @@ function runSnapToRoad(path,timePast) {
     key: 'AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE'
   }, function(data) {
     processSnapToRoadResponse(data);
-    drawSnappedPolyline(timePast);
+    drawSnappedPolyline(timePast,marker,pinpointID);
     //getAndDrawSpeedLimits();
   });
 }
@@ -92,14 +128,22 @@ function processSnapToRoadResponse(data) {
   }
 }
 
-function drawSnappedPolyline(timePast) {
+function drawSnappedPolyline(timePast,marker,pinpointID) {
+  var timeVal = (140-timePast)/20;
+  var sliderVal = document.getElementById("myRange").value;
+  var options = getHarzardStatus(timeVal,sliderVal,marker);
+  
+  console.log(options);
+
+  //var numNearby = numberOfNearbyHazards(timeVal,marker);
+  //console.log(numNearby);
   var snappedPolyline = new google.maps.Polyline({
     path: snappedCoordinates,
-    strokeColor: 'black',
+    strokeColor: options[1],
     strokeWeight: 7,
-    visible: trueFalse
+    visible: options[0]
   });
 
   snappedPolyline.setMap(map);
-  hazardLines[timePast].push(snappedPolyline);
+  hazardLines[timePast][pinpointID] = snappedPolyline;
 }

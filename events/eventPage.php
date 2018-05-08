@@ -385,13 +385,13 @@ hazardMarker.setVisible(false);
 <div id="mainTable" >
   <!-- Display directions panel -->
 
-  <div id="directionsPanel" align="left">
+  <div id="directionsPanel" align="left" style="padding-right:25px">
     <div style="background:white">
         <u><b>Date:</b></u></br>
         <div id="eventDate" style="float: left;" align="left"></div></br>
         <u><b>Location:</b></u></br>
-        <div id="eventLoc" style="float: left;" align="left"></div></br>
-        <a href="#eventDescription">Click here for event information</a></br>
+        <div id="eventLoc" style="float: left;" align="left"></div></br></br>
+        <a href =#eventDescription style="color:black"><div style="padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:100%; text-align: center;">Click here for event summary</div></a>
       </div>
     </br>
     <div style="background:white">
@@ -452,11 +452,11 @@ hazardMarker.setVisible(false);
 
     <div id="routeOptions" class="mapOptions">
       <div id="trafficHazardClosedPanel">
-        <button onclick="openHazardInput()"> Add Hazard</button><button onclick="showCurrentHazards(document.getElementById('myRange').value);"> test</button> 
+        <button onclick="openHazardInput()"> Add Hazard</button><button onclick="showCurrentHazards(document.getElementById('myRange').value);"> test</button></br></br>
         <div class="slidecontainer">
           <input type="range" min="1" max="6" value="6" class="slider" id="myRange">
           <p>Showing hazards reported up to <span id="timePastSlider"></span> minutes ago</p><span id="demo1"></span>
-        </div>
+        </div></br></br>
 
         <button onclick="getHazards()">Get Hazards</button>
       </div>
@@ -490,7 +490,7 @@ hazardMarker.setVisible(false);
     </br></br><input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
       </div></br>
 
-  <div id="map" style="width: 100%; height:350px;"></div>
+  <div id="map" style="width: 100%; height:500px;"></div>
 
   </div>
 
@@ -813,6 +813,7 @@ output.innerHTML = 140-slider.value*20;
 
 slider.oninput = function() {
   output.innerHTML = 140-this.value*20;
+  console.log("-----------slider changed to"+ this.value +" ---------");
   showCurrentHazards(this.value);
 }
 </script>

@@ -270,7 +270,7 @@ html *
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 14px 0 0 12px;
     transition: 0.3s;
     font-size: 17px;
     width: 20%;
@@ -293,6 +293,8 @@ html *
     border: 0px;
     border-top: none;
     background-color: #f1f1f1;
+    height: 250px;
+    overflow: auto;
 }
 
 
@@ -359,7 +361,7 @@ html *
     appearance: none;
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: #ffa31a;
     cursor: pointer;
 }
 
@@ -370,6 +372,9 @@ html *
     cursor: pointer;
 }
 
+.routeTablink1 {
+    overflow: scroll
+}
 
 
 /* =========================================== Pagination ============================================== */
