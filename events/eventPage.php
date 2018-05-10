@@ -24,8 +24,8 @@
   <script type=text/javascript src=js/changeRoute.js></script> 
   <script type=text/javascript src=js/createHazards.js></script> 
     
-  <script type="text/javascript" src="../js/jquery.min.js"></script>
-  <script type="text/jfavascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/jquery.backstretch.min.js"></script>
   <script type="text/javascript" src="../js/function.js"></script>
   <script src="js/wow.min.js"></script>
@@ -210,7 +210,7 @@ function UrlExists(url)
             <div class="header-left">
               <!-- logo -->
               <div class="logo smooth-scroll">
-                <a href="#banner"><img id="logo" src="../images/logo3.png" alt="Worthy"></a>
+                <a href="#banner"><img id="logo" src="../images/logo2.png" alt="Worthy"></a>
               </div>
               <!-- name-and-slogan -->
               <div class="logo-section smooth-scroll">
@@ -316,7 +316,7 @@ hazardMarker.setVisible(false);
 
 
                 document.getElementById("eventName").innerHTML = event.name.text;
-                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700;\"><u>Click here for event page</u></a>";
+                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:30px; text-align: center; height:30px\" ><u>Click here for event original page</u></a>";
                 document.getElementById("eventDate").innerHTML = moment(event.start.local).format('D/M/YYYY h:mm A');
                 document.getElementById("eventLoc").innerHTML = event.venue.address.address_1 + ", " + event.venue.address.city;
                 document.getElementById("eventDescription").innerHTML = event.description.html;
@@ -546,9 +546,19 @@ Tweet</a> -->
 <div style="display: block; clear: both">
   <div style="padding: 25px;">
 <p style="display: block; "> 
-  <b>Description:</b>
-  <div id="eventDescription" ></div> </p>
-  <div id="eventUrl" style="float: left; width: 50%;" align="left"></div>
+  <table>
+    <tr>
+      <td>
+  <div><h2><b>Description:</b></h2></div>
+</td>
+<td>
+  <div id="eventUrl" style="padding-left: 10px"></div>
+</td>
+</tr>
+<table>
+  <div id="eventDescription" style="text-align:justify"></div> </p>
+</table>
+  </table>
 </div>
 </div>
 
