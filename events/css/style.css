@@ -123,6 +123,7 @@ color: #FFC40A;
 .caption-data h1 {text-transform: uppercase;}
 .caption-data h1 span {font-size: inherit; line-height: inherit; font-weight: inherit;}
 .caption-data h3{line-height: 39px;font-size: 22px;}
+.caption-data h4{line-height: 30px;font-size: 35px;}
 button.cta-button.btn-light, button.cta-button.btn-dark, .contact-form button.cta-button, button.cta-button.btn-default, .contact-form a {
 color:#FBFBFB;
 background: transparent;
@@ -482,6 +483,27 @@ min-height: 100%;
 }
 
 
+
+
+.placeholder { 
+
+}
+
+::-webkit-input-placeholder {
+    color:#b37700;
+}
+
+::-moz-placeholder {
+    color:#b37700;
+}
+
+::placeholder {
+    color:#b37700;
+}
+
+
+
+
 .search input[type="text"]{
 	outline: none;
     background: none;
@@ -500,22 +522,6 @@ min-height: 100%;
 
 }
 
-.placeholder { 
-
-}
-
-::-webkit-input-placeholder {
-    color:white;
-}
-
-::-moz-placeholder {
-    color:white;
-}
-
-::placeholder {
-    color:white;
-}
-
 .search input[type="submit"]{
 	outline: none;
     border:1px solid #fff;
@@ -529,6 +535,9 @@ min-height: 100%;
     background: url(../images/img-sp.png) no-repeat -9px -8.5px
     
 }
+
+
+
 
 html, body {
     height: 100%;

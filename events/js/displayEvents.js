@@ -85,7 +85,7 @@ function getEvents(catName,searchString) {
                         var eventTime = moment(event.start.local).format('D/M/YYYY h:mm A');
                         //console.dir(event);
                         s += "<div class=\"accordion\" id=\"accordion"+ event.id  + "\" style=\"padding-bottom:2px; background-clip: content-box; box-shadow: inset 0 0 0 0px white;\">"; 
-                        s += "<table style=\"width:100%\"><tr class=\"mobileOnlyRow\"><td><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;\"></td></tr><tr>"
+                        s += "<table style=\"width:100%\"><tr class=\"mobileOnlyRow\"><td><a href =\"eventPage.php?" + event.id + "\"><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;\"></a></td></tr><tr>"
                         s += "<td class=\"desktopOnlyCell\"><a href =\"eventPage.php?" + event.id + "\"><img src=\"" + testPicture(event.logo) +"\" style=\"width:200px;padding-right:15px\"></a> </td>"
                         s += "<td style=\"width: 100%\"; align=\"left\"><div class='eventList'>";
                         s += "<h2>" + event.name.text + "</h2>";

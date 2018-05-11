@@ -204,30 +204,39 @@ html *
 /* Style the tab */
 .horizontalTab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid white;
+    background-color: #232323;
+
 }
 
 /* Style the buttons inside the tab */
 .horizontalTab button {
-    background-color: inherit;
+    background-color: #232323;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 20px;
+
+
 }
+    @media (max-width: 770px){
+.horizontalTab {padding: 10px 20px;}
+
+}
+
 
 /* Change background color of buttons on hover */
 .horizontalTab button:hover {
-    background-color: #ddd;
+    background-color: #b37700;
 }
 
 /* Create an active/current tablink class */
 .horizontalTab button.active {
-    background-color: #ccc;
+    background-color: #EEC440;
+    color: black
 }
 
 /* Style the tab content */
@@ -260,12 +269,13 @@ html *
 #directionsTab {
     overflow: hidden;
     border: none;
-    background-color: #ccc;
+    background-color: white;
 }
 
 /* Style the buttons inside the tab */
 #directionsTab button {
-    background-color: inherit;
+    background-color: #232323;
+    color: white;
     float: left;
     border: none;
     outline: none;
@@ -278,12 +288,13 @@ html *
 
 /* Change background color of buttons on hover */
 #directionsTab button:hover {
-    background-color: #ddd;
+    background-color:#b37700;
 }
 
 /* Create an active/current tablink class */
 #directionsTab button.active {
-    background-color: #f1f1f1;
+    background-color: #EEC440;
+    color: black;
 }
 
 /* Style the tab content */
@@ -318,6 +329,7 @@ html *
 #hazard-selector label > input{ /* HIDE RADIO */
   visibility: hidden; /* Makes input not-clickable */
   position: absolute; /* Remove input from document flow */
+
 }
 #hazard-selector label > input + div{ /* IMAGE STYLES */
     padding: 5px;
@@ -326,7 +338,8 @@ html *
     box-shadow: none; 
     border-radius: 0px; 
     width:155px;
-    background-color:#EEC440
+    background-color:#EEC440;
+    color: black;
 }
 #hazard-selector label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   background-color:black;
@@ -337,15 +350,16 @@ html *
 /* =========================================== Slider ============================================== */
 
 .slidecontainer {
-    width: 75%;
+    
     display: inline-block;
 }
 
 .slider {
+
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
-    background: #d3d3d3;
+    height: 3px;
+    background: black;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -424,7 +438,7 @@ html *
 .desktopOnlyRow {display:table-row;}
 .desktopOnlyCell {display:table-cell;}
 #directionsPanel {float: left; width: 30%; padding-left:25px;}
-#mapAndInfoPanel {float: left; width: 70%; padding-right:0;}
+#mapAndInfoPanel {float: left; width: 70%; padding-right:25px;}
 
 #directionsOutput {width: 95%; height: 250px; overflow: auto;}
 #mainTable {content: ""; display: table; clear: both; width: 100%;}
@@ -445,7 +459,8 @@ html *
 }
 
 
-#origin-input {width:250px}
+#origin-input {width:250px;
+                border: 1px solid #bfbfbf;}
 @media (max-width: 942px) { 
     #origin-input {width:98%}
 }

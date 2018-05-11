@@ -41,13 +41,16 @@ function showMarkerGroup(tab){
   
   switch (tab) {
            case "directions":
-                toggleToiletMarkers(true); 
+                toggleToiletMarkers(true);
+                hideAllHazards(); 
                 break;
             case "safety":
                 toggleSafetyMarkers(true);
+                hideAllHazards();
                 break;
             case "route":
                 toggleHazardMarkers(true);
+                showCurrentHazards(document.getElementById("myRange").value);
                 break;
             }
 }
@@ -151,7 +154,8 @@ function initMap() {
     center: {lat: -37.8136, lng: 144.9631},
     streetViewControl: false,
     fullscreenControl: false,
-    zoom: 16
+    zoom: 16,
+    clickableIcons: false
   });
 
   geocoder = new google.maps.Geocoder;

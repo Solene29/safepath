@@ -12,7 +12,7 @@
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
   <!-- <script src="jquery.easyPaginate.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
   <script type=text/javascript src=js/displayEvents.js></script>
@@ -21,8 +21,8 @@
   <script type=text/javascript src=js/pageTab.js></script>
   <script type=text/javascript src=js/AccordionEventDesc.js></script> 
     
-  <script type="text/javascript" src="../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/jquery.backstretch.min.js"></script>
   <script type="text/javascript" src="../js/function.js"></script>
   <script src="js/wow.min.js"></script>
@@ -85,7 +85,7 @@ function openModal(eventName,address,lat,lng) {
             <div class="header-left">
               <!-- logo -->
               <div class="logo smooth-scroll">
-                <a href="../index.php"><img id="logo" src="../images/logo3.png" alt="Worthy"></a>
+                <a href="../index.php"><img id="logo" src="../images/logo2.png" alt="Worthy"></a>
               </div>
               <!-- name-and-slogan -->
               <div class="logo-section smooth-scroll">
@@ -116,7 +116,8 @@ function openModal(eventName,address,lat,lng) {
                       <ul class="nav navbar-nav navbar-right search">
                         <li><a href="../index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
-                        <li><a href="../about.php">About Us</a></li>
+                        <li><a href="../index.php#about">About Us</a></li>
+                        <li><a href="../index.php#FAQ">FAQ</a></li>
       <li><a><form action="index.php" class="search-form">
       <input type="text" name="search" placeholder="Search" required="">
        <input type="submit" value="" class="search-submit" >
@@ -165,7 +166,7 @@ console.log(searchQn);
 
 
 <!-- Event category tabs: -->
-<div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="index.php">Event</a></p></div>
+<div class="tabb"><p><a href="../index.php">Home</a> - <a style="color:black" href="eventPage.php">Events</a></p></div>
 <div class="tab">
   <button class="tablinks" onclick="openCategory(event, 'eventArts', '')">Arts <img src="images/ic_brush.png" align="right"></img></button>
   <button class="tablinks" onclick="openCategory(event, 'eventFood', '')">Food and Drink <img src="images/ic_local_dining.png" align="right"></img></button>

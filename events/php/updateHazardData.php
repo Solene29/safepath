@@ -1,3 +1,5 @@
+
+
 <?php
 
 function getUserData(){
@@ -30,51 +32,21 @@ while($row = mysqli_fetch_assoc($result))
 $result = json_encode($result1,JSON_NUMERIC_CHECK);
 
 echo '<script  language="javascript">';
-echo 'hazardData =' . $result .';';
-echo '//console.log(hazardData);';
-echo 'var result = await Array.prototype.forEach.call(hazardData, function(data){
-			
-
-
-
-
-
-for(time in hazardMarkers){
-		for(pinId in hazardMarkers[time]){
-
-		}
-	 }'
-/*echo 'for (var i = 0; i < markerGroups["hazardMarker"].length; i++) {
-          var marker = markerGroups["hazardMarker"][i];
-          marker.setMap(null);
-      };';
-//echo 'markerCluster.clearMarkers();';
-echo 'markerGroups["hazardMarker"] = [];';*/
+echo 'newHazardData =' . $result .';';
+echo '//console.log(newHazardData);';
 echo 'async function asyncCall() {
-	  //console.log("calling");
-	  var result = await Array.prototype.forEach.call(hazardData, function(data){
-							  var marker = new google.maps.Marker({
-							    position: new google.maps.LatLng(data.lat,data.lon),
-							    map: map,
-							    title: data.description,
-							    visible: false,
-							    id: data.pinpointID
-							  })
+	  var result = await compareNewAndOldHazards();
 
-							hazardMarkers[data.timePast][data.pinpointID] = marker;
-						});
-		console.log(hazardMarkers);
-		Array.prototype.forEach.call(hazardData, function(data){
-							var temp = data.outerlat2 + "," + data.outerlon2 + "|" + data.innerlat2 + "," + data.innerlon2 + "|" + data.lat + "," + data.lon + "|" + data.innerlat1 + "," + data.innerlon1 + "|" + data.outerlat1 + "," + data.outerlon1;
-							//console.log(temp);
+	  showCurrentHazards(document.getElementById("myRange").value);
 
-							runSnapToRoad(temp,hazardMarkers[data.timePast][data.pinpointID],data.timePast,data.pinpointID);
-						});
-	  //console.log("done waiting");
-	  //console.log(hazardMarkers);
-	  //console.log(document.getElementById("myRange").value);
-	  //showCurrentHazards(document.getElementById("myRange").value);
-	  }';
+
+	  };';
+
+
+
+
+
+
 echo 'asyncCall();';
 echo '</script>';
 
@@ -89,4 +61,5 @@ $conn->close();
 
 
 getUserData();
+
 ?> 

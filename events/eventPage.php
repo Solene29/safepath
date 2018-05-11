@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
   <title>SafePath|Event Info</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="robots" content="noindex" />
@@ -38,15 +39,26 @@
 var hazardRoad;
 
 function snapToRoad(marker){
-  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE',
-      function(res){
-        //console.log(res.snappedPoints[0].location.latitude);
+
+return new Promise(resolve =>{
+  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE')
+   .done(function(res){
+      if(!jQuery.isEmptyObject(res)){
         marker.setPosition(new google.maps.LatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude));
         if(marker === hazardMarker){
           geocodeLatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude);
         }
-      });
-
+        resolve("ok");
+      }
+      else
+        alert("Please choose a location close to a road.");
+        resolve("bad");
+    })
+   .fail(function() {
+    alert("An error occured. Please try again.");
+    resolve("bad");
+    });
+});
 };
 
 
@@ -65,23 +77,57 @@ var hazardClickListener;
 var hazardDragListener;
 
 function openHazardInput() {
-toggleHazardMarkers(false);
-document.getElementById("trafficHazardClosedPanel").style.display = "none";
-document.getElementById("trafficHazardOpenPanel").style.display = "block";
+  hideAllHazards();
+  document.getElementById("trafficHazardClosedPanel").style.display = "none";
+  document.getElementById("trafficHazardOpenPanel").style.display = "block";
 
-hazardClickListener = new google.maps.event.addListener(map, 'click', function(event) {
-    //console.log(event.latLng.lat());
+  var oldLatLng;
+
+  hazardClickListener = new google.maps.event.addListener(map, 'click', function(event) {
+    oldLatLng = hazardMarker.getPosition();
+    var oldVisible = hazardMarker.getVisible();
     hazardMarker.setPosition(event.latLng);
     hazardMarker.setVisible(true);
-    snapToRoad(hazardMarker);
 
-    });
+    async function asyncSnap() {
 
-hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
-    //console.log(hazardMarker.getPosition());
-    snapToRoad(hazardMarker);
+        var clickOKStatus = await snapToRoad(hazardMarker);
+        //console.log(clickOKStatus);
 
-    });
+        //console.log(snapToRoad(hazardMarker));
+        if(clickOKStatus==="bad"){
+          hazardMarker.setPosition(oldLatLng);
+          hazardMarker.setVisible(oldVisible);
+          //console.log("not ok");
+        }
+    };
+
+    asyncSnap();
+
+  });
+
+  hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragstart', function(event) {
+    oldLatLng = hazardMarker.getPosition();
+    //console.log(oldLatLng.lat());
+  });
+
+  hazardDragListener = new google.maps.event.addListener(hazardMarker, 'dragend', function(event) {
+
+    async function asyncSnap() {
+
+        var clickOKStatus = await snapToRoad(hazardMarker);
+        //console.log(clickOKStatus);
+
+        //console.log(snapToRoad(hazardMarker));
+        if(clickOKStatus==="bad"){
+          hazardMarker.setPosition(oldLatLng);
+          //console.log("not ok");
+        }
+    };
+
+    asyncSnap();
+
+  });
 
 };
 
@@ -241,7 +287,8 @@ function UrlExists(url)
                       <ul class="nav navbar-nav navbar-right search">
                         <li><a href="../index.php">Home</a></li>
                         <li><a href="index.php">Events</a></li>
-                        <li><a href="../about.php">About Us</a></li>
+                        <li><a href="../index.php#about">About Us</a></li>
+                        <li><a href="../index.php#FAQ">FAQ</a></li>
                         <li><a><form action="index.php" class="search-form" >
                       <input type="text" name="search" placeholder="Search for event..." required="">
                        <input type="submit" value="" class="search-submit" >
@@ -265,7 +312,8 @@ function UrlExists(url)
     <!-- banner end -->
    
 
-
+<!-- Event category tabs: -->
+<div class="tabb"><p><a href="../index.php">Home</a> - <a href="index.php">Events</a> - <a style="color:black">Event information</a></p></div>
 <script type="text/javascript">
 //Add the event location marker
 var hazardMarker;
@@ -276,7 +324,8 @@ var hazardIcon = {url: 'images/ylw-pushpin.png',
                   };
 var marker = new google.maps.Marker({
           position: new google.maps.LatLng(lat,lon),
-          map: map
+          map: map,
+          clickable: false
         });
 hazardMarker = new google.maps.Marker({
           position: new google.maps.LatLng(lat,lon),
@@ -316,9 +365,11 @@ hazardMarker.setVisible(false);
 
 
                 document.getElementById("eventName").innerHTML = event.name.text;
-                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:30px; text-align: center; height:30px\" ><u>Click here for event original page</u></a>";
+                document.getElementById("eventUrl").innerHTML = "<a href='" + event.url + "' target=\"_blank\" style=\";font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #EEC440; border: 1px; box-shadow: none; border-radius: 0px; width:30px; text-align: center; height:30px\" ><u>Click here for event original page</u></a>";
                 document.getElementById("eventDate").innerHTML = moment(event.start.local).format('D/M/YYYY h:mm A');
-                document.getElementById("eventLoc").innerHTML = event.venue.address.address_1 + ", " + event.venue.address.city;
+                var eventAddress = testAddress(event.venue.address.address_1,event.venue.name) + event.venue.address.city;
+                document.getElementById("eventLoc").innerHTML = eventAddress;
+                document.getElementById("destination-box").innerHTML = eventAddress;
                 document.getElementById("eventDescription").innerHTML = event.description.html;
                 eventlat = event.venue.latitude;
                 eventlon = event.venue.longitude;
@@ -391,13 +442,26 @@ hazardMarker.setVisible(false);
         <div id="eventDate" style="float: left;" align="left"></div></br>
         <u><b>Location:</b></u></br>
         <div id="eventLoc" style="float: left;" align="left"></div></br></br>
-        <a href =#eventDescription style="color:black"><div style="padding: 5px;cursor: pointer;background-color: #FEB728; border: 1px; box-shadow: none; border-radius: 0px; width:100%; text-align: center;">Click here for event summary</div></a>
+        <a href =#eventDescription style="color:black"><div style="padding: 5px;cursor: pointer;background-color: #EEC440; border: 1px; box-shadow: none; border-radius: 0px; width:100%; text-align: center;">Click here for event summary</div></a>
       </div>
     </br>
     <div style="background:white">
-        <u><b>Route:</b></u></br></br>    
-        <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></br></br>
-          <b>Transport type: </b>
+        <u><b>Route:</b></u></br></br>
+        <div style="margin: auto;">
+        <div style="display: inline-block;">
+        <div id="destination-box-return" style="display:none; width:250px; border: 1px solid #bfbfbf; color: #b37700">Destination</div>
+        <div style="display:block"><input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></div>
+        <div id="destination-box" style="display:block; width:250px; border: 1px solid #bfbfbf; color: #b37700">Destination</div>
+        </div>
+        <!--<div style="display: inline-block;">
+         <i class="material-icons">cached</i>
+        </div>-->
+        </div>
+
+
+
+
+          </br><b>Transport type: </b>
           <div id="mode-selector" class="controls">
             <label><input type="radio" name="type" id="changemode-walking" checked="checked">
             <i class="material-icons">directions_walk</i></label>
@@ -427,43 +491,50 @@ hazardMarker.setVisible(false);
   <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
-  <button class="tablinks" id="directions" onclick="openMapOrInfo(event, 'directions')">Direction to event</button>
-  <button class="tablinks" id="safety" onclick="openMapOrInfo(event, 'safety')">Safety Features</button>
-  <button class="tablinks" id="route" onclick="openMapOrInfo(event, 'route')">Route Hazards</button>
-  <button class="tablinks" id="event" onclick="openMapOrInfo(event, 'event')">Event Feedback</button>
+  <button class="tablinks" id="directions" onclick="openMapOrInfo(event, 'directions')"><b>Direction to event</b></button>
+  <button class="tablinks" id="safety" onclick="openMapOrInfo(event, 'safety')"><b>Safety Features</b></button>
+  <button class="tablinks" id="route" onclick="openMapOrInfo(event, 'route')"><b>Route Hazards</b></button>
+  <button class="tablinks" id="event" onclick="openMapOrInfo(event, 'event')"><b>Event Feedback</b></button>
   </div>
     
   <div id="mapPanel" class="mapOrInfoPanelContent">
     <div id="safetyOptions" class="mapOptions">
+      <h3 style="padding-left: 7px"><b>What would you like to see?</b></h3>
           <table>
-          </br>
             <tr>
-              <td ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">Cameras </input><i class="material-icons" style="color:#6600ff">videocam &#160;</i></td>
+              <td ><h4 ><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('cameraMarker')" checked="checked">     Cameras </input><i class="material-icons" style="color:#6600ff">videocam &#160;</i></h4></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">Police stations </input><i class="material-icons" style="color:#993300">security &#160;</i></td>
+              <td><h4><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('policeMarker')" checked="checked">     Police stations </input><i class="material-icons" style="color:#993300">security &#160;</i></h4></td>
             <!-- </tr>
             <tr> -->
-              <td><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">Taxi ranks </input><i class="material-icons" style="color:#FF3366">local_taxi</i></td>
+              <td><h4><input id="cameraCheckbox" type="checkbox" onclick="toggleGroup('taxiMarker')" checked="checked">     Taxi ranks </input><i class="material-icons" style="color:#FF3366">local_taxi</i></h4></td>
               
             </tr>
           </table>
       </div>
 
     <div id="routeOptions" class="mapOptions">
+      <p><h3 style="padding-left: 7px"><b>Report hazards on the way to the event:</b>  <label><input type="submit" id="myBtn2" style="display:none">
+            <i class="material-icons">info_outline</i></label></h3>
+
+        
       <div id="trafficHazardClosedPanel">
-        <button onclick="openHazardInput()"> Add Hazard</button><button onclick="showCurrentHazards(document.getElementById('myRange').value);"> test</button></br></br>
-        <div class="slidecontainer">
-          <input type="range" min="1" max="6" value="6" class="slider" id="myRange">
+        <div align="center">
+        <button onclick="openHazardInput()" style="font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #EEC440; border: 1px; box-shadow: none; border-radius: 0px; width:160px; text-align: center; height:30px; padding-left: 7px;"> Add Hazard</button></div></br>
+       
+        <div class="slidecontainer" style="width:100%" align="center">
+          <input type="range" min="1" max="6" value="6" class="slider" id="myRange" style="width:80%"></br>
+
           <p>Showing hazards reported up to <span id="timePastSlider"></span> minutes ago</p><span id="demo1"></span>
         </div></br></br>
-
-        <button onclick="getHazards()">Get Hazards</button>
+      
       </div>
       <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
  
       <h3><b>What would you like to report on the way?</b></h3>
       </br>
+      <div style="width:100%" align="center">
           <div id="hazard-selector" class="controls">
             <label><input type="radio" name="hazard-type" id="trafficAccident">
              <div align="center">Traffic accident</div></label>
@@ -474,20 +545,23 @@ hazardMarker.setVisible(false);
             <label><input type="radio" name="hazard-type" id="illegalActivity">
             <div align="center">Illegal activity</div></label>
           </div>
+        </div>
       </br>
-        <button onclick="addHazard()"> Submit Hazard </button>
-        <button onclick="closeHazardInput()"> Cancel</button>
+      <div style="width:100%">
+        <div align="center">
+        <button onclick="addHazard()" style="font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #86B85F; border: 1px; box-shadow: none; border-radius: 0px; width:160px; text-align: center; height:30px; padding-left: 7px;"> Submit Hazard </button>
+        <button onclick="closeHazardInput()" style="font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #ED3C2D; border: 1px; box-shadow: none; border-radius: 0px; width:160px; text-align: center; height:30px; padding-left: 7px;"> Cancel</button></br>
       </div>
+    </div>
+    </div>
 
 
     </div>
 
 
       <div id="directionsOptions" class="mapOptions">
-    <b style="font-size: 20px">Filter Options</b>
-    
-
-    </br></br><input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')">Toilets</input>
+    <p><h3 style="padding-left: 7px"><b>Filter options: </b></h3>
+    <h4 style="padding-left:7px"><input id="toiletCheckbox" type="checkbox" onclick="toggleGroup('toiletMarker')"> Toilets</input></h4>
       </div></br>
 
   <div id="map" style="width: 100%; height:500px;"></div>
@@ -500,7 +574,7 @@ hazardMarker.setVisible(false);
 
   <div id="phpOutput"></div>
 
-  <p><h3><b>What would you like to report? </b></h3>   
+  <p><h3 style="padding-left: 7px"><b>What would you like to report? </b></h3>   
 
   </p>
 
@@ -517,17 +591,20 @@ hazardMarker.setVisible(false);
   
 
   
-  <div id="chartDiv"></div>
-
+  <div id="chartDiv"></div></br>
+  <div style="width: 100%" align="center">
 
   <button onclick="goToToilets();" style="padding: 5px;
     cursor: pointer;
-    background-color: #bbb; 
+    background-color: #232323; 
     border: 1px; 
+    color: white;
     box-shadow: none; 
     border-radius: 0px; 
-    width:200px;" >Show me nearby toilets! <i class="material-icons">wc</i>
+    width:200px;" >Show me nearby toilets! <i class="material-icons" style="color:white">wc</i>
+
   </button>
+</div>
 <!-- <input type="image" src="images/twit.png" class="twitter-share-button"
   href="https://twitter.com/intent/tweet?text=Hello%20world"><a class="twitter-share-button"
   href="https://twitter.com/intent/tweet?text=Hello%20world"></a></input>
@@ -594,16 +671,16 @@ function switchColours(codeName) {
   var out = '';
    switch (codeName) {
         case 'foodRange':
-            out = 'green';
+            out = '#86B85F';
             break;
         case 'longQueue':
-            out = 'red';
+            out = '#ED3C2D';
             break;
         case 'noToilets':
-            out = 'red';
+            out = '#ED3C2D';
             break;
         case 'quickService':
-            out = 'green';
+            out = '#86B85F';
             break;
     }
     return out;
@@ -720,9 +797,9 @@ function setValue(desc){
 <script>
 function addHazard(){
       if(hazardMarker.getVisible() && $('input[name=hazard-type]:checked').length>0){
-        console.log($('input[name=hazard-type]:checked')[0].id);
-        console.log(hazardMarker.getPosition().lat());
-        console.log(hazardMarker.getPosition().lng());
+        //console.log($('input[name=hazard-type]:checked')[0].id);
+       // console.log(hazardMarker.getPosition().lat());
+        //console.log(hazardMarker.getPosition().lng());
         $("#phpOutput").load("php/sendInputRoute.php?eventIdValue="+eventId+"&description="+$('input[name=hazard-type]:checked')[0].id+"&lat="+hazardMarker.getPosition().lat()+"&lon="+hazardMarker.getPosition().lng());
         closeHazardInput();
       }
@@ -740,6 +817,7 @@ function addHazard(){
         $("#phpOutput").load("php/getHazardData.php");
 
     };
+
 </script>
 
 <script>
@@ -755,7 +833,7 @@ function getUserData(){
     function updateData(){
       var activeTab = getActiveTab();
       if(activeTab === "route" && document.getElementById("trafficHazardOpenPanel").style.display === "none"){
-        //getHazards();
+        getHazards();
       };
       if(activeTab === "event"){
         getUserData(); 
@@ -823,7 +901,7 @@ output.innerHTML = 140-slider.value*20;
 
 slider.oninput = function() {
   output.innerHTML = 140-this.value*20;
-  console.log("-----------slider changed to"+ this.value +" ---------");
+  //console.log("-----------slider changed to"+ this.value +" ---------");
   showCurrentHazards(this.value);
 }
 </script>
@@ -835,7 +913,7 @@ slider.oninput = function() {
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" id="feedbackInfoModal">
     <span class="close">&times;</span>
     <p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>
 No Toilet - insufficient facilities</br>
@@ -844,37 +922,92 @@ Varied Food - plenty of tasty treats</br>
 Great Event - no problems encountered</p>
   </div>
 
+  <div class="modal-content" id="hazardInfoModal">
+    <span class="close">&times;</span>
+    <p>Accident - vehicle accident that may block or delay access</br>
+Harassment - cat-calling, wolf-whistling, abusive language, inappropriate touching or following</br>
+Aggression - threats, fights or fisticuffs</br>
+Illegal Activity - vandalism or graffiti in progress
+</p>
+  </div>
+
+
+    <div class="modal-content" id ="hazardModal">
+    <span class="close">&times;</span>
+    <div id="hazardModalContent"></div>
+    </div>
+
 </div>
+
+
 
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');
+var feedbackInfoModal = document.getElementById('feedbackInfoModal');
+var hazardInfoModal = document.getElementById('hazardInfoModal');
+var hazardModal = document.getElementById('hazardModal');
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
+var btn2 = document.getElementById("myBtn2");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close")[1];
+var span3 = document.getElementsByClassName("close")[2];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "block";    
+    feedbackInfoModal.style.display = "block";
+    hazardInfoModal.style.display = "none";
+    hazardModal.style.display = "none";
+}
+
+btn2.onclick = function() {
+    modal.style.display = "block";    
+    feedbackInfoModal.style.display = "none";
+    hazardInfoModal.style.display = "block";
+    hazardModal.style.display = "none";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
+    feedbackInfoModal.style.display = "none";
+    hazardInfoModal.style.display = "none";
+    hazardModal.style.display = "none";
+}
+
+span2.onclick = function() {
+    modal.style.display = "none";
+    feedbackInfoModal.style.display = "none";
+    hazardInfoModal.style.display = "none";
+    hazardModal.style.display = "none";
+}
+
+span3.onclick = function() {
+    modal.style.display = "none";
+    feedbackInfoModal.style.display = "none";
+    hazardInfoModal.style.display = "none";
+    hazardModal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        feedbackInfoModal.style.display = "none";
+        hazardInfoModal.style.display = "none";
+        hazardModal.style.display = "none";
     }
 }
 </script>
 
 <!-- ================   Modal code end  ====================    -->
+
+
 
  <!-- footer start -->
     <div id="footer">

@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 } 
 
 // Fetch camera data 
-$sqlHazard = "	SELECT pinpointID, description, dt, ceil(TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP,dt))/60/20)*20 as timePast, lat, lon, innerlat1, innerlon1, innerlat2, innerlon2, outerlat1, outerlon1, outerlat2, outerlon2 
+$sqlHazard = "	SELECT pinpointID, description, dt, ceil(TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP,dt))/60/20)*20 as timePast, lat, lon, polycoords
 				FROM pinpoint
 				HAVING timePast < 140	";
 
@@ -33,41 +33,18 @@ $result = json_encode($result1,JSON_NUMERIC_CHECK);
 //echo '<div id="userData">' . $result . '</div>';
 echo '<script  language="javascript">';
 echo 'hazardData =' . $result .';';
-echo 'console.log(hazardData);';
-/*echo 'for (var i = 0; i < markerGroups["hazardMarker"].length; i++) {
-          var marker = markerGroups["hazardMarker"][i];
-          marker.setMap(null);
-      };';
-//echo 'markerCluster.clearMarkers();';
-echo 'markerGroups["hazardMarker"] = [];';*/
-echo 'async function asyncCall() {
-	  console.log("calling");
-	  var result = await Array.prototype.forEach.call(hazardData, function(data){
-							  var marker = new google.maps.Marker({
-							    position: new google.maps.LatLng(data.lat,data.lon),
-							    map: map,
-							    title: data.description,
-							    visible: false,
-							    id: data.pinpointID
-							  })
+//echo '//console.log(hazardData);';
+echo 'async function asyncCall(newHazardData) {
+		
+		var result = await createHazardMarkers(newHazardData);
 
-							hazardMarkers[data.timePast][data.pinpointID] = marker;
-						});
-		console.log(hazardMarkers);
-		//var count = 0;
-		Array.prototype.forEach.call(hazardData, function(data){
-							var temp = data.outerlat2 + "," + data.outerlon2 + "|" + data.innerlat2 + "," + data.innerlon2 + "|" + data.lat + "," + data.lon + "|" + data.innerlat1 + "," + data.innerlon1 + "|" + data.outerlat1 + "," + data.outerlon1;
-							//console.log(temp);
+		Array.prototype.forEach.call(newHazardData, function(data){
 
-							runSnapToRoad(temp,hazardMarkers[data.timePast][data.pinpointID],data.timePast,data.pinpointID);
-							//count++;
-						});
-	  //console.log("done waiting");
-	  //console.log(hazardMarkers);
-	  //console.log(document.getElementById("myRange").value);
-	  //showCurrentHazards(document.getElementById("myRange").value);
+				processPolylineWithSnap(data.polycoords,hazardMarkers[data.timePast][data.pinpointID],data.timePast,data.pinpointID);
+							
+				});
 	  }';
-echo 'asyncCall();';
+echo 'asyncCall(compareNewAndOldHazards(hazardData));';
 //echo 'markerCluster.addMarkers(markerGroups["hazardMarker"]);';
 //echo 'markerCluster.redraw();';*/
 echo '</script>';
