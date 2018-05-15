@@ -2,7 +2,7 @@
 	font-family: 'Open Sans', sans-serif;
 }*/
 .brand {
-	//font-family: 'Nunito';
+	font-family: 'Nunito';
 }
 html,
 body {
@@ -145,7 +145,7 @@ blockquote {
 	min-height: 100%;
 	width: 100%;
 }
-.banner:after {
+/*.banner:after {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -153,7 +153,7 @@ blockquote {
 	bottom: 0;
 	background-color: rgba(0,0,0, 0.5);
 	content: "";
-}
+}*/
 .banner-caption {
 	position: absolute;
 	top: 50%;
@@ -246,11 +246,8 @@ padding: 17px 34px;}
 .caption-data {position: absolute; top: 50%; left: 50%; z-index: 20; text-align: center; -webkit-transform: translate(-50%,-50%); -moz-transform: translate(-50%,-50%); transform: translate(-50%,-50%);}
 .caption-data h1 {text-transform: uppercase;}
 .caption-data h1 span {font-size: inherit; line-height: inherit; font-weight: inherit;}
-.caption-data h3{line-height: 100px;font-size: 60px; font-family: "Permanent marker"; font-weight:lighter;}
-.caption-data h4{line-height: 40px;font-size: 25px; font-family: 'Nunito'; font-weight:lighter;}
-@media (max-width: 768px){
-.caption-data h3{line-height: 40px;font-size: 30px;}
-}
+.caption-data h3{font-family: "Caveat";line-height: 40px;font-size: 38px;}
+.caption-data h4{font-family: 'Nunito'; font-weight:lighter; line-height: 40px;font-size: 20px;}
 button.cta-button.btn-light, button.cta-button.btn-dark, .contact-form button.cta-button, button.cta-button.btn-default {
 background: transparent;
 }
@@ -302,10 +299,6 @@ color: #FFC400;}
 .list-group-item{
     padding: 15px 15px;
 }
-
-
-
-
 /* Sections
 ----------------------------------------------------------------------------- */
 .banner-caption h1,
@@ -685,10 +678,6 @@ margin: 2px 5px 0;}
 
 /* Isotope Items
 ---------------------------------- */
-.content {
-	width: 100%
-}
-
 .filters {
 	margin: 0 0 30px 0;
 }
@@ -705,15 +694,12 @@ margin: 2px 5px 0;}
 	margin-bottom: 2px;
 	display: inline-block;
 	float: none;
-
 }
 .isotope-container {
 	overflow: hidden;
-
 }
 .isotope-item {
 	margin-bottom: 20px;
-
 }
 .isotope-item .btn-default {
 	color: #FFFFFF;
@@ -738,7 +724,6 @@ margin: 2px 5px 0;}
 		width: 100%;
 		display: block;
 	}
-	.isotope-container {width:100%;}
 }
 /* Images Overlay
 ----------------------------------------------------------------------------- */
@@ -867,7 +852,6 @@ margin: 35px 0 15px;
 05.test
 
 -------------------------------- */
-
 .test h2{
 		text-transform: uppercase;
 	  letter-spacing: 5px;
@@ -1153,95 +1137,14 @@ b i:last-child {
 .no-csstransitions .box-headline.rotate-2 .is-visible i {
     opacity: 1;
 }
-/*
-.search input[type="text"]{
-	outline: none;
-    background: none;
-    border:1px solid #fff;
-    padding: 0px 0 0 10px;
-    font-size: 16px;
-    color: white;
-    width: 55%;
-	height:35px;
-    float: center;
-	border-right: none;
-	border-bottom-left-radius:4px;
-	border-top-left-radius: 4px;
-	font-weight: 100;
 
 
-}
-*/
-.placeholder { 
+#main-search-form{margin-top: 50px;}
+#subtitle1{font-size: 25px; line-height:30px;}
+#subtitle2{font-size: 25px; line-height:30px;}
 
-}
-
-::-webkit-input-placeholder {
-    color:white;
-}
-
-::-moz-placeholder {
-    color:white;
-}
-
-::placeholder {
-    color:white;
-}
-
-
-/*
-.search .placeholder ul{
-	
-	float: middle;
-	outline: none;
-    
-
-}
-*/
-.search input[type="text"]{
-	outline: none;
-    background: none;
-    border:1px solid #fff;
-    padding: 0px 0 0 10px;
-    font-size: 16px;
-    color: white;
-    width: 90%;
-	height:35px;
-    float: left;
-	border-right: none;
-	border-bottom-left-radius:4px;
-	border-top-left-radius: 4px;
-	font-weight: 100;
-
-
-}
-
-.placeholder { 
-
-}
-
-::-webkit-input-placeholder {
-    color:white;
-}
-
-::-moz-placeholder {
-    color:white;
-}
-
-::placeholder {
-    color:white;
-}
-
-.search input[type="submit"]{
-	outline: none;
-    border:1px solid #fff;
-    color: white;
-    border-left: none;
-    padding: 2px;
-    width: 10%;
-	height: 35px;
-	border-bottom-right-radius:4px;
-	border-top-right-radius: 4px;
-    background: url(../events/images/img-sp.png) no-repeat -9px -8.5px
-    
-}
+@media (max-width: 700px) { 
+		#main-search-form{margin-top: 0px;}
+		#subtitle1{font-size: 18px;}
+		#subtitle2{font-size: 18px;}
+	}

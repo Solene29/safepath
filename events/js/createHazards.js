@@ -341,7 +341,7 @@ function runSnapToRoad(path,marker,timePast,pinpointID,index) {
   //console.log(path);
   $.get('https://roads.googleapis.com/v1/snapToRoads?path='+path, {
     interpolate: true,
-    key: 'AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE'
+    key: 'AIzaSyBqNkm0anMe79zfctQcyc2tisZpKIxC0SQ'
   }, function(data) {
     processSnapToRoadResponse(data);
     drawSnappedPolyline(timePast,marker,pinpointID,index);

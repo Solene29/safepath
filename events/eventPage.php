@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-  <title>SafePath|Event Info</title>
+  <title>SafePath | Event Info</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -41,7 +41,7 @@ var hazardRoad;
 function snapToRoad(marker){
 
 return new Promise(resolve =>{
-  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&key=AIzaSyBvo9WExDGqsikBGfsqvdP0mHGGBDh79iE')
+  $.get('https://roads.googleapis.com/v1/snapToRoads?path='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&key=AIzaSyBqNkm0anMe79zfctQcyc2tisZpKIxC0SQ')
    .done(function(res){
       if(!jQuery.isEmptyObject(res)){
         marker.setPosition(new google.maps.LatLng(res.snappedPoints[0].location.latitude,res.snappedPoints[0].location.longitude));

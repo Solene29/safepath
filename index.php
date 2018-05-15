@@ -16,6 +16,9 @@
 		<link href="css/animations.css" rel="stylesheet"> 
 		<link href="css/style.css" rel="stylesheet"> 
 
+		<link href="css/normalize.css" rel="stylesheet"> 
+		<link href="css/search-form.css" rel="stylesheet"> 
+
 		<!-- font -->
 		<link href="https://fonts.googleapis.com/css?family=Permanent%20Marker" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet" type="text/css">
@@ -87,29 +90,42 @@
 
 		<!-- banner start --> 
 		<div id="banner" class="banner">
-			<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" style="width:100%">  
-             <source  src="video/mel.mp4" type="video/mp4"> 
+			<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" style="min-height:600px; width:100%; object-fit: cover;">  
+             <source  src="video/mel.mp4" type="video/mp4">
            </video>
 			<div class="banner-caption">
 				<div class="container">
 					<div class="row">					 
-						<div class="caption-data" style="margin-top: 0px; opacity: 1;" data-animation-effect="fadeIn">						
-								<h3 class="padding-top30">Heading out? </h3>
-							<h4 class="padding-top30">SafePath has you covered for events in Melbourne. </h3>
-							<h4 class="padding-top30">Find events, get directions and share real-time reports. </h3></br></br></br></br></br></br></br></br></br></br></br>
-							</div>
+						<div class="caption-data" style="margin-top: -100px; opacity: 1;" data-animation-effect="fadeIn">						
+								<h3 class="padding-top30" style="font-size:50px; padding-bottom: 10px">Heading out? </h3>
+							<h4 id="subtitle1" >SafePath has you covered for events in Melbourne. </h4>
+							<h4 id="subtitle2" >Find events, get directions and share real-time reports. </h4>
+							
+<form action="events/index.php"; id="main-search-form">
+	<div class="search-wrapper active">
+	<div class="input-holder">
+	
+	<input type="text" class="search-input" name="search" placeholder="Type to search" required="">
+	<input type="submit" value="" class="search-icon">
+</div>
+</div>
+</form>
+</div>
 
-					</div></br></br></br></br></br></br>
-					
-					<ul class="nav navbar-nav navbar-right search" style="width:100%;" align="center">
+
+
+
+
+					<!--
+					<ul class="nav navbar-nav navbar-right search" style="width:100%; padding-top: 10%">
 				<div>
 					<li><a><form action="events/index.php" class="search-form" >
                       <input type="text" name="search" placeholder="Search for event..." required="">
                        <input type="submit" value="" class="search-submit" >
                         </form></a></li>
                     </div>
-                </ul>
-                
+                </ul>-->
+               
 				</div>
 
 			</div>
@@ -131,8 +147,9 @@
 		</div>
 	    <div class="row">
          <div class="col-lg-4">
+         	<div class="service_block">
 		<div class="service_icon delay-03s animated wow  zoomIn"> <span><img src="images/location.png" alt="" ></span></div>
-          <div class="service_block">
+          
             
             <h3 class="animated fadeInUp wow">Information</h3>
             <p class="animated fadeInDown wow">Get access to everything you need to know about an event, including directions and what other people think </p>
@@ -151,11 +168,16 @@
 												<div class="row">												 
 													<div class="col-md-12">
 														<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
+            											 <source  src="video/Video1.mp4" type="video/mp4" > 
+															</video>
+															<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
             											 <source  src="video/Video2.mp4" type="video/mp4" > 
 															</video>
 														<br/>
 														<h3></h3>
-														<p>You can use your current location (or select a location) on the SafePath map in the Route Hazards tab. Click the Add Hazard button, then select the option that is the closest to what you want to report. </p>-
+														<p>You can view events in the "events" tab in the navigation bar of your screen. You can browse events by categories or choose to search for events by key words or event names.
+
+														After choosing your event and clicking the "go there" button, you can select your origin location on the SafePath map. Routes options will be calculated for you. </p>-
 													</div>
 												</div>
 											</div>
@@ -189,12 +211,12 @@
 												
 												<div class="row">												 
 													<div class="col-md-12">
-														<video autoplay="autoplay" poster="images/Video1.mp4" loop="loop" controls="controls" height="240">  
-            											 <source  src="video/mel.mp4" type="video/mp4" > 
+														<video autoplay="autoplay" loop="loop" controls="controls" height="240">  
+            											 <source  src="video/Video3.mp4" type="video/mp4" > 
 															</video>
 														<br/>
 														<h3></h3>
-														<p>You can use your current location (or select a location) on the SafePath map in the Route Hazards tab. Click the Add Hazard button, then select the option that is the closest to what you want to report. </p>
+														<p>To view where safety facilities are located (cameras, taxi ranks and police stations), go to the "satefy features" tab in event page. You will be able to tick or untick your options. </p>
 													</div>
 												</div>
 											</div>
@@ -229,11 +251,11 @@
 												<div class="row">												 
 													<div class="col-md-12">
 														<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
-            											 <source  src="video/mel.mp4" type="video/mp4" > 
+            											 <source  src="video/Video4.mp4" type="video/mp4" > 
 															</video>
 														<br/>
 														<h3></h3>
-														<p>You can use your current location (or select a location) on the SafePath map in the Route Hazards tab. Click the Add Hazard button, then select the option that is the closest to what you want to report. </p>
+														<p>You can see what others have reported at the event and report something you like/dislike yourself going to "Feedback" tab. Click on the option you prefer and it will be added to the bar chart. </p>
 													</div>
 												</div>
 											</div>
