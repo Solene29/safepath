@@ -75,13 +75,17 @@ function getActiveTab(){
 
 var hazardClickListener;
 var hazardDragListener;
+var hazardHoverListener;
 
 function openHazardInput() {
   hideAllHazards();
   document.getElementById("trafficHazardClosedPanel").style.display = "none";
-  document.getElementById("trafficHazardOpenPanel").style.display = "block";
+  document.getElementById("trafficHazardOpenPanelMapInput").style.display = "block";
 
   var oldLatLng;
+
+
+  map.setOptions({draggableCursor:'crosshair'});
 
   hazardClickListener = new google.maps.event.addListener(map, 'click', function(event) {
     oldLatLng = hazardMarker.getPosition();
@@ -100,6 +104,11 @@ function openHazardInput() {
           hazardMarker.setVisible(oldVisible);
           //console.log("not ok");
         }
+        else{
+            document.getElementById("trafficHazardOpenPanelMapInput").style.display = "none";
+            document.getElementById("trafficHazardOpenPanel").style.display = "block";
+        }
+
     };
 
     asyncSnap();
@@ -132,68 +141,15 @@ function openHazardInput() {
 };
 
 
-/*
-var tempMarkers =[];
-function getPointsOnRoad(){
-  var kmToCoordFactor = 360/(6371*2*3.141596536);
-  var points = [];
-
-  for(var t = 0; t <= 9; t++){
-    for(var r = 0; r <= 3; r++){
-      point =[hazardMarker.getPosition().lat() - kmToCoordFactor*0.025*(1+r)*Math.sin(t*3.141596536/5), hazardMarker.getPosition().lng() - kmToCoordFactor*0.05*(1+r)*Math.cos(t*3.141596536/5)];
-      var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(point[0],point[1]),
-            map: map
-          });
-      points.push(point);
-      tempMarkers.push(marker);
-    }
-  }
-console.log(points);
-
-console.log(tempMarkers[0].getPosition().lat());
-for(marker in tempMarkers){
-  snapToRoad(tempMarkers[marker]);
-};
-}
-
-
-
-function testPointsOnRoad(){
-  console.log(tempMarkers);
-  for(i = 0; i < tempMarkers.length; i++){
-    
-      $.get("https://35.197.185.129/nominatim/reverse?format=json&lat="+ tempMarkers[i].getPosition().lat() +"&lon="+tempMarkers[i].getPosition().lng()+"", 
-        function(res){
-          console.log(res);
-        }
-
-        )
-    
-              //if( hazardRoad != results[0].address_components[1].short_name){
-                //console.log(results[0].address_components[1].short_name);
-                //console.log(hazardRoad);
-                //tempMarkers[i].setMap(null)
-              //}
-
-
-};
-}
-
-
-*/
-
-
-
-
-
 function closeHazardInput() {
 toggleHazardMarkers(true);
 document.getElementById("trafficHazardClosedPanel").style.display = "block";
+document.getElementById("trafficHazardOpenPanelMapInput").style.display = "none";
 document.getElementById("trafficHazardOpenPanel").style.display = "none";
 
 google.maps.event.removeListener(hazardClickListener);
 google.maps.event.removeListener(hazardDragListener);
+map.setOptions({draggableCursor:''});
 hazardMarker.setVisible(false);
 infowindow.close();
 if($('input[name=hazard-type]:checked').length>0){
@@ -491,7 +447,7 @@ hazardMarker.setVisible(false);
   <!-- Display map panel -->
   <div id="mapAndInfoPanel" align="left">
     <div class="horizontalTab">
-  <button class="tablinks" id="directions" onclick="openMapOrInfo(event, 'directions')"><b>Direction to event</b></button>
+  <button class="tablinks" id="directions" onclick="openMapOrInfo(event, 'directions')"><b>Getting there</b></button>
   <button class="tablinks" id="safety" onclick="openMapOrInfo(event, 'safety')"><b>Safety Features</b></button>
   <button class="tablinks" id="route" onclick="openMapOrInfo(event, 'route')"><b>Route Hazards</b></button>
   <button class="tablinks" id="event" onclick="openMapOrInfo(event, 'event')"><b>Event Feedback</b></button>
@@ -530,6 +486,13 @@ hazardMarker.setVisible(false);
         </div></br></br>
       
       </div>
+
+      <div id="trafficHazardOpenPanelMapInput" style="display:none; background-color:#ccc">
+        <h3><b>Please select where the hazard is on the map below:</b></h3>
+
+        <button onclick="closeHazardInput()" style="font-weight:700; color: black; padding: 5px;cursor: pointer;background-color: #ED3C2D; border: 1px; box-shadow: none; border-radius: 0px; width:160px; text-align: center; height:30px; padding-left: 7px;"> Cancel</button></br>
+      </div>
+
       <div id="trafficHazardOpenPanel" style="display:none; background-color:#ccc">
  
       <h3><b>What would you like to report on the way?</b></h3>
@@ -832,7 +795,9 @@ function getUserData(){
 
     function updateData(){
       var activeTab = getActiveTab();
-      if(activeTab === "route" && document.getElementById("trafficHazardOpenPanel").style.display === "none"){
+      if(activeTab === "route" 
+        && document.getElementById("trafficHazardOpenPanel").style.display === "none"
+        && document.getElementById("trafficHazardOpenPanelMapInput").style.display === "none"){
         getHazards();
       };
       if(activeTab === "event"){
@@ -913,40 +878,50 @@ slider.oninput = function() {
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content" id="feedbackInfoModal">
+
+  <div class="modal-content" id ="alertModal">
     <span class="close">&times;</span>
-    <p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>
-No Toilet - insufficient facilities</br>
-Long Queues - access or service is slow</br>
-Varied Food - plenty of tasty treats</br>
-Great Event - no problems encountered</p>
+    <div id="alertModalContent"></div>
   </div>
 
-  <div class="modal-content" id="hazardInfoModal">
-    <span class="close">&times;</span>
-    <p>Accident - vehicle accident that may block or delay access</br>
-Harassment - cat-calling, wolf-whistling, abusive language, inappropriate touching or following</br>
-Aggression - threats, fights or fisticuffs</br>
-Illegal Activity - vandalism or graffiti in progress
-</p>
-  </div>
-
-
-    <div class="modal-content" id ="hazardModal">
-    <span class="close">&times;</span>
-    <div id="hazardModalContent"></div>
-    </div>
 
 </div>
+
+
+<script type="text/javascript">
+  
+function alertModal(string){
+    document.getElementById('alertModalContent').innerHTML = string;
+    document.getElementById('myModal').style.display = 'block';
+}
+
+
+var feedbackInfoString = "";
+  feedbackInfoString += "<p><b>The bar chart combines user opinions about the event. Share your thoughts by clicking on the following buttons:</b></br></br>";
+  feedbackInfoString += "No Toilet - insufficient facilities</br>";
+  feedbackInfoString += "Long Queues - access or service is slow</br>";
+  feedbackInfoString += "Varied Food - plenty of tasty treats</br>";
+  feedbackInfoString += "Great Event - no problems encountered</p>";
+
+var hazardInfoString = "";
+ hazardInfoString += "<p>Accident - vehicle accident that may block or delay access</br>";
+ hazardInfoString += "Harassment - cat-calling, wolf-whistling, abusive language, inappropriate touching or following</br>";
+ hazardInfoString += "Aggression - threats, fights or fisticuffs</br>";
+ hazardInfoString += "Illegal Activity - vandalism or graffiti in progress";
+ hazardInfoString += "</p>";
+
+
+
+</script>
+
+
+
 
 
 
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');
-var feedbackInfoModal = document.getElementById('feedbackInfoModal');
-var hazardInfoModal = document.getElementById('hazardInfoModal');
-var hazardModal = document.getElementById('hazardModal');
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
@@ -954,53 +929,21 @@ var btn2 = document.getElementById("myBtn2");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-var span2 = document.getElementsByClassName("close")[1];
-var span3 = document.getElementsByClassName("close")[2];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";    
-    feedbackInfoModal.style.display = "block";
-    hazardInfoModal.style.display = "none";
-    hazardModal.style.display = "none";
-}
+btn.onclick = function(){alertModal(feedbackInfoString)};
 
-btn2.onclick = function() {
-    modal.style.display = "block";    
-    feedbackInfoModal.style.display = "none";
-    hazardInfoModal.style.display = "block";
-    hazardModal.style.display = "none";
-}
+btn2.onclick = function(){alertModal(hazardInfoString)};
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
-    feedbackInfoModal.style.display = "none";
-    hazardInfoModal.style.display = "none";
-    hazardModal.style.display = "none";
-}
-
-span2.onclick = function() {
-    modal.style.display = "none";
-    feedbackInfoModal.style.display = "none";
-    hazardInfoModal.style.display = "none";
-    hazardModal.style.display = "none";
-}
-
-span3.onclick = function() {
-    modal.style.display = "none";
-    feedbackInfoModal.style.display = "none";
-    hazardInfoModal.style.display = "none";
-    hazardModal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        feedbackInfoModal.style.display = "none";
-        hazardInfoModal.style.display = "none";
-        hazardModal.style.display = "none";
     }
 }
 </script>

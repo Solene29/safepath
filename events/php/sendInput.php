@@ -23,11 +23,11 @@ $sql = "INSERT INTO user_input_data(eventid, description, userip) values('" .  $
 if ($conn->query($sql) === TRUE) {
    // echo "New record created successfully";
     echo '<script language="javascript">';
-	echo 'alert("Your input has been recorded")';
+	echo 'alertModal("Your input has been recorded")';
 	echo '</script>';
 } else {
         echo '<script language="javascript">';
-	echo 'alert("Your input has already been recorded")';
+	echo 'alertModal("Your input has already been recorded")';
 	echo '</script>';
 }
 

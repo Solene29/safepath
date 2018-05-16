@@ -30,11 +30,11 @@ $sql = "INSERT INTO pinpoint(eventID, description, userip, lat, lon, innerlat1,i
 if ($conn->query($sql) === TRUE) {
    // echo "New record created successfully";
     echo '<script language="javascript">';
-	echo 'alert("Your input has been recorded")';
+	echo 'alertModal("Your input has been recorded")';
 	echo '</script>';
 } else {
     echo '<script language="javascript">';
-	echo 'alert("Your input has already been recorded")';
+	echo 'alertModal("Your input has already been recorded")';
 	echo '</script>';
 }
 
@@ -73,6 +73,7 @@ function makePolycoords($LAT,$LON){
 		$i++;
 	}
 
+	var_dump($polycoords);
 	return $polycoords;
 }
 
@@ -120,6 +121,7 @@ function getNearbyRoadsFromCoords($LAT,$LON){
 
 
 				//var_dump($newNodes);
+				//return [$ways, $newNodes];
 				return [$newWays, $newNodes];
 
 		}
@@ -238,17 +240,17 @@ function makeBoundaryPoints($latC,$lonC,$crossingPair,$nodes,$wayID,$kmRadius){
 	$vectAB = [111*($latB-$latA),85*($lonB-$lonA)];
 	$vectCA = [111*($latA-$latC),85*($lonA-$lonC)];
 
-	$factor1 = dotProduct($vectCA,$vectAB)/pow(norm($vectAB),2);
+	$factor1 = - dotProduct($vectCA,$vectAB)/pow(norm($vectAB),2);
 	$factor2 =sqrt(pow(dotProduct($vectCA,$vectAB),2)-(pow(norm($vectCA),2)-pow($kmRadius,2))*pow(norm($vectAB),2))/pow(norm($vectAB),2);
 	$factor = ($factor1 + $factor2);
-	if( abs($factor) < 0 || abs($factor) > 1){
+	if( $factor < 0 || $factor > 1){
 		$factor = ($factor1 - $factor2);
 	}
 
-	$vectCD = [ $vectCA[0]-$factor*$vectAB[0] , $vectCA[1]-$factor*$vectAB[1] ];
+	$vectCD = [ $vectCA[0]+$factor*$vectAB[0] , $vectCA[1]+$factor*$vectAB[1] ];
 
-	$latNew = -$vectCD[0]/111+$latC;
-	$lonNew = -$vectCD[1]/85+$lonC;
+	$latNew = $vectCD[0]/111+$latC;
+	$lonNew = $vectCD[1]/85+$lonC;
 
 	//echo distanceBetweenCoords($latC,$lonC,$latNew,$lonNew) . "|";
 
@@ -506,11 +508,11 @@ $sql = "INSERT INTO pinpoint(eventID, description, userip, lat, lon, innerlat1,i
 if ($conn->query($sql) === TRUE) {
    // echo "New record created successfully";
     echo '<script language="javascript">';
-	echo 'alert("Your input has been recorded")';
+	echo 'alertModal("Your input has been recorded")';
 	echo '</script>';
 } else {
     echo '<script language="javascript">';
-	echo 'alert("Your input has already been recorded")';
+	echo 'alertModal("Your input has already been recorded")';
 	echo '</script>';
 }
 
@@ -720,11 +722,11 @@ $sql = "INSERT INTO pinpoint(eventID, description, userip, lat, lon, innerlat1,i
 if ($conn->query($sql) === TRUE) {
    // echo "New record created successfully";
     echo '<script language="javascript">';
-	echo 'alert("Your input has been recorded")';
+	echo 'alertModal("Your input has been recorded")';
 	echo '</script>';
 } else {
     echo '<script language="javascript">';
-	echo 'alert("Your input has already been recorded")';
+	echo 'alertModal("Your input has already been recorded")';
 	echo '</script>';
 }
 
