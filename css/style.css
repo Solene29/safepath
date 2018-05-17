@@ -246,8 +246,8 @@ padding: 17px 34px;}
 .caption-data {position: absolute; top: 50%; left: 50%; z-index: 20; text-align: center; -webkit-transform: translate(-50%,-50%); -moz-transform: translate(-50%,-50%); transform: translate(-50%,-50%);}
 .caption-data h1 {text-transform: uppercase;}
 .caption-data h1 span {font-size: inherit; line-height: inherit; font-weight: inherit;}
-.caption-data h3{font-family: "Caveat";line-height: 40px;font-size: 38px;}
-.caption-data h4{font-family: 'Nunito'; font-weight:lighter; line-height: 40px;font-size: 20px;}
+.caption-data h3{font-family: "Caveat";line-height: 40px;font-size: 40px;}
+.caption-data h4{font-family: "Nunito";line-height: 40px;font-size: 20px;}
 button.cta-button.btn-light, button.cta-button.btn-dark, .contact-form button.cta-button, button.cta-button.btn-default {
 background: transparent;
 }
@@ -760,6 +760,9 @@ margin: 2px 5px 0;}
 	cursor: pointer;
 	overflow: hidden;
 }
+.overlay1:hover{
+	background-color: rgba(255, 196, 0, 0.1);
+}
 .overlay:hover {
 	text-decoration: none;
 }
@@ -803,6 +806,7 @@ margin: 2px 5px 0;}
     padding-right: 15px; 
 	position: relative;
 }
+
 
 .service_icon {  
     width: 90px;
@@ -1140,11 +1144,19 @@ b i:last-child {
 
 
 #main-search-form{margin-top: 50px;}
-#subtitle1{font-size: 25px; line-height:30px;}
-#subtitle2{font-size: 25px; line-height:30px;}
+
 
 @media (max-width: 700px) { 
 		#main-search-form{margin-top: 0px;}
-		#subtitle1{font-size: 18px;}
-		#subtitle2{font-size: 18px;}
+
+	}
+.go-down{
+	position: absolute; 
+	z-index: 20;
+	left:50%;
+	top:170%;
+}
+@media (max-width: 700px) { 
+		.go-down{visibility: hidden;}
+
 	}
