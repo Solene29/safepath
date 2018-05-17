@@ -58,7 +58,7 @@ body{background-color: #fff;}
     top: 28px;
 }
 .loader-line-wrap:nth-child(5) .loader-line {
-    border-color: #2f2f2f;
+    border-color:  #FFC40A;
     height: 34px;
     width: 34px;
     top: 35px;

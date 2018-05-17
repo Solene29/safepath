@@ -40,7 +40,7 @@ echo 'async function asyncCall(newHazardData) {
 
 		Array.prototype.forEach.call(newHazardData, function(data){
 
-				processPolylineWithSnap(data.polycoords,hazardMarkers[data.timePast][data.pinpointID],data.timePast,data.pinpointID);
+				processPolyline(data.polycoords,hazardMarkers[data.timePast.toString()][data.pinpointID],data.timePast.toString(),data.pinpointID.toString());
 							
 				});
 	  }';

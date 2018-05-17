@@ -10,7 +10,7 @@ function getEvents(catName,searchString) {
         //anon oauth token
     var token = 'BY5GBM6TSQPL3NTR5S6E';
 
-        var $events1 = $("#"+catName);
+    var $events1 = $("#"+catName);
         
     var mainInput;
 
@@ -44,8 +44,29 @@ function getEvents(catName,searchString) {
     mainInput = "&q="+searchString;
     }
 
+    var loadingString = "";
+    loadingString += "<div class=\"loader-inner\">";
+    loadingString += "    <div class=\"loader-line-wrap\">";
+    loadingString += "        <div class=\"loader-line\"></div>";
+    loadingString += "    </div>";
+    loadingString += "    <div class=\"loader-line-wrap\">";
+    loadingString += "        <div class=\"loader-line\"></div>";
+    loadingString += "    </div>";
+    loadingString += "    <div class=\"loader-line-wrap\">";
+    loadingString += "        <div class=\"loader-line\"></div>";
+    loadingString += "    </div>";
+    loadingString += "    <div class=\"loader-line-wrap\">";
+    loadingString += "        <div class=\"loader-line\"></div>";
+    loadingString += "    </div>";
+    loadingString += "    <div class=\"loader-line-wrap\">";
+    loadingString += "        <div class=\"loader-line\"></div>";
+    loadingString += "    </div>";
+    loadingString += "</div>";
+    loadingString += "<div style=\"text-align: center;\"><i style=\"display: inline-block;\">Loading events, please stand by...</i>";
+
+
 //Loading events from eventBright according to below endpoints:
-        $events1.html("<i>Loading events, please stand by...</i>");
+        $events1.html(loadingString);
         $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token + mainInput +'&location.address=Melbourne&location.within=3km&expand=venue', function(res) {
             
             if(res.events.length) {
@@ -102,8 +123,8 @@ function getEvents(catName,searchString) {
                         s += "<img id=\"upArrow"+ event.id  + "\" src=\"images/uparrow.png\" align=\"right\" alt=\"Contract\" style=\"display:none; width:30px; border: 0; box-shadow: none; border-radius: 0px; align: center\">";
                         s += " </button> ";
                         s += "</td></tr></table></div>"
-                        s += "<div id=\"panel" + event.id + "\" style=\"display:none;white-space:pre-wrap;\">";
-                        s += "<div>" + event.description.text + "<a href='" + event.url + "' target=\"_blank\" style=\"color:orange;font-weight:700;\"> More details here!</a></div>";
+                        s += "<div id=\"panel" + event.id + "\" style=\"display:none;white-space:pre-wrap; padding:18px\">";
+                        s += "<div>" + event.description.html + "<a href='" + event.url + "' target=\"_blank\" style=\"color:orange;font-weight:700;\"> More details here!</a></div>";
                         s += "</div>";
                       
                     }

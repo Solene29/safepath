@@ -18,7 +18,6 @@
   <script type=text/javascript src="js/markerclusterer.js"></script>  
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
-  <!--<script type=text/javascript src=js/displayEvents.js></script>-->
   <script type=text/javascript src=js/test.js></script>
   <script type=text/javascript src=js/categoryTabs.js></script>
   <script type=text/javascript src=js/AccordionEventDesc.js></script>
@@ -396,8 +395,6 @@ hazardMarker.setVisible(false);
     <div style="background:white">
         <u><b>Date:</b></u></br>
         <div id="eventDate" style="float: left;" align="left"></div></br>
-        <u><b>Location:</b></u></br>
-        <div id="eventLoc" style="float: left;" align="left"></div></br></br>
         <a href =#eventDescription style="color:black"><div style="padding: 5px;cursor: pointer;background-color: #EEC440; border: 1px; box-shadow: none; border-radius: 0px; width:100%; text-align: center;">Click here for event summary</div></a>
       </div>
     </br>
@@ -405,9 +402,11 @@ hazardMarker.setVisible(false);
         <u><b>Route:</b></u></br></br>
         <div style="margin: auto;">
         <div style="display: inline-block;">
-        <div id="destination-box-return" style="display:none; width:250px; border: 1px solid #bfbfbf; color: #b37700">Destination</div>
+        <!-- <div id="destination-box-return" style="display:none; width:250px; border: 1px solid #bfbfbf; color: #b37700">Destination</div> -->
+        <b>Origin:</b></br>
         <div style="display:block"><input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"></div>
-        <div id="destination-box" style="display:block; width:250px; border: 1px solid #bfbfbf; color: #b37700">Destination</div>
+        <b>Destination:</b></br>
+        <div id="destination-box" style="display:block; width:250px; border: 0px solid #bfbfbf; color: #b37700">Destination</div>
         </div>
         <!--<div style="display: inline-block;">
          <i class="material-icons">cached</i>
@@ -568,10 +567,6 @@ hazardMarker.setVisible(false);
 
   </button>
 </div>
-<!-- <input type="image" src="images/twit.png" class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text=Hello%20world"><a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text=Hello%20world"></a></input>
-Tweet</a> -->
 
   </div>
 

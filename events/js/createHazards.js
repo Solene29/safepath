@@ -253,6 +253,8 @@ function processPolyline(rawPathData,marker,timePast,pinpointID){
   //console.log(rawPathData);
   var paths = rawPathData.split("#");
 
+
+
   hazardLines[timePast][pinpointID]=[];
 
 
@@ -395,12 +397,8 @@ function addClickListener(pinpointID,line,marker){
     var counts = numberAndTypeOfNearbyHazards(lat,lng);
     var modalContentString = createHazardModalContent(counts);
 
-    document.getElementById('hazardModalContent').innerHTML = modalContentString;
+    alertModal(modalContentString);
 
-    modal.style.display = "block";    
-    feedbackInfoModal.style.display = "none";
-    hazardInfoModal.style.display = "none";
-    hazardModal.style.display = "block";
   });
 }
 

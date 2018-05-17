@@ -10,6 +10,7 @@
   <link href="css/style.css" rel="stylesheet"> 
   <link href="css/test.css" rel="stylesheet">
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link href="css/loading.css" rel="stylesheet">
   
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -173,7 +174,7 @@ console.log(searchQn);
   <button class="tablinks" id="defaultOpen" onclick="openCategory(event, 'eventMusic', '')">Music <img src="images/ic_headset.png" align="right"></img></button>
   <button class="tablinks" onclick="openCategory(event, 'eventSports', '')">Sports <img src="images/ic_fitness_center.png" align="right"></img></button>
   <button class="tablinks" onclick="openCategory(event, 'eventOther', '')">Other <img src="images/ic_linear_scale.png" align="right"></img></button>
-  <button class="tablinks" id="searchOpen" onclick="openCategory(event, 'eventSearch', '')">Search <img src="images/ic_youtube_searched_for.png" align="right"></img></button>
+  <button class="tablinks" id="searchOpen" style="display: none" onclick="openCategory(event, 'eventSearch', '')">Search <img src="images/ic_youtube_searched_for.png" align="right"></img></button>
 </div>
 
 

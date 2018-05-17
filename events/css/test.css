@@ -237,6 +237,7 @@ html *
 /* Create an active/current tablink class */
 .horizontalTab button.active {
     background-color: #EEC440;
+    height:100%;
     color: black
 }
 

@@ -14,15 +14,15 @@ function testAddress(address1,name) {
 // Testing that picture logo exists in EventBright for an event, if not, display dummy picture
 function testPicture(logo) {
     if(!logo){
-        return '../images/abouta.jpeg'
+        return 'images/abouta.jpeg'
     }
     if(!logo.url){
-        return '../images/abouta.jpeg'
+        return 'images/abouta.jpeg'
     }
     if(UrlExists(logo.url)){
         return logo.url
     }
-    return '../images/abouta.jpeg'
+    return 'images/abouta.jpeg'
 
 }
 

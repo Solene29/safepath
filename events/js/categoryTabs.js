@@ -35,6 +35,6 @@ function openCategory(evt, catName, searchString) {
     evt.currentTarget.className += " active";
     }  
     else{
-        document.getElementById("searchOpen").className += " active";
+        //document.getElementById("searchOpen").className += " active";
     }
 }
