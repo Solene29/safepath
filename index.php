@@ -23,8 +23,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Permanent%20Marker" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-
 	</head>
 
 	<body class="SafePath">
@@ -38,11 +36,11 @@
 						<div class="header-left">
 							<!-- logo -->
 							<div class="logo smooth-scroll">
-								<a href="#banner"><img id="logo" src="images/logo2.png" alt="Worthy"></a>
+								<a href="../index.php"><img id="logo" src="images/logo1.png" alt="Worthy" style="width: 3em; height: 3em"></a>
 							</div>
 							<!-- name-and-slogan -->
 							<div class="logo-section smooth-scroll">
-								<div class="brand" ><a>SAFE PATH</a></div>								
+								<div class="brand" ><a href="../index.php">SAFE PATH</a></div>								
 							</div>
 						</div>
 						<!-- header-left end -->
@@ -96,25 +94,21 @@
 			<div class="banner-caption">
 				<div class="container">
 					<div class="row">					 
-						<div class="caption-data" style="margin-top: -100px; opacity: 1;" data-animation-effect="fadeIn">						
-								<h3 class="padding-top30" style="font-size:50px; padding-bottom: 10px">Heading out? </h3>
-							<h4 id="subtitle1" >SafePath has you covered for events in Melbourne. </h4>
-							<h4 id="subtitle2" >Find events, get directions and share real-time reports. </h4>
-							
-<form action="events/index.php"; id="main-search-form">
-	<div class="search-wrapper active">
-	<div class="input-holder">
-	
-	<input type="text" class="search-input" name="search" placeholder="Type to search" required="">
-	<input type="submit" value="" class="search-icon">
-</div>
-</div>
-</form>
-</div>
-
-
-
-
+						<div class="caption-data" style="margin-top: 0px; opacity: 1;" data-animation-effect="fadeIn">						
+							<h3>Heading out? </h3>
+							<h4>SafePath has you covered for events in Melbourne.
+							                                       Find events, get directions and share real-time reports. </h4>						
+									<form action="events/index.php"; id="main-search-form">
+									<div class="search-wrapper active">
+									<div class="input-holder">
+									<input type="text" class="search-input" name="search" placeholder="Type to search" required="">
+										<button class="search-icon" type="submit" value="" ><span></span></button>
+									<!--<input type="submit" value="" class="search-icon">-->
+									</div>
+									</div>
+									</form>
+									<a class="go-down scrollspy smooth-scroll" href="#services"><img src="images/down.gif" alt=""></a>
+							</div>
 
 					<!--
 					<ul class="nav navbar-nav navbar-right search" style="width:100%; padding-top: 10%">
@@ -127,11 +121,11 @@
                 </ul>-->
                
 				</div>
-
 			</div>
-
+				
 		</div>
-
+						
+        </div>
 		<!-- banner end -->
 	<!-- section start service--> 
 		<section id="services" class="about" style="padding-bottom: 3em">
@@ -148,12 +142,10 @@
 	    <div class="row">
          <div class="col-lg-4">
          	<div class="service_block">
-		<div class="service_icon delay-03s animated wow  zoomIn"> <span><img src="images/location.png" alt="" ></span></div>
-          
-            
+			<div class="service_icon delay-03s animated wow  zoomIn"> <span><img src="images/location.png" alt="" ></span></div>           
             <h3 class="animated fadeInUp wow">Information</h3>
             <p class="animated fadeInDown wow">Get access to everything you need to know about an event, including directions and what other people think </p>
-			   <div class="service-video">
+			 <div class="service-video">
 			<a class="overlay1" data-toggle="modal" data-target="#project-14"></a>	
 			<!-- Modal -->
 								<div class="modal fade" id="project-14" tabindex="-1" role="dialog" aria-labelledby="project-1-label" aria-hidden="true">
@@ -167,10 +159,10 @@
 												
 												<div class="row">												 
 													<div class="col-md-12">
-														<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
+														<video autoplay="autoplay"  loop="loop" controls="controls" height="240">  
             											 <source  src="video/Video1.mp4" type="video/mp4" > 
 															</video>
-															<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
+															<video autoplay="autoplay"  loop="loop" controls="controls" height="240">  
             											 <source  src="video/Video2.mp4" type="video/mp4" > 
 															</video>
 														<br/>
@@ -192,8 +184,9 @@
           </div>
         </div>
         <div class="col-lg-4"> 
-		<div class="service_icon icon2  delay-03s animated wow zoomIn"> <span><img src="images/safer.png" alt="" style="width: 100%"></span> </div> 
 		<div class="service_block">
+		<div class="service_icon icon2  delay-03s animated wow zoomIn"> <span><img src="images/safer.png" alt="" style="width: 100%"></span> </div> 
+		
 			
             <h3 class="animated fadeInUp wow">Safety</h3>
            <p class="animated fadeInDown wow">quickly view the location of nearby safety features</p>
@@ -231,8 +224,9 @@
           </div>
         </div>
         <div class="col-lg-4">
+			<div class="service_block">
 		<div class="service_icon icon3  delay-03s animated wow zoomIn"> <span><img src="images/report.png" alt="" style="width: 100%"></span> </div>
-          <div class="service_block">
+          
             
             <h3 class="animated fadeInUp wow">Report</h3>
             <p class="animated fadeInDown wow">Share what you have seen on the way, or while at an event as a real-time warning to others.</p>
@@ -250,7 +244,7 @@
 												
 												<div class="row">												 
 													<div class="col-md-12">
-														<video autoplay="autoplay" poster="images/loading.jpg" loop="loop" controls="controls" height="240">  
+														<video autoplay="autoplay"  loop="loop" controls="controls" height="240">  
             											 <source  src="video/Video4.mp4" type="video/mp4" > 
 															</video>
 														<br/>
@@ -297,11 +291,10 @@
 			<div class="container about mt-150 mb-50">
 			<div class="row center">		
 				<div class="col-md-8 col-md-offset-2">
-					<center><img src="images/about.png" alt=""></center>
-					
+					<center><img src="images/bicycle.gif" alt=""></center>				
 					<h6 class="lead" style="font-weight: 300"><p>SafePath helps people get to or from events in a safer way. Users can select an event, view the different transport alternatives, and view real-time reports from other users.</p>
 
-                    <p>SafePath users observe and log hazards and concerns, such as aggressive groups or overcrowding, when at an event, or in transit. Other users can take this contextual information and use it to make better safety choices. Users can also log positive information about the event or route such as quick service or wide range of food. Next time you head to an event make sure to take the SafePath.</p></h6>
+                    <p>SafePath users observe and log hazards and concerns, such as aggressive groups or accidents, when at an event, or in transit. Other users can take this contextual information and use it to make better safety choices. Users can also log positive information about the event or route such as great event or wide range of food. Next time you head to an event make sure to take the SafePath.</p></h6>
 				</div>
 			</div><!-- description text -->
 		</div>
@@ -335,8 +328,8 @@
 						<div class="filters text-center">
 							<ul class="nav nav-pills">
 								<li class="active"><a href="#" data-filter="*">All</a></li>
-								<li><a href="#" data-filter=".basic">BASIC</a></li>
-								<li><a href="#" data-filter=".information">IFORMATION</a></li>
+								<li><a href="#" data-filter=".basic">Using SafePath</a></li>
+								<li><a href="#" data-filter=".information">More Info</a></li>
 							</ul>
 						</div>
 						<!-- isotope filters end -->
@@ -442,12 +435,11 @@
 											<div class="modal-body">
 												
 												<div class="row">												 
-													<div class="col-md-8">
-														<img src="images/portfolio-3.jpg" alt="">
+													<div class="col-md-12">
+														
 														<br/>
 	
-													</div>
-													<div class="col-md-4">
+											
 													<h3>Answer:</h3>
 														<p>Yes! SafePath is not just for going to or from an event, we want to know what is happening while you are there. Go to the Event Feedback tab and click the button that is closest to what you want to report.</p>
 													</div>
@@ -483,14 +475,13 @@
 											<div class="modal-body">
 												
 												<div class="row">												 
-													<div class="col-md-8">
-														<img src="images/portfolio-5.jpg" alt="">
+													<div class="col-md-12">
+														
 														<br/>
 
-													</div>
-													<div class="col-md-4">
+									
 													<h3>Answer:</h3>
-														<p>When (x) user reports are received on a street the colour changes to (yellow?). If more than (y) reports are received the road turns to (orange?).</p>
+														<p>When a user makes a report the section of street changes to yellow. If two or more reports have been made, the street turns orange.</p>
 													</div>
 												</div>
 											</div>
@@ -524,12 +515,11 @@
 											<div class="modal-body">
 												
 												<div class="row">												 
-													<div class="col-md-8">
-														<img src="images/portfolio-6.jpg" alt="">
+													<div class="col-md-12">
+														
 														<br/>
 
-													</div>
-													<div class="col-md-4">
+											
 														<h3>Answer:</h3>
 														<p>If a serious problem occurs or someone needs help, call 000 immediately to contact the police or call an ambulance. SafePath reports are not monitored by the authorities and the difference of a few minutes can be crucial.</p>
 													</div>
@@ -565,12 +555,11 @@
 											<div class="modal-body">
 												
 												<div class="row">												 
-													<div class="col-md-8">
-														<img src="images/portfolio-8.jpg" alt="">
+													<div class="col-md-12">
+												
 														<br/>
 														
-													</div>
-													<div class="col-md-4">
+													
 													<h3>Answer:</h3>
 														<p>Yes! SafePath users would love to know if you think an event is good. Just go to Event Feedback, but use “Great Event” instead.</p>
 													</div>
@@ -641,11 +630,9 @@
 												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 												<h4 class="modal-title" id="project-12-label">What happens to my report?</h4>
 											</div>
-											<div class="modal-body">
-												
+											<div class="modal-body">											
 												<div class="row">												 
-													<div class="col-md-12">
-								
+													<div class="col-md-12">								
 														<br/>
 														<h3>Answer:</h3>
 														<p>All reports will be stored in the SafePath database, even if they are no longer visible on the map. This data may be used in the future to identify hotspot areas of concern. No personal information will be associated with your report.</p>
